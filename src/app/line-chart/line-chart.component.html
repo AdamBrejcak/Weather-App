@@ -1,0 +1,18 @@
+<p-calendar inputId="dateformat" dateFormat="yy/mm/dd"  [(ngModel)]="date" (ngModelChange)="onDateChange()"></p-calendar>
+<div class="loading-div">
+  <i *ngIf="loading" class="pi pi-spin pi-spinner" style="font-size: 7rem"></i>
+  <h3 *ngIf="loading">loading</h3>
+</div>
+<div *ngIf="showChart" id="chart">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [dataLabels]="chartOptions.dataLabels"
+      [grid]="chartOptions.grid"
+      [stroke]="chartOptions.stroke"
+      [title]="chartOptions.title"
+    ></apx-chart>
+</div>
+<br>
+  
