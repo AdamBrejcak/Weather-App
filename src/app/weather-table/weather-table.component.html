@@ -1,8 +1,8 @@
 <p-calendar inputId="dateformat" dateFormat="yy/mm/dd"  [(ngModel)]="date" (ngModelChange)="onDateChange()"></p-calendar>
 <div class="loading-div">
-    <i *ngIf="loading" class="pi pi-spin pi-spinner" style="font-size: 7rem"></i>
-    <h3 *ngIf="loading">loading</h3>
+    <div *ngIf="loading" class="lds-ring"><div></div><div></div><div></div><div></div></div>
   </div>
+<h2 *ngIf="error">Ups, an error occured: {{error}}</h2>
 <p-table *ngIf="!loading" #dt [globalFilterFields]="['created','weather_state_name']" [value]="weatherData" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" 
 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" sortMode="multiple" [rowsPerPageOptions]="[5,10,20]">
     <!-- <ng-template pTemplate="caption">

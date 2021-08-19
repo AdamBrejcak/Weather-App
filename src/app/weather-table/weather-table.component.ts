@@ -8,10 +8,10 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./weather-table.component.scss']
 })
 export class WeatherTableComponent implements OnInit {
-  // products: Object[] = [{code:"co1",name:"na1",category:"ca1",quantity:"qa1"},{code:"co2",name:"na2",category:"ca2",quantity:"qu2"}];
+  // define variables
   weatherData: Object[] = [];
   date: Date = new Date("2013/4/27");
-  error: String[] = [];
+  error: string = "";
   loading: boolean = false;
   selectedWeather!: Object;
   
@@ -24,7 +24,7 @@ export class WeatherTableComponent implements OnInit {
     );
     setTimeout(() => {
       this.loading = false;
-    }, 500);  
+    }, 550);  
     };
     
     constructor(private weatherDataService: WeatherDataService) { }

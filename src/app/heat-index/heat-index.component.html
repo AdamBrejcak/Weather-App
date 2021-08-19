@@ -4,8 +4,6 @@
     <span class="p-float-label">
         <input *ngIf='heatIndexForm.value.unit === "celsius"' class="form-control" formControlName="tempC" id="float-input" type="number" required min="26.7" step=".01" pInputText name="temperature"> 
         <input *ngIf='heatIndexForm.value.unit === "fahrenheit"' class="form-control" formControlName="tempF" id="float-input" type="number" required min="80" step=".01" pInputText name="temperature"> 
-        <!-- <input [hidden]='!(heatIndexForm.value.unit === "fahrenheit")' class="form-control" formControlName="temp" id="float-input" type="number" required min="26.7" step=".01" pInputText name="temperature"> 
-        <input [hidden]='!(heatIndexForm.value.unit === "celsius")' class="form-control" formControlName="temp" id="float-input" type="number" required min="80" step=".01" pInputText name="temperature">  -->
         <label for="float-input" [ngClass]="((tempC.invalid && (tempC.dirty || tempC.touched))) || ((tempF.invalid && (tempF.dirty || tempF.touched))) ? 'notValidSelect': ''">Temperature</label>
     </span>
     <div *ngIf="(tempC.invalid && (tempC.dirty || tempC.touched)) || (tempF.invalid && (tempF.dirty || tempF.touched))" class="alert alert-danger">
@@ -19,6 +17,7 @@
         Temperature must be at least 80 °F
         </div>
     </div>
+    
     <span class="p-float-label">
         <input id="float-input" type="number" class="form-control" required step=".01" max="100" min="0" formControlName="hum" pInputText name="humidity"> 
         <label for="float-input" [ngClass]="(hum.invalid && (hum.dirty || hum.touched)) ? 'notValidSelect': ''">Humidity</label>
@@ -32,16 +31,18 @@
         </div>
     </div>
 
-    <!-- <p-button label="Submit" class="p-button-info" type="submit" (click)="calculateHeatIndex()" ></p-button> -->
     <p-button *ngIf="heatIndexForm.value.unit === 'celsius'" label="Submit" class="p-button-info" type="submit" (click)="calculateHeatIndex(heatIndexForm.value.tempC, heatIndexForm.value.hum)" ></p-button>
     <p-button *ngIf="heatIndexForm.value.unit === 'fahrenheit'" label="Submit" class="p-button-info" type="submit" (click)="calculateHeatIndex(heatIndexForm.value.tempF, heatIndexForm.value.hum)" ></p-button>
     <span>
-        <h2 *ngIf="heatIndexF">Heat index is: {{heatIndexF | number : '1.2-2'}} °F</h2>
-        <h3 *ngIf="heatIndexC">or {{heatIndexC | number : '1.2-2'}} °C</h3>
+        <h2 *ngIf="heatIndexF">Heat index is {{heatIndexF | number : '1.2-2'}} °F</h2>
+        <h3 class="heatIndexCelsius" *ngIf="heatIndexC">or {{heatIndexC | number : '1.2-2'}} °C</h3>
     </span>
 
     <ul class="large" *ngIf="lastResults.length > 0">
         <h3>Last results</h3>
-        <li *ngFor="let result of lastResults; index as i;">{{result | number : '1.2-2'}} °F</li>
+        <li *ngFor="let result of lastResults; index as i;">
+            {{result.heatIndexFahrenheit | number : '1.2-2'}} °F or
+            {{result.heatIndexCelsius | number : '1.2-2'}} °C
+        </li>
     </ul>
 </form>
