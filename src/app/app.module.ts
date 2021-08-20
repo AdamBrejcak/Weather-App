@@ -16,6 +16,7 @@ import {TableModule} from 'primeng/table';
 import {CalendarModule} from 'primeng/calendar';
 import {TabMenuModule} from 'primeng/tabmenu';
 
+
 // components
 import { AppComponent } from './app.component';
 import { HeatIndexComponent } from './heat-index/heat-index.component';
@@ -24,6 +25,7 @@ import { LineChartComponent } from './line-chart/line-chart.component';
 
 // chart module library
 import { NgApexchartsModule } from "ng-apexcharts";
+// import { PrimeNgModule } from './shared/prime-ng.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +50,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
     TabMenuModule,
 
     NgApexchartsModule,
+    // PrimeNgModule,
   ],
   providers: [  ],
   bootstrap: [AppComponent]

@@ -1,18 +1,19 @@
 import { Component, ViewChild, OnInit } from "@angular/core";
-import { WeatherDataService } from '../weather-data.service';
-import {formatDate} from '@angular/common';
+import { WeatherDataService } from '../shared/weather-data.service';
+import { formatDate } from '@angular/common';
 
 import { chartData } from "../lineChartData";
-import { ChartOptions } from "../chartOptions";
+import { ChartOptions } from "../lineChartOptions";
+
 import { ChartComponent } from "ng-apexcharts";
 
 import * as _ from 'lodash';
+
 @Component({
   selector: "app-root",
   templateUrl: "./line-chart.component.html",
   styleUrls: ["./line-chart.component.scss"]
 })
-
 export class LineChartComponent implements OnInit{
   // define variables
   date: Date = new Date("2013/4/27");
@@ -30,7 +31,6 @@ export class LineChartComponent implements OnInit{
   formatChartData(res:any){
     res.forEach((element:chartData) => {
       if ((element.the_temp) && (formatDate(this.date, 'yyyy/MM/dd', 'en-US').split('/').join('-') === element.applicable_date) ) {
-        // this.weatherData.push({"the_temp" : element.the_temp, "created" : element.created.slice(11,19), "applicable_date" : element.applicable_date});
         this.weatherData.push(element);
       };
       this.weatherData = _.sortBy(this.weatherData, "created", "desc");
@@ -46,14 +46,16 @@ export class LineChartComponent implements OnInit{
     this.loading = true;
     this.showChart = false;
     this.resetChartData();
-    this.weatherDataService.getWeatherData(formatDate(this.date, 'yyyy/MM/dd', 'en-US')).subscribe((res:any) => {
+    this.weatherDataService.getWeatherData(formatDate(this.date, 'yyyy/MM/dd', 'en-US')).subscribe(
+      (res:any) => {
       this.formatChartData(res);
       this.showChart = true;
       this.loading = false;
     },
-    err => {this.error = err,
+      err => {this.error = err,
       this.loading = false;
-    }
+    },
+    // () => console.log('Observer got a complete notification')
     );
   };
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WeatherDataService } from '../weather-data.service';
+import { WeatherDataService } from '../shared//weather-data.service';
 import { formatDate } from '@angular/common';
 
 @Component({
@@ -14,7 +14,7 @@ export class WeatherTableComponent implements OnInit {
   error: string = "";
   loading: boolean = false;
   selectedWeather!: Object;
-  
+
   onDateChange(){
     this.loading = true;
     this.weatherData = [];
@@ -24,11 +24,11 @@ export class WeatherTableComponent implements OnInit {
     );
     setTimeout(() => {
       this.loading = false;
-    }, 550);  
+    }, 550);
     };
-    
+
     constructor(private weatherDataService: WeatherDataService) { }
-    
+
     ngOnInit(): void {
     this.onDateChange();
   }

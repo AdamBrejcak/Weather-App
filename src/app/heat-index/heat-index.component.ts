@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,  FormControl,  Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-heat-index',
   templateUrl: './heat-index.component.html',
@@ -62,7 +63,7 @@ export class HeatIndexComponent implements OnInit {
       ]),
       unit: new FormControl(this.units, [
       ]),
-    }); 
+    });
   };
 
   get hum() {
