@@ -7,7 +7,6 @@ import { FormGroup,  FormControl,  Validators } from '@angular/forms';
   styleUrls: ['./heat-index.component.scss']
 })
 export class HeatIndexComponent implements OnInit {
-  // define variables
   temperatureUnits: any[];
   units: string = "celsius";
   temperature!: number;
@@ -17,7 +16,6 @@ export class HeatIndexComponent implements OnInit {
   lastResults: any[] = [];
   heatIndexForm!: FormGroup;
 
-  // define methods
   addResult(){
     if (this.lastResults.length <= 4) {
       this.lastResults.unshift();

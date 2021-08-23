@@ -8,7 +8,6 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./weather-table.component.scss'],
 })
 export class WeatherTableComponent implements OnInit {
-  // define variables
   weatherData: Object[] = [];
   date: Date = new Date('2013/4/27');
   error: string = '';

@@ -15,14 +15,12 @@ import * as _ from 'lodash';
   styleUrls: ["./line-chart.component.scss"]
 })
 export class LineChartComponent implements OnInit{
-  // define variables
   date: Date = new Date("2013/4/27");
   showChart: boolean = false;
   weatherData: chartData[] = [];
   loading: boolean = false;
   error: string = "";
 
-  // define methods
   resetChartData(){
     this.chartOptions.xaxis.categories = [];
     this.chartOptions.series[0].data = [];
