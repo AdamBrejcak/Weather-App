@@ -18,18 +18,20 @@
   sortMode="multiple"
   [rowsPerPageOptions]="[5, 10, 20]"
 >
-  <!-- <ng-template pTemplate="caption">
+  <ng-template pTemplate="caption">
         <div class="p-d-flex">
             <span class="p-input-icon-left p-ml-auto">
                 <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+                <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Filter" />
             </span>
         </div>
-    </ng-template> -->
+    </ng-template>
+
   <ng-template pTemplate="header">
     <tr>
       <th pSortableColumn="created">
-        Time <p-sortIcon field="created"></p-sortIcon>
+        Time
+         <p-sortIcon field="created"></p-sortIcon>
       </th>
       <th pSortableColumn="weather_state_name">
         Weather <p-sortIcon field="weather_state_name"></p-sortIcon>
