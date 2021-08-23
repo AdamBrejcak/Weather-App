@@ -10,7 +10,7 @@ import { formatDate } from '@angular/common';
 export class WeatherTableComponent implements OnInit {
   weatherData: Object[] = [];
   date: Date = new Date('2013/4/27');
-  error: string = '';
+  error: any = '';
   loading: boolean = false;
   selectedWeather!: Object;
 

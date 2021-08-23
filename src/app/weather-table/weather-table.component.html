@@ -5,7 +5,7 @@
   (ngModelChange)="onDateChange()"
 ></p-calendar>
 <div *ngIf="loading" class="loader"></div>
-<h2 *ngIf="error">Ups, an error occured: {{ error }}</h2>
+<h2 *ngIf="error">Ups, an error occured: {{ error.message }}</h2>
 <p-table
   *ngIf="!loading"
   #dt
