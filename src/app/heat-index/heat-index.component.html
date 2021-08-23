@@ -1,5 +1,5 @@
 <form [formGroup]="heatIndexForm" #formDir="ngForm" class="heatIndexForm">
-  <h5>Heat Index Calculator</h5>
+  <h4 class="heading">Heat Index Calculator</h4>
 
   <span class="p-float-label">
     <input
@@ -120,24 +120,40 @@
     </div>
   </div>
 
-  <p-button
+  <button
+    pButton
     *ngIf="heatIndexForm.value.unit.tempName === 'Celsius'"
     label="Calculate Heat Index"
     class="p-button-info"
     type="submit"
+    [disabled]="
+      !(
+        !(heatIndexForm.controls.hum.status === 'INVALID') &&
+        !(heatIndexForm.controls.tempC.status === 'INVALID')
+      )
+    "
     (click)="
       calculateHeatIndex(heatIndexForm.value.tempC, heatIndexForm.value.hum)
     "
-  ></p-button>
-  <p-button
+  ></button>
+
+  <button
+    pButton
     *ngIf="heatIndexForm.value.unit.tempName === 'Fahrenheit'"
     label="Calculate Heat Index"
     class="p-button-info"
     type="submit"
+    [disabled]="
+      !(
+        !(heatIndexForm.controls.hum.status === 'INVALID') &&
+        !(heatIndexForm.controls.tempF.status === 'INVALID')
+      )
+    "
     (click)="
       calculateHeatIndex(heatIndexForm.value.tempF, heatIndexForm.value.hum)
     "
-  ></p-button>
+  ></button>
+
   <span>
     <h2 *ngIf="heatIndexF">
       Heat index is {{ heatIndexF | number: "1.2-2" }} °F

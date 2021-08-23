@@ -7,8 +7,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./heat-index.component.scss'],
 })
 export class HeatIndexComponent implements OnInit {
-  defaultUnit: object = {tempName :'Celsius'};
   temperature!: number;
+  defaultUnit: object = { tempName: 'Celsius' };
   humidity!: number;
   heatIndexC!: number;
   heatIndexF!: number;
@@ -18,7 +18,12 @@ export class HeatIndexComponent implements OnInit {
     { tempName: 'Celsius' },
     { tempName: 'Fahrenheit' },
   ];
-  selectedCity1: any;
+
+  constructor() {}
+
+  ngOnInit(): void {
+    this.createHeatIndexForm();
+  }
 
   addResult() {
     if (this.lastResults.length <= 4) {
@@ -32,32 +37,21 @@ export class HeatIndexComponent implements OnInit {
   }
 
   calculateHeatIndex(temperature: number, humidity: number) {
-    if (
-      (this.heatIndexForm.value.unit.tempName === 'Celsius' &&
-        temperature >= 26.7 &&
-        this.heatIndexForm.value.hum) ||
-      (this.heatIndexForm.value.unit.tempName === 'Fahrenheit' &&
-        temperature >= 80 &&
-        this.heatIndexForm.value.hum)
-    ) {
-      if (this.heatIndexForm.value.unit.tempName === 'Celsius') {
-        temperature = (9 / 5) * temperature + 32;
-      }
-      this.heatIndexF =
-        -42.379 +
-        2.04901523 * temperature +
-        10.14333127 * humidity -
-        0.22475541 * temperature * humidity -
-        0.00683783 * temperature * temperature -
-        0.05481717 * humidity * humidity +
-        0.00122874 * temperature * temperature * humidity +
-        0.00085282 * temperature * humidity * humidity -
-        0.00000199 * temperature * temperature * humidity * humidity;
-      this.heatIndexC = ((this.heatIndexF - 32) * 5) / 9;
-      this.addResult();
-    } else {
-      window.alert("Can't calculate");
+    if (this.heatIndexForm.value.unit.tempName === 'Celsius') {
+      temperature = (9 / 5) * temperature + 32;
     }
+    this.heatIndexF =
+      -42.379 +
+      2.04901523 * temperature +
+      10.14333127 * humidity -
+      0.22475541 * temperature * humidity -
+      0.00683783 * temperature * temperature -
+      0.05481717 * humidity * humidity +
+      0.00122874 * temperature * temperature * humidity +
+      0.00085282 * temperature * humidity * humidity -
+      0.00000199 * temperature * temperature * humidity * humidity;
+    this.heatIndexC = ((this.heatIndexF - 32) * 5) / 9;
+    this.addResult();
   }
 
   createHeatIndexForm() {
@@ -90,11 +84,5 @@ export class HeatIndexComponent implements OnInit {
   }
   get unit() {
     return this.heatIndexForm.get('unit')!;
-  }
-
-  constructor() {}
-
-  ngOnInit(): void {
-    this.createHeatIndexForm();
   }
 }
