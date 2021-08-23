@@ -2,6 +2,9 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { WeatherDataService } from '../shared/weather-data.service';
 import { formatDate } from '@angular/common';
 
+import { Subject } from 'rxjs';
+import { takeUntil, finalize } from 'rxjs/operators';
+
 import { chartData } from '../lineChartData';
 import { ChartOptions } from '../lineChartOptions';
 
@@ -20,6 +23,34 @@ export class LineChartComponent implements OnInit {
   weatherData: chartData[] = [];
   loading: boolean = false;
   error: any = '';
+  componentDestroyed: Subject<void> = new Subject<void>();
+
+  ngOnInit(): void {
+    this.onDateChange();
+  }
+  ngOnDestroy(): void {
+    this.componentDestroyed.next();
+  }
+  onDateChange() {
+    this.loading = true;
+    this.weatherData = [];
+    this.weatherDataService
+      .getWeatherData(formatDate(this.date, 'yyyy/MM/dd', 'en-US'))
+      .pipe(
+        finalize(() => (this.loading = false)),
+        takeUntil(this.componentDestroyed)
+      )
+      .subscribe(
+        (res: any) => {
+          this.weatherData = this.formatChartData(res);
+          this.pushChartData();
+          this.showChart = true;
+        },
+        (err) => {
+          this.error = err;
+        }
+      );
+  }
 
   resetChartData() {
     this.chartOptions.xaxis.categories = [];
@@ -27,43 +58,25 @@ export class LineChartComponent implements OnInit {
   }
 
   formatChartData(res: any) {
+    let formatedData: any = [];
     res.forEach((element: chartData) => {
       if (
         element.the_temp &&
         formatDate(this.date, 'yyyy/MM/dd', 'en-US').split('/').join('-') ===
           element.applicable_date
       ) {
-        this.weatherData.push(element);
+        formatedData.push(element);
       }
-      this.weatherData = _.sortBy(this.weatherData, 'created', 'desc');
+      formatedData = _.sortBy(formatedData, 'created', 'desc');
     });
-
+    return formatedData;
+  }
+  pushChartData() {
     this.weatherData.forEach((element: chartData) => {
       this.chartOptions.series[0].data.push(element.the_temp.toFixed(2));
       this.chartOptions.xaxis.categories.push(element.created.slice(11, 19));
     });
   }
-
-  onDateChange() {
-    this.loading = true;
-    this.showChart = false;
-    this.resetChartData();
-    this.weatherDataService
-      .getWeatherData(formatDate(this.date, 'yyyy/MM/dd', 'en-US'))
-      .subscribe(
-        (res: any) => {
-          this.formatChartData(res);
-          this.showChart = true;
-          this.loading = false;
-        },
-        (err) => {
-          (this.error = err), console.log(err);
-          this.loading = false;
-        }
-        // () => console.log('Observer got a complete notification')
-      );
-  }
-
   // chart from library
   @ViewChild('chart') chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions> | any;
@@ -103,9 +116,5 @@ export class LineChartComponent implements OnInit {
         categories: [],
       },
     };
-  }
-
-  ngOnInit(): void {
-    this.onDateChange();
   }
 }
