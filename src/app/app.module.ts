@@ -9,13 +9,12 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { AppRoutingModule } from './app-routing.module';
 
 // primeNG components
-import {InputTextModule} from 'primeng/inputtext';
-import {SelectButtonModule} from 'primeng/selectbutton';
-import {ButtonModule} from 'primeng/button';
-import {TableModule} from 'primeng/table';
-import {CalendarModule} from 'primeng/calendar';
-import {TabMenuModule} from 'primeng/tabmenu';
-
+import { InputTextModule } from 'primeng/inputtext';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+import { CalendarModule } from 'primeng/calendar';
+import { TabMenuModule } from 'primeng/tabmenu';
 
 // components
 import { AppComponent } from './app.component';
@@ -24,7 +23,7 @@ import { WeatherTableComponent } from './weather-table/weather-table.component';
 import { LineChartComponent } from './line-chart/line-chart.component';
 
 // chart module library
-import { NgApexchartsModule } from "ng-apexcharts";
+import { NgApexchartsModule } from 'ng-apexcharts';
 // import { PrimeNgModule } from './shared/prime-ng.module';
 @NgModule({
   declarations: [
@@ -52,7 +51,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
     NgApexchartsModule,
     // PrimeNgModule,
   ],
-  providers: [  ],
-  bootstrap: [AppComponent]
+  providers: [],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

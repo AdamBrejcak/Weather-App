@@ -1,81 +1,85 @@
-.heatIndexForm{
-    width: 300px;
-    height: 700px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    // justify-content: space-around;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+.heatIndexForm {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  width: 600px;
+  height: 100%;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  border: 1px #bbbbbb solid;
+  border-radius: 4px;
 }
-.heatIndexCelsius{
+.heatIndexCelsius {
   width: fit-content;
   float: right;
   margin: 0;
 }
-.heatIndexForm > *{
+.heatIndexForm > * {
   margin: 40px auto;
 }
-ul{
-    position: absolute;
-    left: 0;
-    top: 100px;
-    list-style-type: none;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+ul {
+  position: absolute;
+  left: 0;
+  top: 100px;
+  list-style-type: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
-.ng-valid[required], .ng-valid.required  {
-    border-left: 5px solid #42A948; /* green */
-  }
-  
-  .ng-invalid:not(form)  {
-    border-left: 5px solid #a94442; /* red */
-  }
-  
-  .alert div {
-    background-color: #fed3d3;
-    color: #820000;
-    padding: 1rem;
-  }
-  .validation-div{
-    margin:0 auto;
-    margin-top: -5rem;
-  }
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: .5rem;
-  }
-  
-  select {
-    width: 100%;
-    padding: .5rem;
-  }
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 5px solid #42a948; /* green */
+}
 
-  .notValidSelect{
-      top: 50%;
-  }
-  
-  .dontDisplay{
-    display: none;
-  }
-  .doDisplay{
-    display: block;
-  }
+.ng-invalid:not(form) {
+  border-left: 5px solid #a94442; /* red */
+}
 
-  .large{
-    counter-reset: list-counter;
-    list-style: none;
-    float:left;
-  }
-  .large li{
-      margin: 1.5em 0;
-      line-height: 1em
-  }
-  .large li:before{
-      content: counter(list-counter);
-      counter-increment: list-counter;
-      font-size: 2em;
-      margin-right: .5em;
-  }
+.alert div {
+  color: #db0303;
+  padding: 1rem;
+  font-size: 15px;
+}
+.validation-div {
+  margin: 0 auto;
+  margin-top: -5rem;
+}
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+select {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.notValidSelect {
+  top: 50%;
+}
+
+.dontDisplay {
+  display: none;
+}
+.doDisplay {
+  display: block;
+}
+
+.large {
+  counter-reset: list-counter;
+  list-style: none;
+  float: left;
+}
+.large li {
+  margin: 1.5em 0;
+  line-height: 1em;
+}
+.large li:before {
+  content: counter(list-counter);
+  counter-increment: list-counter;
+  font-size: 2em;
+  margin-right: 0.5em;
+}

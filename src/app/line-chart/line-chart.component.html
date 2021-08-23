@@ -1,18 +1,26 @@
-<p-calendar inputId="dateformat" dateFormat="yy/mm/dd"  [(ngModel)]="date" (ngModelChange)="onDateChange()"></p-calendar>
+<p-calendar
+  inputId="dateformat"
+  dateFormat="yy/mm/dd"
+  [(ngModel)]="date"
+  (ngModelChange)="onDateChange()"
+></p-calendar>
 <div class="loading-div">
-  <div *ngIf="loading" class="lds-ring"><div></div><div></div><div></div><div></div></div>
+  <div *ngIf="loading" class="lds-ring">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
 </div>
-<h2 *ngIf="error">Ups, an error occured: {{error}}</h2>
+<h2 *ngIf="error">Ups, an error occured: {{ error }}</h2>
 <div *ngIf="showChart" id="chart">
-    <apx-chart
-      [series]="chartOptions.series"
-      [chart]="chartOptions.chart"
-      [xaxis]="chartOptions.xaxis"
-      [dataLabels]="chartOptions.dataLabels"
-      [grid]="chartOptions.grid"
-      [stroke]="chartOptions.stroke"
-      [title]="chartOptions.title"
-    ></apx-chart>
+  <apx-chart
+    [series]="chartOptions.series"
+    [chart]="chartOptions.chart"
+    [xaxis]="chartOptions.xaxis"
+    [dataLabels]="chartOptions.dataLabels"
+    [grid]="chartOptions.grid"
+    [stroke]="chartOptions.stroke"
+    [title]="chartOptions.title"
+  ></apx-chart>
 </div>
-
-  
