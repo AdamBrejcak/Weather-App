@@ -1,4 +1,4 @@
-import { Component,ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { WeatherDataService } from '../shared//weather-data.service';
 import { formatDate } from '@angular/common';
 import { Table } from 'primeng/table';
@@ -16,7 +16,7 @@ export class WeatherTableComponent implements OnInit {
   error: any = '';
   loading: boolean = false;
   componentDestroyed: Subject<void> = new Subject<void>();
-  @ViewChild('dt') dt: Table | undefined|any;
+  @ViewChild('dt') dt: Table | undefined | any;
   constructor(private weatherDataService: WeatherDataService) {}
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class WeatherTableComponent implements OnInit {
   ngOnDestroy(): void {
     this.componentDestroyed.next();
   }
-  applyFilterGlobal($event:any, stringVal:any) {
+  applyFilterGlobal($event: any, stringVal: any) {
     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
   onDateChange() {

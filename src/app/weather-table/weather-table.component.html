@@ -1,12 +1,14 @@
-<p-calendar
+<div class="weatherTable">
+  <p-calendar
+  class="calendar"
   inputId="dateformat"
   dateFormat="yy/mm/dd"
   [(ngModel)]="date"
   (ngModelChange)="onDateChange()"
-></p-calendar>
-<div *ngIf="loading" class="loader"></div>
-<h2 *ngIf="error">Ups, an error occured: {{ error.message }}</h2>
-<p-table
+  ></p-calendar>
+  <div *ngIf="loading" class="loader"></div>
+  <h2 *ngIf="error">Ups, an error occured: {{ error.message }}</h2>
+  <p-table
   [reorderableColumns]="true"
   *ngIf="!loading"
   #dt
@@ -18,16 +20,16 @@
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   sortMode="multiple"
   [rowsPerPageOptions]="[5, 10, 20]"
->
+  >
   <ng-template pTemplate="caption">
     <div class="p-d-flex">
       <span class="p-input-icon-left p-ml-auto">
         <i class="pi pi-search"></i>
         <input
-          pInputText
-          type="text"
-          (input)="applyFilterGlobal($event, 'contains')"
-          placeholder="Filter"
+        pInputText
+        type="text"
+        (input)="applyFilterGlobal($event, 'contains')"
+        placeholder="Filter"
         />
       </span>
     </div>
@@ -37,7 +39,7 @@
     <tr>
       <th pReorderableColumn>
 
-    </th>
+      </th>
 
       <th pSortableColumn="created">
         Time
@@ -64,7 +66,7 @@
     <tr [pReorderableRow]="index">
       <td>
         <span class="pi pi-bars" [pReorderableRowHandle]="index"></span>
-    </td>
+      </td>
       <td>{{ data.created | date: "mediumTime" }}</td>
       <td>{{ data.weather_state_name }}</td>
       <td>{{ data.wind_direction_compass }}</td>
@@ -74,3 +76,5 @@
     </tr>
   </ng-template>
 </p-table>
+
+</div>
