@@ -4,14 +4,7 @@
   [(ngModel)]="date"
   (ngModelChange)="onDateChange()"
 ></p-calendar>
-<div class="loading-div">
-  <div *ngIf="loading" class="lds-ring">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-</div>
+<div *ngIf="loading" class="loader"></div>
 <h2 *ngIf="error">Ups, an error occured: {{ error }}</h2>
 <div *ngIf="showChart" id="chart">
   <apx-chart

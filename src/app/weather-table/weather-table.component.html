@@ -1,11 +1,24 @@
-<p-calendar inputId="dateformat" dateFormat="yy/mm/dd"  [(ngModel)]="date" (ngModelChange)="onDateChange()"></p-calendar>
-<div class="loading-div">
-    <div *ngIf="loading" class="lds-ring"><div></div><div></div><div></div><div></div></div>
-  </div>
-<h2 *ngIf="error">Ups, an error occured: {{error}}</h2>
-<p-table *ngIf="!loading" #dt [globalFilterFields]="['created','weather_state_name']" [value]="weatherData" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" 
-currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" sortMode="multiple" [rowsPerPageOptions]="[5,10,20]">
-    <!-- <ng-template pTemplate="caption">
+<p-calendar
+  inputId="dateformat"
+  dateFormat="yy/mm/dd"
+  [(ngModel)]="date"
+  (ngModelChange)="onDateChange()"
+></p-calendar>
+<div *ngIf="loading" class="loader"></div>
+<h2 *ngIf="error">Ups, an error occured: {{ error }}</h2>
+<p-table
+  *ngIf="!loading"
+  #dt
+  [globalFilterFields]="['created', 'weather_state_name']"
+  [value]="weatherData"
+  [paginator]="true"
+  [rows]="10"
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  sortMode="multiple"
+  [rowsPerPageOptions]="[5, 10, 20]"
+>
+  <!-- <ng-template pTemplate="caption">
         <div class="p-d-flex">
             <span class="p-input-icon-left p-ml-auto">
                 <i class="pi pi-search"></i>
@@ -13,24 +26,36 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
             </span>
         </div>
     </ng-template> -->
-    <ng-template pTemplate="header">
-        <tr>
-            <th pSortableColumn="created">Time <p-sortIcon field="created"></p-sortIcon></th>
-            <th pSortableColumn="weather_state_name">Weather <p-sortIcon field="weather_state_name"></p-sortIcon></th>
-            <th pSortableColumn="wind_direction_compass">Wind Direction <p-sortIcon field="wind_direction_compass"></p-sortIcon></th>
-            <th pSortableColumn="the_temp">Temperature <p-sortIcon field="the_temp"></p-sortIcon></th>
-            <th pSortableColumn="wind_speed">Wind Speed <p-sortIcon field="wind_spee"></p-sortIcon></th>
-            <th pSortableColumn="humidity">Humidity <p-sortIcon field="humidity"></p-sortIcon></th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-data>
-        <tr>
-            <td>{{data.created | slice : 11 : 19 }}</td>
-            <td>{{data.weather_state_name}}</td>
-            <td>{{data.wind_direction_compass}}</td>
-            <td>{{data.the_temp | number : '1.2-2'}}</td>
-            <td>{{data.wind_speed | number : '1.2-2'}}</td>
-            <td>{{data.humidity}}</td>
-        </tr>
-    </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="created">
+        Time <p-sortIcon field="created"></p-sortIcon>
+      </th>
+      <th pSortableColumn="weather_state_name">
+        Weather <p-sortIcon field="weather_state_name"></p-sortIcon>
+      </th>
+      <th pSortableColumn="wind_direction_compass">
+        Wind Direction <p-sortIcon field="wind_direction_compass"></p-sortIcon>
+      </th>
+      <th pSortableColumn="the_temp">
+        Temperature <p-sortIcon field="the_temp"></p-sortIcon>
+      </th>
+      <th pSortableColumn="wind_speed">
+        Wind Speed <p-sortIcon field="wind_spee"></p-sortIcon>
+      </th>
+      <th pSortableColumn="humidity">
+        Humidity <p-sortIcon field="humidity"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-data>
+    <tr>
+      <td>{{ data.created | slice: 11:19 }}</td>
+      <td>{{ data.weather_state_name }}</td>
+      <td>{{ data.wind_direction_compass }}</td>
+      <td>{{ data.the_temp | number: "1.2-2" }}</td>
+      <td>{{ data.wind_speed | number: "1.2-2" }}</td>
+      <td>{{ data.humidity }}</td>
+    </tr>
+  </ng-template>
 </p-table>
