@@ -2,9 +2,17 @@
   width: 100%;
   height: 100%;
   margin: 20px auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 .calendar {
   margin: 16px;
+}
+.dateHeader{
+  margin:0 0 10px 16px;
+}
+.dateHeader > h5{
+  margin: 0;
 }
 .loader {
   border: 3px solid transparent; /* Light grey */
