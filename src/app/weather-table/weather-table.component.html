@@ -7,6 +7,7 @@
 <div *ngIf="loading" class="loader"></div>
 <h2 *ngIf="error">Ups, an error occured: {{ error.message }}</h2>
 <p-table
+  [reorderableColumns]="true"
   *ngIf="!loading"
   #dt
   [globalFilterFields]="['created', 'weather_state_name']"
@@ -19,19 +20,28 @@
   [rowsPerPageOptions]="[5, 10, 20]"
 >
   <ng-template pTemplate="caption">
-        <div class="p-d-flex">
-            <span class="p-input-icon-left p-ml-auto">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Filter" />
-            </span>
-        </div>
-    </ng-template>
+    <div class="p-d-flex">
+      <span class="p-input-icon-left p-ml-auto">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="applyFilterGlobal($event, 'contains')"
+          placeholder="Filter"
+        />
+      </span>
+    </div>
+  </ng-template>
 
   <ng-template pTemplate="header">
     <tr>
+      <th pReorderableColumn>
+
+    </th>
+
       <th pSortableColumn="created">
         Time
-         <p-sortIcon field="created"></p-sortIcon>
+        <p-sortIcon field="created"></p-sortIcon>
       </th>
       <th pSortableColumn="weather_state_name">
         Weather <p-sortIcon field="weather_state_name"></p-sortIcon>
@@ -50,8 +60,11 @@
       </th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-data>
-    <tr>
+  <ng-template pTemplate="body" let-data let-index="rowIndex">
+    <tr [pReorderableRow]="index">
+      <td>
+        <span class="pi pi-bars" [pReorderableRowHandle]="index"></span>
+    </td>
       <td>{{ data.created | date: "mediumTime" }}</td>
       <td>{{ data.weather_state_name }}</td>
       <td>{{ data.wind_direction_compass }}</td>
