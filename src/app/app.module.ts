@@ -15,6 +15,7 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CalendarModule } from 'primeng/calendar';
 import { TabMenuModule } from 'primeng/tabmenu';
+import {CascadeSelectModule} from 'primeng/cascadeselect';
 
 // components
 import { AppComponent } from './app.component';
@@ -40,6 +41,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     HttpClientModule,
     HttpClientInMemoryWebApiModule,
     AppRoutingModule,
+    CascadeSelectModule,
 
     InputTextModule,
     SelectButtonModule,
@@ -47,6 +49,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     TableModule,
     CalendarModule,
     TabMenuModule,
+
 
     NgApexchartsModule,
     // PrimeNgModule,

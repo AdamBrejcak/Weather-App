@@ -1,15 +1,9 @@
 <form [formGroup]="heatIndexForm" #formDir="ngForm" class="heatIndexForm">
-  <p-selectButton
-    [options]="temperatureUnits"
-    formControlName="unit"
-    optionLabel="label"
-    optionValue="value"
-    name="units"
-  ></p-selectButton>
+  <h5>Heat Index Calculator</h5>
 
   <span class="p-float-label">
     <input
-      *ngIf="heatIndexForm.value.unit === 'celsius'"
+      *ngIf="heatIndexForm.value.unit.tempName === 'Celsius'"
       class="form-control"
       formControlName="tempC"
       id="float-input"
@@ -21,7 +15,7 @@
       name="temperature"
     />
     <input
-      *ngIf="heatIndexForm.value.unit === 'fahrenheit'"
+      *ngIf="heatIndexForm.value.unit.tempName === 'Fahrenheit'"
       class="form-control"
       formControlName="tempF"
       id="float-input"
@@ -32,6 +26,7 @@
       pInputText
       name="temperature"
     />
+
     <label
       for="float-input"
       [ngClass]="
@@ -40,9 +35,19 @@
           ? 'notValidSelect'
           : ''
       "
-      >Temperature</label
-    >
+      >Temperature
+    </label>
+    <p-cascadeSelect
+      formControlName="unit"
+      [options]="temperatureUnits"
+      optionLabel="tempName"
+      optionGroupLabel="name"
+      [optionGroupChildren]="['units']"
+      [style]="{ minWidth: '14rem' }"
+      placeholder="Select a temperature units"
+    ></p-cascadeSelect>
   </span>
+
   <div
     *ngIf="
       (tempC.invalid && (tempC.dirty || tempC.touched)) ||
@@ -53,21 +58,27 @@
     <div
       class="validation-div"
       *ngIf="
-        (tempC.errors?.required && heatIndexForm.value.unit === 'celsius') ||
-        (heatIndexForm.value.unit === 'fahrenheit' && tempF.errors?.required)
+        (tempC.errors?.required &&
+          heatIndexForm.value.unit.tempName === 'Celsius') ||
+        (heatIndexForm.value.unit.tempName === 'Fahrenheit' &&
+          tempF.errors?.required)
       "
     >
       Temperature is required.
     </div>
     <div
       class="validation-div"
-      *ngIf="tempC.errors?.min && heatIndexForm.value.unit === 'celsius'"
+      *ngIf="
+        tempC.errors?.min && heatIndexForm.value.unit.tempName === 'Celsius'
+      "
     >
       Temperature must be at least 26.7 °C
     </div>
     <div
       class="validation-div"
-      *ngIf="tempF.errors?.min && heatIndexForm.value.unit === 'fahrenheit'"
+      *ngIf="
+        tempF.errors?.min && heatIndexForm.value.unit.tempName === 'Fahrenheit'
+      "
     >
       Temperature must be at least 80 °F
     </div>
@@ -110,8 +121,8 @@
   </div>
 
   <p-button
-    *ngIf="heatIndexForm.value.unit === 'celsius'"
-    label="Submit"
+    *ngIf="heatIndexForm.value.unit.tempName === 'Celsius'"
+    label="Calculate Heat Index"
     class="p-button-info"
     type="submit"
     (click)="
@@ -119,8 +130,8 @@
     "
   ></p-button>
   <p-button
-    *ngIf="heatIndexForm.value.unit === 'fahrenheit'"
-    label="Submit"
+    *ngIf="heatIndexForm.value.unit.tempName === 'Fahrenheit'"
+    label="Calculate Heat Index"
     class="p-button-info"
     type="submit"
     (click)="
