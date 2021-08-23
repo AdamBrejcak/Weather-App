@@ -50,7 +50,7 @@
   </ng-template>
   <ng-template pTemplate="body" let-data>
     <tr>
-      <td>{{ data.created | slice: 11:19 }}</td>
+      <td>{{ data.created | date: "mediumTime" }}</td>
       <td>{{ data.weather_state_name }}</td>
       <td>{{ data.wind_direction_compass }}</td>
       <td>{{ data.the_temp | number: "1.2-2" }}</td>
