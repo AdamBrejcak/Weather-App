@@ -66,8 +66,9 @@ export class LineChartComponent implements OnInit {
     res.forEach((element: chartData) => {
       if (
         element.the_temp &&
-        formatDate(this.choosenDate, 'yyyy/MM/dd', 'en-US').split('/').join('-') ===
-          element.applicable_date
+        formatDate(this.choosenDate, 'yyyy/MM/dd', 'en-US')
+          .split('/')
+          .join('-') === element.applicable_date
       ) {
         formatedData.push(element);
       }
@@ -94,6 +95,9 @@ export class LineChartComponent implements OnInit {
         zoom: {
           enabled: false,
         },
+        toolbar: {
+          show: false,
+        },
       },
       dataLabels: {
         enabled: false,
@@ -102,8 +106,8 @@ export class LineChartComponent implements OnInit {
         curve: 'straight',
       },
       title: {
-        text: '',
-        align: 'left',
+        text: "",
+        align: 'right',
       },
       grid: {
         row: {
