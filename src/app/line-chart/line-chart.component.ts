@@ -18,7 +18,7 @@ import * as _ from 'lodash';
   styleUrls: ['./line-chart.component.scss'],
 })
 export class LineChartComponent implements OnInit {
-  date: Date = new Date('2013/4/27');
+  choosenDate: Date = new Date('2013/4/27');
   weatherData: chartData[] = [];
   loading: boolean = false;
   error: any = '';
@@ -35,7 +35,7 @@ export class LineChartComponent implements OnInit {
     this.weatherData = [];
     this.resetChartData();
     this.weatherDataService
-      .getWeatherData(formatDate(this.date, 'yyyy/MM/dd', 'en-US'))
+      .getWeatherData(formatDate(this.choosenDate, 'yyyy/MM/dd', 'en-US'))
       .pipe(
         finalize(() => (this.loading = false)),
         takeUntil(this.componentDestroyed)
@@ -66,7 +66,7 @@ export class LineChartComponent implements OnInit {
     res.forEach((element: chartData) => {
       if (
         element.the_temp &&
-        formatDate(this.date, 'yyyy/MM/dd', 'en-US').split('/').join('-') ===
+        formatDate(this.choosenDate, 'yyyy/MM/dd', 'en-US').split('/').join('-') ===
           element.applicable_date
       ) {
         formatedData.push(element);

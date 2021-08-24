@@ -4,7 +4,7 @@
     class="calendar"
     inputId="dateformat"
     dateFormat="yy/mm/dd"
-    [(ngModel)]="date"
+    [(ngModel)]="choosenDate"
     (ngModelChange)="onDateChange()"
   ></p-calendar>
   <div *ngIf="loading" class="loader"></div>
