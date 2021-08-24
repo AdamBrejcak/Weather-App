@@ -29,10 +29,16 @@ export class WeatherTableComponent implements OnInit {
   constructor(private weatherDataService: WeatherDataService) {}
 
   ngOnInit(): void {
+    if (localStorage.getItem('selectedCity')) {
+      let tempData: any;
+      tempData = localStorage.getItem('selectedCity');
+      this.selectedCity = JSON.parse(tempData);
+    }
     this.onInputChange();
   }
   ngOnDestroy(): void {
     this.componentDestroyed.next();
+    localStorage.setItem('selectedCity', JSON.stringify(this.selectedCity));
   }
   applyFilterGlobal($event: any, stringVal: any) {
     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
@@ -41,7 +47,10 @@ export class WeatherTableComponent implements OnInit {
     this.loading = true;
     this.weatherData = [];
     this.weatherDataService
-      .getWeatherData(formatDate(this.choosenDate, 'yyyy/MM/dd', 'en-US'), 44418)
+      .getWeatherData(
+        formatDate(this.choosenDate, 'yyyy/MM/dd', 'en-US'),
+        this.selectedCity.code
+      )
       .pipe(
         finalize(() => (this.loading = false)),
         takeUntil(this.componentDestroyed)

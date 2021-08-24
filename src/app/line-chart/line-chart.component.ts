@@ -32,18 +32,29 @@ export class LineChartComponent implements OnInit {
     { cname: 'San Francisco', code: 2487956 },
   ];
   selectedCity: any = { cname: 'London', code: 44418 };
+  dataFromSessionStorage: any;
+
   ngOnInit(): void {
+    if (localStorage.getItem('selectedCity')) {
+      let tempData: any;
+      tempData = localStorage.getItem('selectedCity');
+      this.selectedCity = JSON.parse(tempData);
+    }
     this.onInputChange();
   }
   ngOnDestroy(): void {
     this.componentDestroyed.next();
+    localStorage.setItem('selectedCity', JSON.stringify(this.selectedCity));
   }
   onInputChange() {
     this.loading = true;
     this.weatherData = [];
     this.resetChartData();
     this.weatherDataService
-      .getWeatherData(formatDate(this.choosenDate, 'yyyy/MM/dd', 'en-US'),this.selectedCity.code)
+      .getWeatherData(
+        formatDate(this.choosenDate, 'yyyy/MM/dd', 'en-US'),
+        this.selectedCity.code
+      )
       .pipe(
         finalize(() => (this.loading = false)),
         takeUntil(this.componentDestroyed)
@@ -57,6 +68,7 @@ export class LineChartComponent implements OnInit {
           this.error = err;
         }
       );
+    // console.log(JSON.parse(this.dataFromLocalStorage));
   }
 
   resetChartData() {
