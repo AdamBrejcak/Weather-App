@@ -101,6 +101,7 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
+              "src/faviconS.ico",
               "src/assets"
             ],
             "styles": [
