@@ -1,0 +1,12 @@
+.inputs {
+  display: flex;
+}
+.choose-input {
+  margin: 0 0 0 16px;
+}
+.choose-input > * {
+  width: fit-content;
+}
+.choose-input > h5 {
+  margin: 0 0 10px 0;
+}

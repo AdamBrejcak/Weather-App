@@ -1,0 +1,30 @@
+<form [formGroup]="weatherInputsForm">
+  <div class="inputs">
+    <div class="choose-input">
+      <h5>Choose City</h5>
+      <p-cascadeSelect
+        formControlName="city"
+        [options]="cities"
+        optionLabel="name"
+        optionGroupLabel="name"
+        [optionGroupChildren]="['cities']"
+        [style]="{ minWidth: '14rem' }"
+        placeholder="Select a City">
+      </p-cascadeSelect>
+    </div>
+
+    <div class="choose-input">
+      <h5>Choose Date</h5>
+      <p-calendar
+        formControlName="date"
+        type="date"
+        inputId="dateformat"
+        [maxDate]="maxDateValue"
+        [showIcon]="true"
+        customDateFormat
+        dateFormat="yy/mm/dd"
+        rPCalendarMask>
+      </p-calendar>
+    </div>
+  </div>
+</form>

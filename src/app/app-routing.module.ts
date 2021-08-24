@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-// import { HeatIndexComponent } from './heat-index/heat-index.component';
-// import { WeatherTableComponent } from './weather-table/weather-table.component';
-// import { LineChartComponent } from './line-chart/line-chart.component';
 
 const routes: Routes = [
-  {path:"", redirectTo:"/heatindex", pathMatch:"full"},
-  {path:"heatindex", loadChildren: () => import('./heat-index/heat-index-routing.module').then(m => m.HeatIndexRoutingModule)},
-  {path:"weathertable", loadChildren: () => import('./weather-table/weather-table-routing.module').then(m => m.WeatherTableRoutingModule)},
-  {path:"linechart", loadChildren: () => import('./line-chart/line-chart-routing.module').then(m => m.LineChartRoutingModule)},
+  {path:"", redirectTo:"/weathertable", pathMatch:"full"},
+  {path:"weathertable", loadChildren: () => import('./features/weather-table/weather-table.module').then(m => m.WeatherTableModule)},
+  {path:"linechart", loadChildren: () => import('./features/line-chart/line-chart.module').then(m => m.LineChartModule)},
+  {path:"heatindex", loadChildren: () => import('./features/heat-index/heat-index.module').then(m => m.HeatIndexModule)},
 ];
 
 @NgModule({
