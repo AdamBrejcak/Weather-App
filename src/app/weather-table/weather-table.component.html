@@ -1,12 +1,22 @@
 <div class="weatherTable">
-  <div class="dateHeader"><h5>Choose date</h5></div>
+  <div class="dateHeader"><h5>Choose date and city</h5></div>
   <p-calendar
     class="calendar"
     inputId="dateformat"
     dateFormat="yy/mm/dd"
     [(ngModel)]="choosenDate"
-    (ngModelChange)="onDateChange()"
+    (ngModelChange)="onInputChange()"
   ></p-calendar>
+  <p-cascadeSelect
+    [(ngModel)]="selectedCity"
+    [options]="cities"
+    optionLabel="cname"
+    optionGroupLabel="name"
+    [optionGroupChildren]="['cities']"
+    [style]="{ minWidth: '14rem' }"
+    (ngModelChange)="onInputChange()"
+    placeholder="Select a City"
+  ></p-cascadeSelect>
   <div *ngIf="loading" class="loader"></div>
   <h2 *ngIf="error">Ups, an error occured: {{ error.message }}</h2>
   <p-table

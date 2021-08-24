@@ -15,7 +15,7 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CalendarModule } from 'primeng/calendar';
 import { TabMenuModule } from 'primeng/tabmenu';
-import {CascadeSelectModule} from 'primeng/cascadeselect';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
 
 // components
 import { AppComponent } from './app.component';
@@ -25,7 +25,6 @@ import { LineChartComponent } from './line-chart/line-chart.component';
 
 // chart module library
 import { NgApexchartsModule } from 'ng-apexcharts';
-// import { PrimeNgModule } from './shared/prime-ng.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,9 +49,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     CalendarModule,
     TabMenuModule,
 
-
     NgApexchartsModule,
-    // PrimeNgModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

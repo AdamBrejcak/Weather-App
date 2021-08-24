@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class WeatherDataService {
 
   constructor(private http:HttpClient) { }
-  getWeatherData(pickedDate:String): Observable<Object[]> {
-    return this.http.get<Object[]>(`https://thingproxy.freeboard.io/fetch/https://www.metaweather.com/api/location/44418/${pickedDate}/`)
+  getWeatherData(pickedDate:String, pickedCity:Number): Observable<Object[]> {
+    return this.http.get<Object[]>(`https://thingproxy.freeboard.io/fetch/https://www.metaweather.com/api/location/${pickedCity}/${pickedDate}/`)
   };
 }
