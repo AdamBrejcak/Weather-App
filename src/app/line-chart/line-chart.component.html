@@ -1,6 +1,5 @@
 <div class="lineChart">
   <div class="dateHeader"><h5>Choose date</h5></div>
-
   <p-calendar
     class="calendar"
     inputId="dateformat"
@@ -10,7 +9,7 @@
   ></p-calendar>
   <div *ngIf="loading" class="loader"></div>
   <h2 *ngIf="error">Ups, an error occured: {{ error.message }}</h2>
-  <div *ngIf="showChart" id="chart">
+  <div *ngIf="!loading" id="chart">
     <apx-chart
       [series]="chartOptions.series"
       [chart]="chartOptions.chart"

@@ -19,7 +19,6 @@ import * as _ from 'lodash';
 })
 export class LineChartComponent implements OnInit {
   date: Date = new Date('2013/4/27');
-  showChart: boolean = false;
   weatherData: chartData[] = [];
   loading: boolean = false;
   error: any = '';
@@ -34,6 +33,7 @@ export class LineChartComponent implements OnInit {
   onDateChange() {
     this.loading = true;
     this.weatherData = [];
+    this.resetChartData();
     this.weatherDataService
       .getWeatherData(formatDate(this.date, 'yyyy/MM/dd', 'en-US'))
       .pipe(
@@ -44,7 +44,6 @@ export class LineChartComponent implements OnInit {
         (res: any) => {
           this.weatherData = this.formatChartData(res);
           this.pushChartData();
-          this.showChart = true;
         },
         (err) => {
           this.error = err;
@@ -53,10 +52,15 @@ export class LineChartComponent implements OnInit {
   }
 
   resetChartData() {
-    this.chartOptions.xaxis.categories = [];
     this.chartOptions.series[0].data = [];
+    this.chartOptions.xaxis.categories = [];
   }
-
+  pushChartData() {
+    this.weatherData.forEach((element: chartData) => {
+      this.chartOptions.series[0].data.push(element.the_temp.toFixed(2));
+      this.chartOptions.xaxis.categories.push(element.created.slice(11, 19));
+    });
+  }
   formatChartData(res: any) {
     let formatedData: any = [];
     res.forEach((element: chartData) => {
@@ -71,12 +75,7 @@ export class LineChartComponent implements OnInit {
     });
     return formatedData;
   }
-  pushChartData() {
-    this.weatherData.forEach((element: chartData) => {
-      this.chartOptions.series[0].data.push(element.the_temp.toFixed(2));
-      this.chartOptions.xaxis.categories.push(element.created.slice(11, 19));
-    });
-  }
+
   // chart from library
   @ViewChild('chart') chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions> | any;
