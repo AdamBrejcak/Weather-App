@@ -12,7 +12,7 @@ import { takeUntil, finalize } from 'rxjs/operators';
 })
 export class WeatherTableComponent implements OnInit {
   weatherData: Object[] = [];
-  date: Date = new Date('2013/4/27');
+  choosenDate: Date = new Date('2013/4/27');
   error: any = '';
   loading: boolean = false;
   componentDestroyed: Subject<void> = new Subject<void>();
@@ -32,7 +32,7 @@ export class WeatherTableComponent implements OnInit {
     this.loading = true;
     this.weatherData = [];
     this.weatherDataService
-      .getWeatherData(formatDate(this.date, 'yyyy/MM/dd', 'en-US'))
+      .getWeatherData(formatDate(this.choosenDate, 'yyyy/MM/dd', 'en-US'))
       .pipe(
         finalize(() => (this.loading = false)),
         takeUntil(this.componentDestroyed)
