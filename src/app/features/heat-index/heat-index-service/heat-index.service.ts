@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { LastResultsItem } from 'src/app/shared/last-results-item/last-results-item';
 import { CustomValidators } from '../custom.validators';
 
 @Injectable({
@@ -8,6 +9,17 @@ import { CustomValidators } from '../custom.validators';
 export class HeatIndexService {
 
   constructor(private formBuilder: FormBuilder) {}
+
+  getLocalStorageResults(): Array<LastResultsItem> {
+    if (localStorage.getItem('results')) {
+      return JSON.parse(localStorage.getItem('results') || '{}');
+    }
+    return [];
+  }
+
+  changeLocalStorageResults(lastResults: Array<LastResultsItem>) {
+    localStorage.setItem('results', JSON.stringify(lastResults));
+  }
 
   createHeatIndexForm(): FormGroup {
     let heatIndexForm: FormGroup;
@@ -35,7 +47,7 @@ export class HeatIndexService {
     return result;
   }
 
-  getHeatIndexInChoosenUnits(resultInFahrenheit: number, heatIndexUnit:string): string {
+  getHeatIndexInChosenUnits(resultInFahrenheit: number, heatIndexUnit:string): string {
     if (heatIndexUnit === 'Celsius') {
       return `${this.convertFahrenheitToCelsius(resultInFahrenheit).toFixed(2)} °C`;
     } else {

@@ -23,6 +23,7 @@
     "apexcharts": "^3.27.3",
     "lodash": "^4.17.21",
     "ng-apexcharts": "^1.5.12",
+    "ol": "^6.8.1",
     "primeicons": "^4.1.0",
     "primeng": "^11.4.5",
     "racoon-mask-primeng": "^1.1.15",

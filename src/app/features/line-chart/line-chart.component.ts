@@ -5,7 +5,7 @@ import { takeUntil, finalize } from 'rxjs/operators';
 import { ChartOptions } from './lineChartOptions';
 import { ChartComponent } from 'ng-apexcharts';
 import { WeatherDataService } from '../../core/weather-data-service/weather-data.service';
-import { FilterDataService } from '../../core/filter-data-service/filter-data.service';
+import { FilterLineChartDataService } from './filter-data-service/filter-data.service';
 import { DateCity } from '../../shared/date-city/date-city';
 import { WeatherDataItem } from '../../shared/weather-data-item/weather-data-item';
 
@@ -20,12 +20,12 @@ export class LineChartComponent {
   chartOptions: Partial<ChartOptions> | any;
   weatherData: WeatherDataItem[] = [];
   loading: boolean = false;
-  error: any = '';
+  error: any = null;
   private componentDestroyed: Subject<void> = new Subject<void>();
 
   constructor(
     private weatherDataService: WeatherDataService,
-    private filterDataSerivce: FilterDataService,
+    private FilterLineChartDataService: FilterLineChartDataService,
   ) {
     this.chartOptions = {
       series: [
@@ -71,6 +71,7 @@ export class LineChartComponent {
   }
 
   onInputChange(emitedData: DateCity) {
+    this.error = null;
     if((emitedData.city) && (emitedData.date)){
       this.loading = true;
       this.weatherData = [];
@@ -86,7 +87,7 @@ export class LineChartComponent {
         )
         .subscribe(
           (res: WeatherDataItem[]) => {
-            this.weatherData = this.filterDataSerivce.filterAndSortChartData(
+            this.weatherData = this.FilterLineChartDataService.filterAndSortChartData(
               res,
               emitedData.date,
             );

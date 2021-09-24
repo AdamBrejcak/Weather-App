@@ -1,2 +1,7 @@
-<p-tabMenu [model]="items"></p-tabMenu>
+<h3 class="heading">
+  <span [routerLink]="['/map']">
+    <i class="pi pi-home"></i>Weather App
+  </span>
+</h3>
+<p-tabMenu *ngIf="showMenu" [model]="items"></p-tabMenu>
 <router-outlet></router-outlet>

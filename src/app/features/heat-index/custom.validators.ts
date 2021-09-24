@@ -9,6 +9,10 @@ export class CustomValidators {
       const temperature = fg.controls[formCtrlOne];
       const unit = fg.controls[formCtrlTwo];
 
+      if (!unit.value) {
+        return;
+      }
+
       let minTemperatureError:{[p: string]: () => boolean} =  {
         Celsius : () => {
           return (temperature.value < 26.7);

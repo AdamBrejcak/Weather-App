@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FilterDataService } from './filter-data.service';
+import { UserInputService } from './user-input.service';
 
-describe('FormatDataServiceService', () => {
-  let service: FilterDataService;
+describe('EmitServiceService', () => {
+  let service: UserInputService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FilterDataService);
+    service = TestBed.inject(UserInputService);
   });
 
   it('should be created', () => {

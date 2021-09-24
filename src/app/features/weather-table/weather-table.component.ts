@@ -16,7 +16,7 @@ import { DateCity } from 'src/app/shared/date-city/date-city';
 export class WeatherTableComponent {
   @ViewChild('dt') dt: Table | undefined | any;
   weatherData: WeatherDataItem[] = [];
-  error: any = '';
+  error: any = null;
   loading: boolean = false;
   filterFields: string[] = [
     'created',
@@ -39,6 +39,7 @@ export class WeatherTableComponent {
   }
 
   onInputChange(emitedData: DateCity) {
+    this.error = null;
     if((emitedData.city) && (emitedData.date)){
       this.loading = true;
       this.weatherData = [];

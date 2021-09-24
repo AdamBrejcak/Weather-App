@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HeatIndexService } from './heat-index-service/heat-index.service';
-import { LocalStorageDataService } from '../../core/local-storage-data-service/local-storage-data.service';
 import { FormGroup } from '@angular/forms';
 import { LastResultsItem } from 'src/app/shared/last-results-item/last-results-item';
 
@@ -18,14 +17,11 @@ export class HeatIndexComponent implements OnInit {
   heatIndexForm!: FormGroup;
   temperatureUnits: string[] = [ 'Celsius','Fahrenheit' ];
 
-  constructor(
-    private heatIndexService: HeatIndexService,
-    private localStorageDataService: LocalStorageDataService,
-  ) {}
+  constructor(private heatIndexService: HeatIndexService,) {}
 
   ngOnInit(): void {
     this.heatIndexForm = this.heatIndexService.createHeatIndexForm();
-    this.lastResults = this.localStorageDataService.getLocalStorageResults();
+    this.lastResults = this.heatIndexService.getLocalStorageResults();
   }
 
   numbersOnly(event: { which: any; keyCode: any; }): boolean {
@@ -46,9 +42,9 @@ export class HeatIndexComponent implements OnInit {
       temperature,
       this.heatIndexForm.value.hum,
     );
-    this.heatIndex = this.heatIndexService.getHeatIndexInChoosenUnits(resultInFahrenheit, this.heatIndexForm.value.unit);
+    this.heatIndex = this.heatIndexService.getHeatIndexInChosenUnits(resultInFahrenheit, this.heatIndexForm.value.unit);
     this.addResultToLastResults(resultInFahrenheit);
-    this.heatIndexForm = this.heatIndexService.createHeatIndexForm();
+    this.heatIndexForm.reset();
   }
 
   addResultToLastResults(resultInFahrenheit: number) {
@@ -57,7 +53,7 @@ export class HeatIndexComponent implements OnInit {
       resultInFahrenheit,
       this.heatIndexService.convertFahrenheitToCelsius(resultInFahrenheit),
     ));
-    this.localStorageDataService.changeLocalStorageResults(this.lastResults);
+    this.heatIndexService.changeLocalStorageResults(this.lastResults);
   }
 
   get f() {

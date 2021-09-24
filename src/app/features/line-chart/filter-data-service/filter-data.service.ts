@@ -5,14 +5,14 @@ import { formatDate } from '@angular/common';
 @Injectable({
   providedIn: 'root'
 })
-export class FilterDataService {
+export class FilterLineChartDataService {
 
   constructor() {}
 
-  filterAndSortChartData(results: WeatherDataItem[], choosenDate: Date): Array<WeatherDataItem> {
+  filterAndSortChartData(results: WeatherDataItem[], chosenDate: Date): Array<WeatherDataItem> {
     let formatedData: WeatherDataItem[] = [];
     formatedData = results.filter(result => result.the_temp &&
-      formatDate(choosenDate, 'yyyy-MM-dd', 'en-US') === result.applicable_date);
+      formatDate(chosenDate, 'yyyy-MM-dd', 'en-US') === result.applicable_date);
     formatedData.sort((a: WeatherDataItem, b: WeatherDataItem) => a.created.localeCompare(b.created));
     return formatedData;
   }

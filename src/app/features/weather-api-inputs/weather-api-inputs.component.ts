@@ -1,12 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import * as cities from '../../shared/cities.json';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import * as data from '../../shared/cities.json';
 import { City } from 'src/app/shared/city/city';
 import { DateCity } from 'src/app/shared/date-city/date-city';
 import { Output, EventEmitter } from '@angular/core';
-import { LocalStorageDataService } from '../../core/local-storage-data-service/local-storage-data.service';
-import { SessionStorageDataService } from '../../core/session-storage-data-service/session-storage-data.service';
+import { UserInputService } from 'src/app/core/user-input-service/user-input.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { formatDate } from '@angular/common';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-weather-api-inputs',
@@ -14,34 +15,43 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./weather-api-inputs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WeatherApiInputsComponent implements OnInit {
-  choosenDate!: Date;
+export class WeatherApiInputsComponent implements OnInit, OnDestroy {
+  chosenDate!: Date;
   maxDateValue: Date = new Date();
-  choosenCity!: City;
-  cities: City[] = (cities as any).default;
+  chosenCity!: City | undefined;
+  cities: City[] = (data as any).default;
   weatherInputsForm!: FormGroup;
   @Output() change = new EventEmitter<DateCity>();
+  private componentDestroyed: Subject<void> = new Subject<void>();
 
   constructor(
-    private localStorageDataService: LocalStorageDataService,
-    private sessionStorageDataService: SessionStorageDataService,
-    private formBuilder: FormBuilder
+    private userInputService: UserInputService,
+    private formBuilder: FormBuilder,
   ) {}
 
   ngOnInit(): void {
-    this.choosenCity = this.localStorageDataService.getLocalStorageCity();
-    this.choosenDate = new Date(this.sessionStorageDataService.getSessionStorageDate());
-    this.change.emit(new DateCity(this.choosenDate, this.choosenCity));
+    this.userInputService.currentCityValue.pipe(takeUntil(this.componentDestroyed)).subscribe((res: City|undefined) => {
+      this.chosenCity = res;
+    })
+    this.userInputService.currentDateValue.pipe(takeUntil(this.componentDestroyed)).subscribe((res: Date) => {
+      this.chosenDate = new Date(res);
+    })
+
+    this.change.emit(new DateCity(this.chosenDate, this.chosenCity));
     this.weatherInputsForm = this.createWeatherInputsForm();
     this.emitAndSaveDate();
     this.emitAndSaveCity();
   }
 
+  ngOnDestroy(): void {
+    this.componentDestroyed.next();
+  }
+
   createWeatherInputsForm(): FormGroup {
     let tempForm: FormGroup;
     tempForm = this.formBuilder.group({
-      city: [this.choosenCity],
-      date: [this.choosenDate],
+      city: [this.chosenCity],
+      date: [this.chosenDate],
     });
     return tempForm;
   }
@@ -50,28 +60,31 @@ export class WeatherApiInputsComponent implements OnInit {
     this.weatherInputsForm.controls.date.valueChanges.subscribe(
       (newDate: Date) => {
         if (
-          this.formatDate(newDate).length === 10 &&
-          this.formatDate(this.weatherInputsForm.value['date']) !== this.formatDate(newDate)
+          this.isDateValid(this.weatherInputsForm.value['date'], newDate)
         ) {
           this.change.emit(
             new DateCity(newDate, this.weatherInputsForm.value.city)
           );
-          this.sessionStorageDataService.changeSessionStorageDate(newDate);
-          this.weatherInputsForm.value['date'] = newDate;
+          this.userInputService.changeCurrentDateValue(newDate);
         }
       }
+    );
+  }
+
+  isDateValid(oldDate: Date, newDate: Date): boolean {
+    return (
+      this.formatDate(newDate).length === 10 && this.formatDate(oldDate) !== this.formatDate(newDate)
     );
   }
 
   emitAndSaveCity() {
     this.weatherInputsForm.controls.city.valueChanges.subscribe(
       (newCity: City) => {
-        if (this.weatherInputsForm.value['city'] !== newCity) {
+        if (newCity.code !== this.weatherInputsForm.value['city'].code) {
           this.change.emit(
             new DateCity(this.weatherInputsForm.value.date, newCity)
           );
-          this.weatherInputsForm.value['city'] = newCity;
-          this.localStorageDataService.changeLocalStorageCity(newCity);
+          this.userInputService.changeCurrentCityValue(newCity);
         }
       }
     );
@@ -80,5 +93,4 @@ export class WeatherApiInputsComponent implements OnInit {
   formatDate(date: Date): string {
     return formatDate(date, 'yyyy/MM/dd', 'en-US');
   }
-
 }

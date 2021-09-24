@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { TabMenuModule } from 'primeng/tabmenu';
+import { MapModule } from './features/map/map.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +18,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
     BrowserAnimationsModule,
     BrowserModule,
     ReactiveFormsModule,
-
+    MapModule,
     TabMenuModule,
   ],
   providers: [],

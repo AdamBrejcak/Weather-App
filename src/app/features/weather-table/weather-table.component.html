@@ -5,7 +5,7 @@
   <div *ngIf="loading" class="loader"></div>
   <h2 *ngIf="error">Ups, an error occured: {{ error.message }}</h2>
   <p-table
-    *ngIf="!loading"
+    *ngIf="!loading && !error"
     [globalFilterFields]="filterFields"
     [value]="weatherData"
     [paginator]="true"
