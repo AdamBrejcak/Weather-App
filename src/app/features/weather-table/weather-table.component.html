@@ -1,9 +1,10 @@
 <div class="weather-table">
-  <app-weather-api-inputs
-    (change)="onInputChange($event)">
-  </app-weather-api-inputs>
+  <app-weather-api-inputs (change)="onInputChange($event)"> </app-weather-api-inputs>
   <div *ngIf="loading" class="loader"></div>
-  <h2 *ngIf="error">Ups, an error occured: {{ error.message }}</h2>
+  <div *ngIf="error" class="error-message">
+    <h2>Ups, an error occured</h2>
+    <p>{{ error.message }}</p>
+  </div>
   <p-table
     *ngIf="!loading && !error"
     [globalFilterFields]="filterFields"
@@ -13,59 +14,63 @@
     [showCurrentPageReport]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     sortMode="single"
+    [resizableColumns]="true"
     [rowsPerPageOptions]="[5, 10, 20]"
     #dt>
     <ng-template pTemplate="caption">
       <div style="height: 25px" class="p-d-flex">
-        <span
-          style="margin-top: -5px; float: right"
-          class="p-input-icon-left p-ml-auto">
+        <span style="margin-top: -5px; float: right" class="p-input-icon-left p-ml-auto">
           <i class="pi pi-search"></i>
-          <input
-            pInputText
-            type="text"
-            (input)="applyFilterGlobal($event, 'contains')"
-            placeholder="Filter"/>
+          <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Filter" />
         </span>
       </div>
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
+        <th pSortableColumn="id">
+          ID
+          <p-sortIcon field="id"></p-sortIcon>
+        </th>
         <th pSortableColumn="created">
-          Time
+          Created
           <p-sortIcon field="created"></p-sortIcon>
         </th>
-        <th pSortableColumn="weather_state_name">
-          Weather <p-sortIcon field="weather_state_name"></p-sortIcon>
+        <th pSortableColumn="applicable_date">
+          Date
+          <p-sortIcon field="applicable_date"></p-sortIcon>
         </th>
+        <th pSortableColumn="weather_state_name">Weather <p-sortIcon field="weather_state_name"></p-sortIcon></th>
+        <th pSortableColumn="min_temp">Min Temperature <p-sortIcon field="min_temp"></p-sortIcon></th>
+        <th pSortableColumn="max_temp">Max Temperature <p-sortIcon field="max_temp"></p-sortIcon></th>
         <th pSortableColumn="wind_direction_compass">
           Wind Direction
           <p-sortIcon field="wind_direction_compass"></p-sortIcon>
         </th>
-        <th pSortableColumn="the_temp">
-          Temperature <p-sortIcon field="the_temp"></p-sortIcon>
-        </th>
-        <th pSortableColumn="wind_speed">
-          Wind Speed <p-sortIcon field="wind_speed"></p-sortIcon>
-        </th>
-        <th pSortableColumn="humidity">
-          Humidity <p-sortIcon field="humidity"></p-sortIcon>
-        </th>
+        <th pSortableColumn="wind_speed">Wind Speed <p-sortIcon field="wind_speed"></p-sortIcon></th>
+        <th pSortableColumn="humidity">Humidity <p-sortIcon field="humidity"></p-sortIcon></th>
+        <th pSortableColumn="air_pressure">Air Pressure <p-sortIcon field="air_pressure"></p-sortIcon></th>
+        <th pSortableColumn="visibility">Visibility <p-sortIcon field="visibility"></p-sortIcon></th>
       </tr>
       <th>
-        <p-columnFilter type="text" field="created"></p-columnFilter>
+        <p-columnFilter type="number" field="id"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="date" field="created"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="date" field="applicable_date"></p-columnFilter>
       </th>
       <th>
         <p-columnFilter type="text" field="weather_state_name"></p-columnFilter>
       </th>
       <th>
-        <p-columnFilter
-          type="text"
-          field="wind_direction_compass">
-        </p-columnFilter>
+        <p-columnFilter type="text" field="min_temp"></p-columnFilter>
       </th>
       <th>
-        <p-columnFilter type="text" field="the_temp"></p-columnFilter>
+        <p-columnFilter type="text" field="max_temp"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="text" field="wind_direction_compass"></p-columnFilter>
       </th>
       <th>
         <p-columnFilter type="text" field="wind_speed"></p-columnFilter>
@@ -76,18 +81,19 @@
     </ng-template>
     <ng-template pTemplate="body" let-data let-index="rowIndex">
       <tr>
+        <td>{{ data.id }}</td>
         <td>{{ data.created }}</td>
+        <td>{{ data.applicable_date }}</td>
         <td>{{ data.weather_state_name }}</td>
+        <td>{{ data.max_temp }}</td>
+        <td>{{ data.min_temp }}</td>
         <td>
-          {{
-            data.wind_direction_compass === "False"
-              ? ""
-              : data.wind_direction_compass
-          }}
+          {{ data.wind_direction_compass === 'False' ? '' : data.wind_direction_compass }}
         </td>
-        <td>{{ data.the_temp }}</td>
         <td>{{ data.wind_speed }}</td>
         <td>{{ data.humidity }}</td>
+        <td>{{ data.air_pressure }}</td>
+        <td>{{ data.visibility }}</td>
       </tr>
     </ng-template>
   </p-table>

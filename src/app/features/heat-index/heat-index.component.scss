@@ -1,10 +1,10 @@
 .heat-index-form {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
   width: 40%;
   height: 75%;
   max-height: 645px;
-  max-width: 550px ;
+  max-width: 550px;
   float: left;
   margin: 20px;
   display: flex;
@@ -12,91 +12,109 @@
   border: 1px #a3a3a3 solid;
   border-radius: 4px;
 }
+
 .temperature-input {
   display: flex;
   flex-direction: row;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-input[type="number"] {
+
+input[type='number'] {
   -moz-appearance: textfield;
 }
+
 .validations {
   position: absolute;
   width: 14rem;
   display: flex;
   flex-direction: column;
 }
+
 .validations small {
   margin: 2.5px 0;
 }
+
 .main-heading {
   color: rgb(71, 71, 71);
   margin: 5px auto;
   width: fit-content;
 }
-.detail-heading{
+
+.detail-heading {
   color: rgb(122, 121, 121);
   font-weight: 400;
   width: fit-content;
   margin: 0 auto;
 }
+
 .heat-index-form > * {
   margin: 40px auto;
 }
+
 .alert div {
   color: #db0303;
   padding: 1rem;
   font-size: 15px;
 }
+
 .form-group {
   margin-bottom: 1rem;
 }
+
 label {
   display: block;
   margin-bottom: 0.5rem;
 }
+
 select {
   width: 100%;
   padding: 0.5rem;
 }
-.final-result{
+
+.final-result {
   color: rgb(71, 71, 71);
 }
+
 .last-results h3 {
   margin: 0;
 }
+
 .last-results {
   position: relative;
   float: left;
   margin: 20px;
   list-style-type: none;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-  Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
   counter-reset: list-counter;
   list-style: none;
   padding: 0;
 }
+
 .last-results li {
   margin: 1.3em 0;
   line-height: 1em;
 }
+
 .last-results li:before {
   content: counter(list-counter);
   counter-increment: list-counter;
   font-size: 2em;
   margin-right: 0.5em;
 }
+
 @media only screen and (max-width: 750px) {
-  .last-results{
+  .last-results {
     float: none;
     width: 100%;
     margin-left: 30px;
   }
-  .heat-index-form{
+  .heat-index-form {
     float: none;
     width: 95%;
     margin: 0 auto;

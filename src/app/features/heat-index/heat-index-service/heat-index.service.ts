@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { LastResultsItem } from 'src/app/shared/last-results-item/last-results-item';
+import { LastResultsItem } from 'src/app/features/heat-index/last-results-item/last-results-item';
 import { CustomValidators } from '../custom.validators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HeatIndexService {
-
   constructor(private formBuilder: FormBuilder) {}
 
   getLocalStorageResults(): Array<LastResultsItem> {
@@ -36,7 +35,8 @@ export class HeatIndexService {
 
   calculateHeatIndex(temperature: number, humidity: number): number {
     let result =
-      -42.379 + 2.04901523 * temperature +
+      -42.379 +
+      2.04901523 * temperature +
       10.14333127 * humidity -
       0.22475541 * temperature * humidity -
       0.00683783 * temperature * temperature -
@@ -47,7 +47,7 @@ export class HeatIndexService {
     return result;
   }
 
-  getHeatIndexInChosenUnits(resultInFahrenheit: number, heatIndexUnit:string): string {
+  getHeatIndexInChosenUnits(resultInFahrenheit: number, heatIndexUnit: string): string {
     if (heatIndexUnit === 'Celsius') {
       return `${this.convertFahrenheitToCelsius(resultInFahrenheit).toFixed(2)} °C`;
     } else {
@@ -56,11 +56,10 @@ export class HeatIndexService {
   }
 
   convertFahrenheitToCelsius(temperatureInFahrenheit: number): number {
-    return ((temperatureInFahrenheit - 32) * 5/9);
+    return ((temperatureInFahrenheit - 32) * 5) / 9;
   }
 
   convertCelsiusToFahrenheit(temperatureInCelsius: number): number {
-    return ((9 / 5) * temperatureInCelsius + 32);
+    return (9 / 5) * temperatureInCelsius + 32;
   }
-
 }

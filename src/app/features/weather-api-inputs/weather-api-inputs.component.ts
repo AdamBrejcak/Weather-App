@@ -1,13 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import * as data from '../../shared/cities.json';
 import { City } from 'src/app/shared/city/city';
-import { DateCity } from 'src/app/shared/date-city/date-city';
 import { Output, EventEmitter } from '@angular/core';
 import { UserInputService } from 'src/app/core/user-input-service/user-input.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { formatDate } from '@angular/common';
-import { takeUntil } from 'rxjs/operators';
+import { pairwise, startWith, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { UserInputs } from 'src/app/shared/user-inputs/user-inputs';
+import { DateOperationsService } from 'src/app/core/date-operations-service/date-operations.service';
 
 @Component({
   selector: 'app-weather-api-inputs',
@@ -16,31 +16,47 @@ import { Subject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WeatherApiInputsComponent implements OnInit, OnDestroy {
-  chosenDate!: Date;
-  maxDateValue: Date = new Date();
+  chosenDateFrom!: Date;
+  chosenDateTo!: Date;
   chosenCity!: City | undefined;
+  maxDateValue: Date = new Date(new Date().setHours(0, 0, 0, 0));
   cities: City[] = (data as any).default;
   weatherInputsForm!: FormGroup;
-  @Output() change = new EventEmitter<DateCity>();
+  @Output() change = new EventEmitter<UserInputs>();
   private componentDestroyed: Subject<void> = new Subject<void>();
 
   constructor(
     private userInputService: UserInputService,
     private formBuilder: FormBuilder,
+    private dateOperationsService: DateOperationsService
   ) {}
 
   ngOnInit(): void {
-    this.userInputService.currentCityValue.pipe(takeUntil(this.componentDestroyed)).subscribe((res: City|undefined) => {
-      this.chosenCity = res;
-    })
-    this.userInputService.currentDateValue.pipe(takeUntil(this.componentDestroyed)).subscribe((res: Date) => {
-      this.chosenDate = new Date(res);
-    })
+    this.userInputService.currentCityValue
+      .pipe(takeUntil(this.componentDestroyed))
+      .subscribe((res: City | undefined) => {
+        this.chosenCity = res;
+      });
 
-    this.change.emit(new DateCity(this.chosenDate, this.chosenCity));
+    this.userInputService.currentDateFromValue.pipe(takeUntil(this.componentDestroyed)).subscribe((res: Date) => {
+      this.chosenDateFrom = new Date(res);
+    });
+
+    this.userInputService.currentDateToValue.pipe(takeUntil(this.componentDestroyed)).subscribe((res: Date) => {
+      this.chosenDateTo = new Date(res);
+    });
+
     this.weatherInputsForm = this.createWeatherInputsForm();
-    this.emitAndSaveDate();
-    this.emitAndSaveCity();
+    this.change.emit(
+      new UserInputs({
+        city: this.chosenCity,
+        dates: {
+          dateFrom: this.chosenDateFrom,
+          dateTo: this.chosenDateTo,
+        },
+      })
+    );
+    this.onInputChangeEmitAndSave();
   }
 
   ngOnDestroy(): void {
@@ -51,46 +67,77 @@ export class WeatherApiInputsComponent implements OnInit, OnDestroy {
     let tempForm: FormGroup;
     tempForm = this.formBuilder.group({
       city: [this.chosenCity],
-      date: [this.chosenDate],
+      dates: this.formBuilder.group({
+        dateFrom: [this.chosenDateFrom],
+        dateTo: [this.chosenDateTo],
+      }),
     });
     return tempForm;
   }
 
-  emitAndSaveDate() {
-    this.weatherInputsForm.controls.date.valueChanges.subscribe(
-      (newDate: Date) => {
+  dateEqualToToday(): boolean {
+    if (this.weatherInputsForm.value.dates['dateTo']) {
+      return this.weatherInputsForm.value.dates['dateTo'] >= this.maxDateValue;
+    }
+    return false;
+  }
+
+  decrementDateRange() {
+    let dateTo: Date = this.weatherInputsForm.value.dates['dateTo'];
+    let dateFrom: Date = this.weatherInputsForm.value.dates['dateFrom'];
+    let diffBetweenDates: number = this.dateOperationsService.diffBetweenDates(dateFrom, dateTo);
+
+    this.patchAndSaveFormChanges(
+      this.dateOperationsService.removeDaysFromDate(dateFrom, diffBetweenDates),
+      this.dateOperationsService.removeDaysFromDate(dateTo, diffBetweenDates)
+    );
+  }
+
+  incrementDateRange() {
+    let dateTo: Date = this.weatherInputsForm.value.dates['dateTo'];
+    let dateFrom: Date = this.weatherInputsForm.value.dates['dateFrom'];
+    let diffBetweenDates: number = this.dateOperationsService.diffBetweenDates(dateFrom, dateTo);
+
+    if (this.dateOperationsService.addDaysToDate(dateTo, diffBetweenDates).getTime() > this.maxDateValue.getTime()) {
+      this.patchAndSaveFormChanges(
+        this.dateOperationsService.removeDaysFromDate(this.maxDateValue, diffBetweenDates),
+        this.maxDateValue
+      );
+    } else {
+      this.patchAndSaveFormChanges(
+        this.dateOperationsService.addDaysToDate(dateFrom, diffBetweenDates),
+        this.dateOperationsService.addDaysToDate(dateTo, diffBetweenDates)
+      );
+    }
+  }
+
+  patchAndSaveFormChanges(newDateFrom: Date, newDateTo: Date) {
+    this.weatherInputsForm.patchValue({
+      dates: { dateFrom: newDateFrom, dateTo: newDateTo },
+    }),
+      this.userInputService.changeCurrentInputsValues(this.weatherInputsForm.value);
+  }
+
+  onInputChangeEmitAndSave() {
+    this.weatherInputsForm.valueChanges
+      .pipe(startWith(this.weatherInputsForm.value), pairwise())
+      .subscribe(([oldFormValues, newFormValues]: [UserInputs, UserInputs]) => {
         if (
-          this.isDateValid(this.weatherInputsForm.value['date'], newDate)
+          newFormValues.dates.dateFrom &&
+          newFormValues.dates.dateTo &&
+          JSON.stringify(newFormValues) !== JSON.stringify(oldFormValues)
         ) {
+          this.userInputService.changeCurrentInputsValues(newFormValues);
           this.change.emit(
-            new DateCity(newDate, this.weatherInputsForm.value.city)
+            new UserInputs({
+              city: newFormValues.city,
+              dates: {
+                dateFrom: newFormValues.dates.dateFrom,
+                dateTo: newFormValues.dates.dateTo,
+              },
+            })
           );
-          this.userInputService.changeCurrentDateValue(newDate);
         }
-      }
-    );
-  }
-
-  isDateValid(oldDate: Date, newDate: Date): boolean {
-    return (
-      this.formatDate(newDate).length === 10 && this.formatDate(oldDate) !== this.formatDate(newDate)
-    );
-  }
-
-  emitAndSaveCity() {
-    this.weatherInputsForm.controls.city.valueChanges.subscribe(
-      (newCity: City) => {
-        if (newCity.code !== this.weatherInputsForm.value['city'].code) {
-          this.change.emit(
-            new DateCity(this.weatherInputsForm.value.date, newCity)
-          );
-          this.userInputService.changeCurrentCityValue(newCity);
-        }
-      }
-    );
-  }
-
-  formatDate(date: Date): string {
-    return formatDate(date, 'yyyy/MM/dd', 'en-US');
+      });
   }
 }

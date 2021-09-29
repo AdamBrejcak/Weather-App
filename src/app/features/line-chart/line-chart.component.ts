@@ -1,36 +1,40 @@
 import { Component, ViewChild } from '@angular/core';
-import { formatDate } from '@angular/common';
-import { Subject } from 'rxjs';
-import { takeUntil, finalize } from 'rxjs/operators';
+import { merge, Subject } from 'rxjs';
+import { finalize, takeUntil } from 'rxjs/operators';
 import { ChartOptions } from './lineChartOptions';
 import { ChartComponent } from 'ng-apexcharts';
 import { WeatherDataService } from '../../core/weather-data-service/weather-data.service';
-import { FilterLineChartDataService } from './filter-data-service/filter-data.service';
-import { DateCity } from '../../shared/date-city/date-city';
-import { WeatherDataItem } from '../../shared/weather-data-item/weather-data-item';
+import { LineChartService } from './line-chart-service/line-chart.service';
+import { LineChartItem } from './line-chart-item/line-chart-item';
+import { UserInputs } from 'src/app/shared/user-inputs/user-inputs';
+import { AppUtilsService } from 'src/app/core/app-utils-service/app-utils.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.scss'],
 })
-
 export class LineChartComponent {
   @ViewChild('chart') chart!: ChartComponent;
   chartOptions: Partial<ChartOptions> | any;
-  weatherData: WeatherDataItem[] = [];
   loading: boolean = false;
   error: any = null;
+  private cancelRequest: Subject<void> = new Subject<void>();
   private componentDestroyed: Subject<void> = new Subject<void>();
 
   constructor(
     private weatherDataService: WeatherDataService,
-    private FilterLineChartDataService: FilterLineChartDataService,
+    private lineChartService: LineChartService,
+    private appUtilsService: AppUtilsService
   ) {
     this.chartOptions = {
       series: [
         {
-          name: 'Temperature',
+          name: 'Average Max Temperature',
+          data: [],
+        },
+        {
+          name: 'Average Min Temperature',
           data: [],
         },
       ],
@@ -70,46 +74,31 @@ export class LineChartComponent {
     this.componentDestroyed.next();
   }
 
-  onInputChange(emitedData: DateCity) {
-    this.error = null;
-    if((emitedData.city) && (emitedData.date)){
-      this.loading = true;
-      this.weatherData = [];
-      this.resetChartData();
-      this.weatherDataService
-        .getWeatherData(
-          formatDate(emitedData.date, 'yyyy/MM/dd', 'en-US'),
-          emitedData.city.code,
-        )
-        .pipe(
-          finalize(() => (this.loading = false)),
-          takeUntil(this.componentDestroyed),
-        )
-        .subscribe(
-          (res: WeatherDataItem[]) => {
-            this.weatherData = this.FilterLineChartDataService.filterAndSortChartData(
-              res,
-              emitedData.date,
-            );
-          this.pushChartData();
-          },
-          (err) => {
-            this.error = err;
-          }
-        );
+  onInputChange(emitedData: UserInputs) {
+    if (!emitedData.city) {
+      return;
     }
-  }
+    this.cancelRequest.next();
+    this.error = null;
+    this.loading = true;
 
-  resetChartData() {
-    this.chartOptions.series[0].data = [];
-    this.chartOptions.xaxis.categories = [];
-  }
+    this.weatherDataService
+      .loadLineChartData(emitedData)
+      .pipe(
+        takeUntil(merge(this.componentDestroyed, this.cancelRequest)),
+        finalize(() => (this.loading = false))
+      )
+      .subscribe(
+        (res: LineChartItem[]) => {
+          let sortedResult = this.appUtilsService.sortData(res, 'applicableDate');
+          this.error = this.weatherDataService.checkDataLength(res);
+          this.lineChartService.resetChartData(this.chartOptions);
 
-  pushChartData() {
-    this.weatherData.forEach((element) => {
-      this.chartOptions.series[0].data.push(element.the_temp);
-      this.chartOptions.xaxis.categories.push(element.created);
-    });
+          this.lineChartService.pushChartDataToChartOptions(sortedResult, this.chartOptions);
+        },
+        (err: any) => {
+          this.error = err;
+        }
+      );
   }
-
 }

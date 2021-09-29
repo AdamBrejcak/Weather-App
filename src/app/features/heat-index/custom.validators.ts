@@ -3,7 +3,6 @@ import { FormGroup } from '@angular/forms';
 export class CustomValidators {
 
   static temperatureValidator(formCtrlOne: any, formCtrlTwo: any): { [key: string]: any } {
-
     return (fg: FormGroup) => {
 
       const temperature = fg.controls[formCtrlOne];

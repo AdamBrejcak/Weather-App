@@ -1,7 +1,10 @@
 <div class="line-chart">
   <app-weather-api-inputs (change)="onInputChange($event)"></app-weather-api-inputs>
   <div *ngIf="loading" class="loader"></div>
-  <h2 *ngIf="error">Ups, an error occured: {{ error.message }}</h2>
+  <div *ngIf="error" class="error-message">
+    <h2>Ups, an error occured</h2>
+    <p>{{ error.message }}</p>
+  </div>
   <div *ngIf="!loading && !error" id="chart">
     <apx-chart
       [series]="chartOptions.series"

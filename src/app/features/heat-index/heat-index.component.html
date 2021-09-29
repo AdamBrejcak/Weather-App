@@ -17,25 +17,15 @@
           step=".01"
           pInputText
           name="temperature"
-          style="width: 8rem"/>
+          style="width: 8rem" />
         <label for="float-input"> Temperature </label>
 
         <div class="validations" *ngIf="f.temp.invalid && f.temp.dirty">
-          <small *ngIf="f.temp.errors?.required" class="p-error">
-            Temperature is required
-          </small>
-          <small
-            *ngIf="
-              f.temp.errors?.temperature_min &&
-              heatIndexForm.value.unit === 'Celsius'"
-            class="p-error">
+          <small *ngIf="f.temp.errors?.required" class="p-error"> Temperature is required </small>
+          <small *ngIf="f.temp.errors?.temperature_min && heatIndexForm.value.unit === 'Celsius'" class="p-error">
             Temperature must be at least 26.7 °C
           </small>
-          <small
-            *ngIf="
-              f.temp.errors?.temperature_min &&
-              heatIndexForm.value.unit === 'Fahrenheit'"
-            class="p-error">
+          <small *ngIf="f.temp.errors?.temperature_min && heatIndexForm.value.unit === 'Fahrenheit'" class="p-error">
             Temperature must be at least 80 °F
           </small>
         </div>
@@ -65,22 +55,16 @@
           formControlName="hum"
           pInputText
           style="width: 17rem"
-          name="humidity"/>
+          name="humidity" />
         <label for="float-input"> Humidity </label>
       </span>
 
       <div class="validations" *ngIf="f.hum.invalid && f.hum.dirty">
-        <small *ngIf="f.hum.errors?.required" class="p-error">
-          Humidity is required
-        </small>
+        <small *ngIf="f.hum.errors?.required" class="p-error"> Humidity is required </small>
 
-        <small *ngIf="f.hum.errors?.min" class="p-error">
-          Humidity need to be at least 0
-        </small>
+        <small *ngIf="f.hum.errors?.min" class="p-error"> Humidity need to be at least 0 </small>
 
-        <small *ngIf="f.hum.errors?.max" class="p-error">
-          Humidity need to be at most 100
-        </small>
+        <small *ngIf="f.hum.errors?.max" class="p-error"> Humidity need to be at most 100 </small>
       </div>
     </span>
 
@@ -90,21 +74,17 @@
       class="p-button-info"
       type="submit"
       [disabled]="!heatIndexForm.valid"
-      (click)="onFormSubmit()"
-    ></button>
+      (click)="onFormSubmit()"></button>
 
     <span>
-      <h2 class="final-result" *ngIf="heatIndex">
-        Heat index is {{ heatIndex }}
-      </h2>
+      <h2 class="final-result" *ngIf="heatIndex">Heat index is {{ heatIndex }}</h2>
     </span>
   </form>
 
   <ul class="last-results" *ngIf="lastResults.length > 0">
     <h3>Last results</h3>
     <li *ngFor="let result of lastResults; index as i">
-      {{ result.heatIndexFahrenheit | number: "1.2-2" }} °F or
-      {{ result.heatIndexCelsius | number: "1.2-2" }} °C
+      {{ result.heatIndexFahrenheit | number: '1.2-2' }} °F or {{ result.heatIndexCelsius | number: '1.2-2' }} °C
     </li>
   </ul>
 </div>

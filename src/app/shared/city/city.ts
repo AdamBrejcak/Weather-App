@@ -4,11 +4,10 @@ export class City {
   latitude: number;
   longitude: number;
 
-  constructor(data:any){
+  constructor(data: any) {
     this.name = data.name;
     this.code = data.code;
     this.latitude = data.latitude;
     this.longitude = data.longitude;
   }
-
 }

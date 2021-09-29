@@ -1,6 +1,6 @@
 <form [formGroup]="weatherInputsForm">
   <div class="inputs">
-    <div class="choose-input">
+    <div class="chose-input">
       <h5>Choose City</h5>
       <p-cascadeSelect
         formControlName="city"
@@ -13,18 +13,46 @@
       </p-cascadeSelect>
     </div>
 
-    <div class="choose-input">
-      <h5>Choose Date</h5>
+    <div formGroupName="dates" class="chose-input">
+      <h5>Choose Date From</h5>
+      <button
+        (click)="decrementDateRange()"
+        pButton
+        pRipple
+        type="button"
+        icon="pi pi-angle-left"
+        class="p-button-rounded"></button>
       <p-calendar
-        formControlName="date"
+        formControlName="dateFrom"
         type="date"
-        inputId="dateformat"
-        [maxDate]="maxDateValue"
-        [showIcon]="true"
+        inputId="dateformatfrom"
+        [maxDate]="chosenDateTo"
         customDateFormat
         dateFormat="yy/mm/dd"
         rPCalendarMask>
       </p-calendar>
+    </div>
+
+    <div formGroupName="dates" class="chose-input">
+      <h5>Choose Date To</h5>
+      <p-calendar
+        formControlName="dateTo"
+        type="date"
+        inputId="dateformatto"
+        [minDate]="chosenDateFrom"
+        [maxDate]="maxDateValue"
+        customDateFormat
+        dateFormat="yy/mm/dd"
+        rPCalendarMask>
+      </p-calendar>
+      <button
+        (click)="incrementDateRange()"
+        [disabled]="dateEqualToToday()"
+        pButton
+        pRipple
+        type="button"
+        icon="pi pi-angle-right"
+        class="p-button-rounded"></button>
     </div>
   </div>
 </form>

@@ -1,19 +1,29 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { City } from 'src/app/shared/city/city';
+import { UserInputs } from 'src/app/shared/user-inputs/user-inputs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserInputService {
-  private citySource = new BehaviorSubject(this.getCurrentCityValue());
-  private dateSource = new BehaviorSubject(this.getCurrentDateValue());
+  private citySource = new BehaviorSubject(this.initCityValue());
+  private dateFromSource = new BehaviorSubject(this.initDateFromValue());
+  private dateToSource = new BehaviorSubject(this.initDateToValue());
+
   public readonly currentCityValue = this.citySource.asObservable();
-  public readonly currentDateValue = this.dateSource.asObservable();
+  public readonly currentDateFromValue = this.dateFromSource.asObservable();
+  public readonly currentDateToValue = this.dateToSource.asObservable();
 
   constructor() {}
 
-  private getCurrentCityValue(): City|undefined {
+  changeCurrentInputsValues(inputsObject: UserInputs) {
+    this.changeCurrentCityValue(inputsObject.city);
+    this.changeCurrentDateFromValue(inputsObject.dates.dateFrom);
+    this.changeCurrentDateToValue(inputsObject.dates.dateTo);
+  }
+
+  private initCityValue(): City | undefined {
     if (localStorage.getItem('selectedCity')) {
       if (localStorage.getItem('selectedCity') === 'undefined') {
         return undefined;
@@ -24,20 +34,36 @@ export class UserInputService {
     return undefined;
   }
 
-  changeCurrentCityValue(newCity: City|undefined) {
+  changeCurrentCityValue(newCity: City | undefined) {
     localStorage.setItem('selectedCity', JSON.stringify(newCity));
     this.citySource.next(newCity);
   }
 
-  private getCurrentDateValue(): Date {
-    if (sessionStorage.getItem('selectedDate')) {
-      return new Date(parseInt(sessionStorage.getItem('selectedDate') || '{}'));
+  private initDateFromValue(): Date {
+    if (sessionStorage.getItem('selectedDateFrom')) {
+      return new Date(parseInt(sessionStorage.getItem('selectedDateFrom') || '{}'));
     }
-    return new Date();
+    let actualDateMidnight = new Date().setHours(0, 0, 0, 0);
+    sessionStorage.setItem('selectedDateFrom', JSON.stringify(+new Date(actualDateMidnight)));
+    return new Date(actualDateMidnight);
   }
 
-  changeCurrentDateValue(newDate: Date) {
-    sessionStorage.setItem('selectedDate',JSON.stringify(+new Date(newDate)));
+  changeCurrentDateFromValue(newDateFrom: Date) {
+    sessionStorage.setItem('selectedDateFrom', JSON.stringify(+new Date(newDateFrom)));
+    this.dateFromSource.next(newDateFrom);
   }
 
+  private initDateToValue(): Date {
+    if (sessionStorage.getItem('selectedDateTo')) {
+      return new Date(parseInt(sessionStorage.getItem('selectedDateTo') || '{}'));
+    }
+    let actualDateMidnight = new Date().setHours(0, 0, 0, 0);
+    sessionStorage.setItem('selectedDateTo', JSON.stringify(+new Date(actualDateMidnight)));
+    return new Date(actualDateMidnight);
+  }
+
+  changeCurrentDateToValue(newDateTo: Date) {
+    sessionStorage.setItem('selectedDateTo', JSON.stringify(+new Date(newDateTo)));
+    this.dateToSource.next(newDateTo);
+  }
 }

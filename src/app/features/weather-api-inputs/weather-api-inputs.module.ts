@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { WeatherApiInputsComponent } from './weather-api-inputs.component';
-
 import { CalendarModule } from 'primeng/calendar';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { PrimeNgCalendarMaskModule } from 'racoon-mask-primeng';
+
 @NgModule({
   declarations: [
     WeatherApiInputsComponent
@@ -13,10 +13,9 @@ import { PrimeNgCalendarMaskModule } from 'racoon-mask-primeng';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-
     CalendarModule,
     CascadeSelectModule,
-    PrimeNgCalendarMaskModule,
+    PrimeNgCalendarMaskModule
   ],
   exports: [
     WeatherApiInputsComponent

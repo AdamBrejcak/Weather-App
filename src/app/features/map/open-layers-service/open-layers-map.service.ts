@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { City } from 'src/app/shared/city/city';
 import * as data from '../../../shared/cities.json';
 import Map from 'ol/Map';
@@ -14,14 +15,12 @@ import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import * as olProj from 'ol/proj';
 import { Subject } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class OpenLayersMapService {
-  private onMarkerClickSource: Subject<City|undefined> = new Subject
+  private onMarkerClickSource: Subject<City | undefined> = new Subject();
   public readonly markerClick = this.onMarkerClickSource.asObservable();
   cities: City[] = (data as any).default;
 
@@ -34,9 +33,7 @@ export class OpenLayersMapService {
     for (let index = 0; index < this.cities.length; index++) {
       const element: City = this.cities[index];
       const cityMarker = new Feature({
-        geometry: new Point(
-          olProj.fromLonLat([element.longitude, element.latitude])
-        ),
+        geometry: new Point(olProj.fromLonLat([element.longitude, element.latitude])),
         name: element.name,
       });
       features.push(cityMarker);
@@ -53,13 +50,13 @@ export class OpenLayersMapService {
             features: features,
           }),
           style: new Style({
-              image: new Circle({
-                radius: 6,
-                fill: new Fill({
-                  color: 'rgba(0,0,230,0.9)',
-              })
+            image: new Circle({
+              radius: 6,
+              fill: new Fill({
+                color: 'rgba(0,0,230,0.9)',
               }),
             }),
+          }),
         }),
       ],
       view: new View({
@@ -71,42 +68,29 @@ export class OpenLayersMapService {
     this.setMarkerClickEvents(map);
     this.setMarkerCursorPointer(map);
 
-    return map
+    return map;
   }
 
-  setMarkerClickEvents(map:Map){
-    map.on('click',  (evt: any) => {
+  setMarkerClickEvents(map: Map) {
+    map.on('click', (evt: any) => {
       var pixel = evt.pixel;
       map.forEachFeatureAtPixel(pixel, (feature: any) => {
-        let clickedCity: any = this.cities.find(
-          (x) => x.name === feature.values_.name
-        );
-        return(this.onMarkerClickSource.next(clickedCity),this.router.navigate(['weathertable']));
+        let clickedCity: any = this.cities.find((x) => x.name === feature.values_.name);
+        return this.onMarkerClickSource.next(clickedCity), this.router.navigate(['weathertable']);
       });
     });
   }
 
-  setMarkerCursorPointer(map:Map){
+  setMarkerCursorPointer(map: Map) {
     map.on('pointermove', (evt: any) => {
-      var hit = map.forEachFeatureAtPixel(
-        evt.pixel,
-        function () {
-          return true;
-        }
-      );
+      var hit = map.forEachFeatureAtPixel(evt.pixel, function () {
+        return true;
+      });
       if (hit) {
-        return(
-          map.getTargetElement().style.cursor = 'pointer'
-        )
+        return (map.getTargetElement().style.cursor = 'pointer');
       } else {
-          return(
-            map.getTargetElement().style.cursor = ''
-          )
-        }
+        return (map.getTargetElement().style.cursor = '');
+      }
     });
-  }
-
-  changeMarkerCity(value:City|undefined){
-    this.onMarkerClickSource.next(value);
   }
 }

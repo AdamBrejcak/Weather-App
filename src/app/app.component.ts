@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ChangeDetectorRef} from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -15,15 +15,14 @@ export class AppComponent implements OnInit, OnDestroy {
   showMenu: boolean = false;
   private componentDestroyed: Subject<void> = new Subject<void>();
 
-  constructor(
-    private userInputService: UserInputService,
-    private cdref: ChangeDetectorRef,
-  ) {}
+  constructor(private userInputService: UserInputService, private cdref: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.userInputService.currentCityValue.pipe(takeUntil(this.componentDestroyed)).subscribe((city:City|undefined) => {
-      this.showMenu = !!city;
-    });
+    this.userInputService.currentCityValue
+      .pipe(takeUntil(this.componentDestroyed))
+      .subscribe((city: City | undefined) => {
+        this.showMenu = !!city;
+      });
 
     this.items = [
       {
