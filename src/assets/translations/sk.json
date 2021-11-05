@@ -1,0 +1,86 @@
+{
+  "MAIN": {
+    "HEADING": "Počasie App",
+    "LINKS": {
+      "WEATHER_TABLE": "Tabuľka počasia",
+      "LINE_CHART": "Graf počasia",
+      "HEAT_INDEX": "Výpočet pocitovej teploty"
+    }
+  },
+  "MAP": {
+    "HEADING": "Prosím zvoľte si mesto"
+  },
+  "HEAT_INDEX": {
+    "HEADING": "Výpočet pocitovej tepoty",
+    "DETAILS": "Prosím vyplňte informácie o počasí",
+    "TEMPERATURE": "Teplota",
+    "TEMPERATURE_UNITS": "Jednotky",
+    "TEMPERATURE_REQ": "Teplota musí byť vyplnená",
+    "TEMPERATURE_MIN_C": "Teplota musí byť minimálne 26.7 °C",
+    "TEMPERATURE_MIN_F": "Teplota musí byť minimálne 80 °F",
+    "HUMIDITY": "Vlhkosť",
+    "HUMIDITY_REQ": "Vlhkosť musí byť vyplnená",
+    "HUMIDITY_MIN": "Vlhkosť musí byť minimálne 0",
+    "HUMIDITY_MAX": "Vlhkosť musí byť maximálne 100",
+    "CALCULATE": "Vypočítať pocitovú teplotu",
+    "RESULT": "Pocitová teplota je",
+    "LAST_RESULTS": "Posledné výsledky",
+    "OR": "alebo"
+  },
+  "API_INPUTS": {
+    "CHOOSE_CITY": "Zvoľte mesto",
+    "CHOOSE_DATEFROM": "Zvoľte dátum od",
+    "CHOOSE_DATETO": "Zvoľte dátum do",
+    "CALENDAR": {
+      "firstDayOfWeek": 1,
+      "dayNames": ["Pondelok", "Utorok", "Streda", "Štvrtok", "Piatok", "Sobota", "Nedela"],
+      "dayNamesShort": ["Pon", "Uto", "Str", "Štv", "Pia", "Sob", "Ned"],
+      "dayNamesMin": ["Po", "Ut", "St", "Št", "Pi", "So", "Ne"],
+      "monthNames": [
+        "Január",
+        "Február",
+        "Marec",
+        "Apríl",
+        "Máj",
+        "Jún",
+        "Júl",
+        "August",
+        "September",
+        "Október",
+        "November",
+        "December"
+      ],
+      "monthNamesShort": ["Jan", "Feb", "Mar", "Apr", "Maj", "Jún", "Júl", "Aug", "Sep", "Okt", "Nov", "Dec"],
+      "today": "Dnes",
+      "clear": "Jasno"
+    },
+    "CITIES": {
+      "SAN_FRANCISCO": "San Francisco",
+      "LOS_ANGELES": "Los Angeles",
+      "NEW_YORK": "New York",
+      "TORONTO": "Toronto",
+      "LONDON": "Londýn",
+      "PARIS": "Paríž",
+      "KYIV": "Kijev",
+      "MOSCOW": "Moskva"
+    }
+  },
+  "LINE_CHART": {
+    "AVG_MIN_TEMP": "Priemerná min teplota",
+    "AVG_MAX_TEMP": "Priemerná max teplota",
+    "ERROR": "Ups, vyskytla sa chyba"
+  },
+  "WEATHER_TABLE": {
+    "CREATED": "Vytvorené",
+    "DATE": "Dátum",
+    "WEATHER": "Počasie",
+    "MIN_TEMP": "Min teplota",
+    "MAX_TEMP": "Max teplota",
+    "WIND_DIRECTION": "Smer vetra",
+    "WIND_SPEED": "Rýchlosť vetra",
+    "HUMIDITY": "Vlhkosť",
+    "AIR_PRESSURE": "Tlak vzduchu",
+    "VISIBILITY": "Viditeľnosť",
+    "ERROR": "Ups, vyskytla sa chyba"
+  }
+}

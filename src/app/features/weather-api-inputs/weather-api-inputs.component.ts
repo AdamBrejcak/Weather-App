@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
-import * as data from '../../shared/cities.json';
 import { City } from 'src/app/shared/city/city';
 import { Output, EventEmitter } from '@angular/core';
 import { UserInputService } from 'src/app/core/user-input-service/user-input.service';
@@ -8,6 +7,8 @@ import { pairwise, startWith, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { UserInputs } from 'src/app/shared/user-inputs/user-inputs';
 import { DateOperationsService } from 'src/app/core/date-operations-service/date-operations.service';
+import { TranslateService } from '@ngx-translate/core';
+import * as citiesData from '../../shared/cities.json';
 
 @Component({
   selector: 'app-weather-api-inputs',
@@ -20,7 +21,8 @@ export class WeatherApiInputsComponent implements OnInit, OnDestroy {
   chosenDateTo!: Date;
   chosenCity!: City | undefined;
   maxDateValue: Date = new Date(new Date().setHours(0, 0, 0, 0));
-  cities: City[] = (data as any).default;
+  citiesData: City[] = (citiesData as any).default;
+  cities: City[] = [];
   weatherInputsForm!: FormGroup;
   @Output() change = new EventEmitter<UserInputs>();
   private componentDestroyed: Subject<void> = new Subject<void>();
@@ -28,10 +30,18 @@ export class WeatherApiInputsComponent implements OnInit, OnDestroy {
   constructor(
     private userInputService: UserInputService,
     private formBuilder: FormBuilder,
-    private dateOperationsService: DateOperationsService
+    private dateOperationsService: DateOperationsService,
+    private ngxTranslateService: TranslateService
   ) {}
 
   ngOnInit(): void {
+    this.cities = this.citiesData.map((cityData) => new City(cityData));
+    this.changeCitiesNames();
+
+    this.ngxTranslateService.onLangChange.pipe(takeUntil(this.componentDestroyed)).subscribe(() => {
+      this.changeCitiesNames();
+    });
+
     this.userInputService.currentCityValue
       .pipe(takeUntil(this.componentDestroyed))
       .subscribe((res: City | undefined) => {
@@ -47,6 +57,9 @@ export class WeatherApiInputsComponent implements OnInit, OnDestroy {
     });
 
     this.weatherInputsForm = this.createWeatherInputsForm();
+
+    this.weatherInputsForm.controls.city.patchValue(this.cities.find((x) => x.code === this.chosenCity?.code));
+
     this.change.emit(
       new UserInputs({
         city: this.chosenCity,
@@ -56,11 +69,18 @@ export class WeatherApiInputsComponent implements OnInit, OnDestroy {
         },
       })
     );
+
     this.onInputChangeEmitAndSave();
   }
 
   ngOnDestroy(): void {
     this.componentDestroyed.next();
+  }
+
+  changeCitiesNames() {
+    this.cities.forEach(
+      (city) => city.name = this.ngxTranslateService.instant('API_INPUTS.CITIES.' + city.translationName)
+    );
   }
 
   createWeatherInputsForm(): FormGroup {

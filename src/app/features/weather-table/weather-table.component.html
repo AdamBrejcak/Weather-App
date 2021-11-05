@@ -2,7 +2,7 @@
   <app-weather-api-inputs (change)="onInputChange($event)"> </app-weather-api-inputs>
   <div *ngIf="loading" class="loader"></div>
   <div *ngIf="error" class="error-message">
-    <h2>Ups, an error occured</h2>
+    <h2>{{ 'WEATHER_TABLE.ERROR' | translate }}</h2>
     <p>{{ error.message }}</p>
   </div>
   <p-table
@@ -32,24 +32,38 @@
           <p-sortIcon field="id"></p-sortIcon>
         </th>
         <th pSortableColumn="created">
-          Created
+          {{ 'WEATHER_TABLE.CREATED' | translate }}
           <p-sortIcon field="created"></p-sortIcon>
         </th>
         <th pSortableColumn="applicable_date">
-          Date
+          {{ 'WEATHER_TABLE.DATE' | translate }}
           <p-sortIcon field="applicable_date"></p-sortIcon>
         </th>
-        <th pSortableColumn="weather_state_name">Weather <p-sortIcon field="weather_state_name"></p-sortIcon></th>
-        <th pSortableColumn="min_temp">Min Temperature <p-sortIcon field="min_temp"></p-sortIcon></th>
-        <th pSortableColumn="max_temp">Max Temperature <p-sortIcon field="max_temp"></p-sortIcon></th>
+        <th pSortableColumn="weather_state_name">
+          {{ 'WEATHER_TABLE.WEATHER' | translate }}<p-sortIcon field="weather_state_name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="min_temp">
+          {{ 'WEATHER_TABLE.MIN_TEMP' | translate }}<p-sortIcon field="min_temp"></p-sortIcon>
+        </th>
+        <th pSortableColumn="max_temp">
+          {{ 'WEATHER_TABLE.MAX_TEMP' | translate }}<p-sortIcon field="max_temp"></p-sortIcon>
+        </th>
         <th pSortableColumn="wind_direction_compass">
-          Wind Direction
+          {{ 'WEATHER_TABLE.WIND_DIRECTION' | translate }}
           <p-sortIcon field="wind_direction_compass"></p-sortIcon>
         </th>
-        <th pSortableColumn="wind_speed">Wind Speed <p-sortIcon field="wind_speed"></p-sortIcon></th>
-        <th pSortableColumn="humidity">Humidity <p-sortIcon field="humidity"></p-sortIcon></th>
-        <th pSortableColumn="air_pressure">Air Pressure <p-sortIcon field="air_pressure"></p-sortIcon></th>
-        <th pSortableColumn="visibility">Visibility <p-sortIcon field="visibility"></p-sortIcon></th>
+        <th pSortableColumn="wind_speed">
+          {{ 'WEATHER_TABLE.WIND_SPEED' | translate }}<p-sortIcon field="wind_speed"></p-sortIcon>
+        </th>
+        <th pSortableColumn="humidity">
+          {{ 'WEATHER_TABLE.HUMIDITY' | translate }}<p-sortIcon field="humidity"></p-sortIcon>
+        </th>
+        <th pSortableColumn="air_pressure">
+          {{ 'WEATHER_TABLE.AIR_PRESSURE' | translate }}<p-sortIcon field="air_pressure"></p-sortIcon>
+        </th>
+        <th pSortableColumn="visibility">
+          {{ 'WEATHER_TABLE.VISIBILITY' | translate }}<p-sortIcon field="visibility"></p-sortIcon>
+        </th>
       </tr>
       <th>
         <p-columnFilter type="number" field="id"></p-columnFilter>
@@ -64,19 +78,25 @@
         <p-columnFilter type="text" field="weather_state_name"></p-columnFilter>
       </th>
       <th>
-        <p-columnFilter type="text" field="min_temp"></p-columnFilter>
+        <p-columnFilter type="number" field="min_temp"></p-columnFilter>
       </th>
       <th>
-        <p-columnFilter type="text" field="max_temp"></p-columnFilter>
+        <p-columnFilter type="number" field="max_temp"></p-columnFilter>
       </th>
       <th>
         <p-columnFilter type="text" field="wind_direction_compass"></p-columnFilter>
       </th>
       <th>
-        <p-columnFilter type="text" field="wind_speed"></p-columnFilter>
+        <p-columnFilter type="number" field="wind_speed"></p-columnFilter>
       </th>
       <th>
-        <p-columnFilter type="text" field="humidity"></p-columnFilter>
+        <p-columnFilter type="number" field="humidity"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="number" field="air_pressure"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="number" field="visibility"></p-columnFilter>
       </th>
     </ng-template>
     <ng-template pTemplate="body" let-data let-index="rowIndex">

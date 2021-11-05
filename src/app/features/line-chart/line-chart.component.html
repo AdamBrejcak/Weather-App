@@ -2,11 +2,12 @@
   <app-weather-api-inputs (change)="onInputChange($event)"></app-weather-api-inputs>
   <div *ngIf="loading" class="loader"></div>
   <div *ngIf="error" class="error-message">
-    <h2>Ups, an error occured</h2>
+    <h2>{{ 'LINE_CHART.ERROR' | translate }}</h2>
     <p>{{ error.message }}</p>
   </div>
   <div *ngIf="!loading && !error" id="chart">
     <apx-chart
+      #chart
       [series]="chartOptions.series"
       [chart]="chartOptions.chart"
       [xaxis]="chartOptions.xaxis"

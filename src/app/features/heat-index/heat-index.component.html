@@ -1,8 +1,8 @@
 <div>
   <form [formGroup]="heatIndexForm" #formDir="ngForm" class="heat-index-form">
     <span>
-      <h2 class="main-heading">Heat Index Calculator</h2>
-      <h5 class="detail-heading">Please fill information about weather</h5>
+      <h2 class="main-heading">{{ 'HEAT_INDEX.HEADING' | translate }}</h2>
+      <h5 class="detail-heading">{{ 'HEAT_INDEX.DETAILS' | translate }}</h5>
     </span>
 
     <span class="temperature-input">
@@ -18,15 +18,15 @@
           pInputText
           name="temperature"
           style="width: 8rem" />
-        <label for="float-input"> Temperature </label>
+        <label for="float-input">{{ 'HEAT_INDEX.TEMPERATURE' | translate }} </label>
 
         <div class="validations" *ngIf="f.temp.invalid && f.temp.dirty">
-          <small *ngIf="f.temp.errors?.required" class="p-error"> Temperature is required </small>
+          <small *ngIf="f.temp.errors?.required" class="p-error">{{ 'HEAT_INDEX.TEMPERATURE_REQ' | translate }}</small>
           <small *ngIf="f.temp.errors?.temperature_min && heatIndexForm.value.unit === 'Celsius'" class="p-error">
-            Temperature must be at least 26.7 °C
+            {{ 'HEAT_INDEX.TEMPERATURE_MIN_C' | translate }}
           </small>
           <small *ngIf="f.temp.errors?.temperature_min && heatIndexForm.value.unit === 'Fahrenheit'" class="p-error">
-            Temperature must be at least 80 °F
+            {{ 'HEAT_INDEX.TEMPERATURE_MIN_F' | translate }}
           </small>
         </div>
       </span>
@@ -37,7 +37,7 @@
         optionGroupLabel="name"
         [optionGroupChildren]="['units']"
         [style]="{ width: '9rem' }"
-        placeholder="Temperature units">
+        placeholder="{{ 'HEAT_INDEX.TEMPERATURE_UNITS' | translate }}">
       </p-cascadeSelect>
     </span>
 
@@ -56,35 +56,32 @@
           pInputText
           style="width: 17rem"
           name="humidity" />
-        <label for="float-input"> Humidity </label>
+        <label for="float-input">{{ 'HEAT_INDEX.HUMIDITY' | translate }}</label>
       </span>
 
       <div class="validations" *ngIf="f.hum.invalid && f.hum.dirty">
-        <small *ngIf="f.hum.errors?.required" class="p-error"> Humidity is required </small>
+        <small *ngIf="f.hum.errors?.required" class="p-error">{{ 'HEAT_INDEX.HUMIDITY_REQ' | translate }}</small>
 
-        <small *ngIf="f.hum.errors?.min" class="p-error"> Humidity need to be at least 0 </small>
+        <small *ngIf="f.hum.errors?.min" class="p-error">{{ 'HEAT_INDEX.HUMIDITY_MIN' | translate }}</small>
 
-        <small *ngIf="f.hum.errors?.max" class="p-error"> Humidity need to be at most 100 </small>
+        <small *ngIf="f.hum.errors?.max" class="p-error">{{ 'HEAT_INDEX.HUMIDITY_MAX' | translate }}</small>
       </div>
     </span>
 
-    <button
-      pButton
-      label="Calculate Heat Index"
-      class="p-button-info"
-      type="submit"
-      [disabled]="!heatIndexForm.valid"
-      (click)="onFormSubmit()"></button>
+    <button pButton class="p-button-info" type="submit" [disabled]="!heatIndexForm.valid" (click)="onFormSubmit()">
+      {{ 'HEAT_INDEX.CALCULATE' | translate }}
+    </button>
 
     <span>
-      <h2 class="final-result" *ngIf="heatIndex">Heat index is {{ heatIndex }}</h2>
+      <h2 class="final-result" *ngIf="heatIndex">{{ 'HEAT_INDEX.RESULT' | translate }} {{ heatIndex }}</h2>
     </span>
   </form>
 
   <ul class="last-results" *ngIf="lastResults.length > 0">
-    <h3>Last results</h3>
+    <h3>{{ 'HEAT_INDEX.LAST_RESULTS' | translate }}</h3>
     <li *ngFor="let result of lastResults; index as i">
-      {{ result.heatIndexFahrenheit | number: '1.2-2' }} °F or {{ result.heatIndexCelsius | number: '1.2-2' }} °C
+      {{ result.heatIndexFahrenheit | number: '1.2-2' }} °F {{ 'HEAT_INDEX.OR' | translate }}
+      {{ result.heatIndexCelsius | number: '1.2-2' }} °C
     </li>
   </ul>
 </div>

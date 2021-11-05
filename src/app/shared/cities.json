@@ -1,10 +1,10 @@
 [
-  { "name": "San Francisco", "code": 2487956, "latitude": 37.7749, "longitude": -122.4194 },
-  { "name": "Los Angeles", "code": 2442047, "latitude": 34.052235, "longitude": -118.243683 },
-  { "name": "New York", "code": 2459115, "latitude": 40.730610, "longitude": -73.935242 },
-  { "name": "Toronto", "code": 4118, "latitude": 43.751070, "longitude": -79.347015 },
-  { "name": "London", "code": 44418, "latitude": 51.6074, "longitude": 0.0078 },
-  { "name": "Paris", "code": 615702, "latitude": 48.9566, "longitude": 2.3522 },
-  { "name": "Kiev", "code": 924938, "latitude": 50.4501, "longitude": 30.5234 },
-  { "name": "Moscow", "code": 1105779, "latitude": 55.7558, "longitude": 37.6173 }
+  { "name": "", "translationName": "SAN_FRANCISCO", "code": 2487956, "latitude": 37.7749, "longitude": -122.4194 },
+  { "name": "", "translationName": "LOS_ANGELES", "code": 2442047, "latitude": 34.052235, "longitude": -118.243683 },
+  { "name": "", "translationName": "NEW_YORK", "code": 2459115, "latitude": 40.73061, "longitude": -73.935242 },
+  { "name": "", "translationName": "TORONTO", "code": 4118, "latitude": 43.75107, "longitude": -79.347015 },
+  { "name": "", "translationName": "LONDON", "code": 44418, "latitude": 51.6074, "longitude": 0.0078 },
+  { "name": "", "translationName": "PARIS", "code": 615702, "latitude": 48.9566, "longitude": 2.3522 },
+  { "name": "", "translationName": "KYIV", "code": 924938, "latitude": 50.4501, "longitude": 30.5234 },
+  { "name": "", "translationName": "MOSCOW", "code": 1105779, "latitude": 55.7558, "longitude": 37.6173 }
 ]

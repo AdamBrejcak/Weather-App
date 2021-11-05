@@ -1,20 +1,19 @@
 <form [formGroup]="weatherInputsForm">
   <div class="inputs">
     <div class="chose-input">
-      <h5>Choose City</h5>
-      <p-cascadeSelect
+      <h5>{{ 'API_INPUTS.CHOOSE_CITY' | translate }}</h5>
+      <p-dropdown
         formControlName="city"
         [options]="cities"
         optionLabel="name"
         optionGroupLabel="name"
-        [optionGroupChildren]="['cities']"
-        [style]="{ minWidth: '14rem' }"
-        placeholder="Select a City">
-      </p-cascadeSelect>
+        [style]="{ width: '160px' }"
+        placeholder="{{ 'API_INPUTS.CHOOSE_CITY' | translate }}">
+      </p-dropdown>
     </div>
 
     <div formGroupName="dates" class="chose-input">
-      <h5>Choose Date From</h5>
+      <h5>{{ 'API_INPUTS.CHOOSE_DATEFROM' | translate }}</h5>
       <button
         (click)="decrementDateRange()"
         pButton
@@ -34,7 +33,7 @@
     </div>
 
     <div formGroupName="dates" class="chose-input">
-      <h5>Choose Date To</h5>
+      <h5>{{ 'API_INPUTS.CHOOSE_DATETO' | translate }}</h5>
       <p-calendar
         formControlName="dateTo"
         type="date"

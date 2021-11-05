@@ -1,0 +1,86 @@
+{
+  "MAIN": {
+    "HEADING": "Weather App",
+    "MENU_ITEMS": {
+      "WEATHER_TABLE": "Weather Table",
+      "LINE_CHART": "Line Chart",
+      "HEAT_INDEX": "Heat Index Calculator"
+    }
+  },
+  "MAP": {
+    "HEADING": "Please choose city"
+  },
+  "HEAT_INDEX": {
+    "HEADING": "Heat Index Calculator",
+    "DETAILS": "Please fill information about weather",
+    "TEMPERATURE": "Temperature",
+    "TEMPERATURE_UNITS": "Units",
+    "TEMPERATURE_REQ": "Temperature is required",
+    "TEMPERATURE_MIN_C": "Temperature must be at least 26.7 °C",
+    "TEMPERATURE_MIN_F": "Temperature must be at least 80 °F",
+    "HUMIDITY": "Humidity",
+    "HUMIDITY_REQ": "Humidity is required",
+    "HUMIDITY_MIN": "Humidity need to be at least 0",
+    "HUMIDITY_MAX": "Humidity need to be at most 100",
+    "CALCULATE": "Calcualte heat index",
+    "RESULT": "Heat index is",
+    "LAST_RESULTS": "Last results",
+    "OR": "or"
+  },
+  "API_INPUTS": {
+    "CHOOSE_CITY": "Choose city",
+    "CHOOSE_DATEFROM": "Choose date from",
+    "CHOOSE_DATETO": "Choose date to",
+    "CALENDAR": {
+      "firstDayOfWeek": 1,
+      "dayNames": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "dayNamesShort": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      "dayNamesMin": ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+      "monthNames": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+      "monthNamesShort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      "today": "Today",
+      "clear": "Clear"
+    },
+    "CITIES": {
+      "SAN_FRANCISCO": "San Francisco",
+      "LOS_ANGELES": "Los Angeles",
+      "NEW_YORK": "New York",
+      "TORONTO": "Toronto",
+      "LONDON": "London",
+      "PARIS": "Paris",
+      "KYIV": "Kyiv",
+      "MOSCOW": "Moscow"
+    }
+  },
+  "LINE_CHART": {
+    "AVG_MIN_TEMP": "Average min temperature",
+    "AVG_MAX_TEMP": "Average max temperature",
+    "ERROR": "Ups, an error occured"
+  },
+  "WEATHER_TABLE": {
+    "CREATED": "Created",
+    "DATE": "Date",
+    "WEATHER": "Weather",
+    "MIN_TEMP": "Min temperature",
+    "MAX_TEMP": "Max temperature",
+    "WIND_DIRECTION": "Wind direction",
+    "WIND_SPEED": "Wind speed",
+    "HUMIDITY": "Humidity",
+    "AIR_PRESSURE": "Air pressure",
+    "VISIBILITY": "Visibility",
+    "ERROR": "Ups, an error occured"
+  }
+}

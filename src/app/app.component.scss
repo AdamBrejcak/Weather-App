@@ -20,3 +20,13 @@
 h3 span i {
   margin-right: 0.5rem;
 }
+
+.flags {
+  position: absolute;
+  right: 10px;
+  top: 16px;
+  p-image{
+    margin: 5px;
+    cursor: pointer;
+  }
+}

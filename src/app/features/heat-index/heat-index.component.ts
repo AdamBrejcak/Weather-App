@@ -16,7 +16,9 @@ export class HeatIndexComponent implements OnInit {
   heatIndexForm!: FormGroup;
   temperatureUnits: string[] = ['Celsius', 'Fahrenheit'];
 
-  constructor(private heatIndexService: HeatIndexService) {}
+  constructor(
+    private heatIndexService: HeatIndexService,
+  ) {}
 
   ngOnInit(): void {
     this.heatIndexForm = this.heatIndexService.createHeatIndexForm();

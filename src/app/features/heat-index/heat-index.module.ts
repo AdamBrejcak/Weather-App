@@ -7,6 +7,7 @@ import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { CalendarModule } from 'primeng/calendar';
 import { ButtonModule } from 'primeng/button';
 import { HeatIndexRoutingModule } from './heat-index-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [HeatIndexComponent],
@@ -18,6 +19,7 @@ import { HeatIndexRoutingModule } from './heat-index-routing.module';
     CalendarModule,
     ButtonModule,
     HeatIndexRoutingModule,
+    TranslateModule,
   ],
 })
 export class HeatIndexModule {}

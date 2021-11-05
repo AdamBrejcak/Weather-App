@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { City } from 'src/app/shared/city/city';
-import * as data from '../../../shared/cities.json';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
@@ -13,8 +12,9 @@ import Circle from 'ol/style/Circle';
 import Fill from 'ol/style/Fill';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
-import * as olProj from 'ol/proj';
 import { Subject } from 'rxjs';
+import * as olProj from 'ol/proj';
+import * as data from '../../../shared/cities.json';
 
 @Injectable({
   providedIn: 'root',

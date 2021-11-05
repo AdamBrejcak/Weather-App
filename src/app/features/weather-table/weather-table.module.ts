@@ -5,6 +5,7 @@ import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { WeatherApiInputsModule } from '../weather-api-inputs/weather-api-inputs.module';
 import { WeatherTableRoutingModule } from './weather-table-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [WeatherTableComponent],
@@ -14,6 +15,7 @@ import { WeatherTableRoutingModule } from './weather-table-routing.module';
     InputTextModule,
     WeatherApiInputsModule,
     WeatherTableRoutingModule,
+    TranslateModule
   ],
 })
 export class WeatherTableModule {}
