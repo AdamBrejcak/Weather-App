@@ -1,7 +1,7 @@
 {
   "MAIN": {
     "HEADING": "Počasie App",
-    "LINKS": {
+    "MENU_ITEMS": {
       "WEATHER_TABLE": "Tabuľka počasia",
       "LINE_CHART": "Graf počasia",
       "HEAT_INDEX": "Výpočet pocitovej teploty"
@@ -51,8 +51,25 @@
         "December"
       ],
       "monthNamesShort": ["Jan", "Feb", "Mar", "Apr", "Maj", "Jún", "Júl", "Aug", "Sep", "Okt", "Nov", "Dec"],
+      "matchAll": "Zhoduje sa so všetkým",
+      "matchAny": "Zhoduje sa s akýmkoľvek",
       "today": "Dnes",
-      "clear": "Jasno"
+      "clear": "Zrušiť",
+      "apply": "Použiť",
+      "addRule": "Pridať pravidlo",
+      "removeRule": "Odstrániť pravidlo",
+      "startsWith": "Začína na",
+      "contains": "Obsahuje",
+      "notContains": "Neobsahuje",
+      "endsWith": "Končí na",
+      "equals": "Rovná sa",
+      "notEquals": "Nerovná sa",
+      "dateIs": "Dátum je",
+      "dateIsNot": "Dátum nieje",
+      "dateBefore": "Dátum je pred",
+      "dateAfter": "Dátum je po",
+      "emptyFilterMessage":"Žiadne výsledky",
+      "noFilter": "Žiaden filter"
     },
     "CITIES": {
       "SAN_FRANCISCO": "San Francisco",
@@ -71,6 +88,7 @@
     "ERROR": "Ups, vyskytla sa chyba"
   },
   "WEATHER_TABLE": {
+    "PAGE_REPORT": "Zobrazených {first} do {last} z {totalRecords} záznamov",
     "CREATED": "Vytvorené",
     "DATE": "Dátum",
     "WEATHER": "Počasie",
@@ -81,6 +99,7 @@
     "HUMIDITY": "Vlhkosť",
     "AIR_PRESSURE": "Tlak vzduchu",
     "VISIBILITY": "Viditeľnosť",
-    "ERROR": "Ups, vyskytla sa chyba"
+    "ERROR": "Ups, vyskytla sa chyba",
+    "ANY": "Akýkoľvek"
   }
 }

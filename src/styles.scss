@@ -15,15 +15,28 @@ body {
   margin-top: 15px !important;
 }
 
-div.ng-trigger {
-  top: 40px !important;
-}
-
 .p-calendar input {
   width: 145px !important;
-  margin: 0 5px 0 5px;
+}
+
+.p-multiselect-label {
+  max-width: 150px !important;
 }
 
 div .p-inputwrapper {
   min-width: fit-content !important;
+}
+
+div .range-values {
+  justify-content: space-between!important;
+  span:nth-child(1){
+    position: absolute;
+    top: 25px;
+    left: 7px;
+  }
+  span:nth-child(2){
+    position: absolute;
+    top: 25px;
+    right: 7px;
+  }
 }

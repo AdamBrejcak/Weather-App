@@ -35,7 +35,6 @@ export class AppComponent implements OnInit, OnDestroy {
         (item: TranslatedMenuItem) => item.label = this.ngxTranslateService.instant('MAIN.MENU_ITEMS.' + item.translationLabel)
       );
       this.items = itemsCopy;
-
       this.primeNgConfig.setTranslation(this.ngxTranslateService.instant('API_INPUTS.CALENDAR'));
     });
 

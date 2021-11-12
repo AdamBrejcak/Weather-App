@@ -2,8 +2,8 @@ import { formatDate } from '@angular/common';
 
 export class WeatherTableItem {
   id: string;
-  created: string;
-  applicable_date: string;
+  created: Date;
+  applicable_date: Date;
   weather_state_name: string;
   wind_direction_compass: string;
   min_temp: number;
@@ -15,15 +15,15 @@ export class WeatherTableItem {
 
   constructor(data: any) {
     this.id = data.id;
-    this.created = formatDate(data.created, 'yyyy/MM/dd hh:mm', 'en-US');
-    this.applicable_date = formatDate(data.applicable_date, 'yyyy/MM/dd', 'en-US');
+    this.created = new Date(data.created);
+    this.applicable_date = new Date(data.applicable_date);
     this.weather_state_name = data.weather_state_name;
     this.wind_direction_compass = data.wind_direction_compass;
-    this.max_temp = data.min_temp.toFixed(2);
-    this.min_temp = data.max_temp.toFixed(2);
-    this.wind_speed = data.wind_speed.toFixed(2);
+    this.max_temp = data.min_temp;
+    this.min_temp = data.max_temp;
+    this.wind_speed = data.wind_speed;
     this.humidity = data.humidity;
     this.air_pressure = data.air_pressure;
-    this.visibility = data.visibility?.toFixed(2);
+    this.visibility = data.visibility;
   }
 }

@@ -71,7 +71,7 @@ export class WeatherDataService {
         Output.forEach((element: any) => {
           let minTemps: any[] = [];
           let maxTemps: any[] = [];
-          let applicableDate: string = '';
+          let applicableDate: Date = new Date();
 
           element.forEach((el: WeatherTableItem) => {
             maxTemps.push(Number(el.max_temp));

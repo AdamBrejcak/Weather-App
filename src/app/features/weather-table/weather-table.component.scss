@@ -33,6 +33,10 @@
   margin: 50px auto;
 }
 
+th {
+  padding: 1rem;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

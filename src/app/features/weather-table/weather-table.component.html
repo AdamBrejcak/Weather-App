@@ -12,7 +12,7 @@
     [paginator]="true"
     [rows]="10"
     [showCurrentPageReport]="true"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    currentPageReportTemplate="{{ 'WEATHER_TABLE.PAGE_REPORT' | translate }}"
     sortMode="single"
     [resizableColumns]="true"
     [rowsPerPageOptions]="[5, 10, 20]"
@@ -40,80 +40,248 @@
           <p-sortIcon field="applicable_date"></p-sortIcon>
         </th>
         <th pSortableColumn="weather_state_name">
-          {{ 'WEATHER_TABLE.WEATHER' | translate }}<p-sortIcon field="weather_state_name"></p-sortIcon>
+          {{ 'WEATHER_TABLE.WEATHER' | translate }}
+          <p-sortIcon field="weather_state_name"></p-sortIcon>
         </th>
         <th pSortableColumn="min_temp">
-          {{ 'WEATHER_TABLE.MIN_TEMP' | translate }}<p-sortIcon field="min_temp"></p-sortIcon>
+          {{ 'WEATHER_TABLE.MIN_TEMP' | translate }}
+          <p-sortIcon field="min_temp"></p-sortIcon>
         </th>
         <th pSortableColumn="max_temp">
-          {{ 'WEATHER_TABLE.MAX_TEMP' | translate }}<p-sortIcon field="max_temp"></p-sortIcon>
+          {{ 'WEATHER_TABLE.MAX_TEMP' | translate }}
+          <p-sortIcon field="max_temp"></p-sortIcon>
         </th>
         <th pSortableColumn="wind_direction_compass">
           {{ 'WEATHER_TABLE.WIND_DIRECTION' | translate }}
           <p-sortIcon field="wind_direction_compass"></p-sortIcon>
         </th>
         <th pSortableColumn="wind_speed">
-          {{ 'WEATHER_TABLE.WIND_SPEED' | translate }}<p-sortIcon field="wind_speed"></p-sortIcon>
+          {{ 'WEATHER_TABLE.WIND_SPEED' | translate }}
+          <p-sortIcon field="wind_speed"></p-sortIcon>
         </th>
         <th pSortableColumn="humidity">
-          {{ 'WEATHER_TABLE.HUMIDITY' | translate }}<p-sortIcon field="humidity"></p-sortIcon>
+          {{ 'WEATHER_TABLE.HUMIDITY' | translate }}
+          <p-sortIcon field="humidity"></p-sortIcon>
         </th>
         <th pSortableColumn="air_pressure">
-          {{ 'WEATHER_TABLE.AIR_PRESSURE' | translate }}<p-sortIcon field="air_pressure"></p-sortIcon>
+          {{ 'WEATHER_TABLE.AIR_PRESSURE' | translate }}
+          <p-sortIcon field="air_pressure"></p-sortIcon>
         </th>
         <th pSortableColumn="visibility">
-          {{ 'WEATHER_TABLE.VISIBILITY' | translate }}<p-sortIcon field="visibility"></p-sortIcon>
+          {{ 'WEATHER_TABLE.VISIBILITY' | translate }}
+          <p-sortIcon field="visibility"></p-sortIcon>
         </th>
       </tr>
-      <th>
-        <p-columnFilter type="number" field="id"></p-columnFilter>
-      </th>
-      <th>
-        <p-columnFilter type="date" field="created"></p-columnFilter>
-      </th>
-      <th>
-        <p-columnFilter type="date" field="applicable_date"></p-columnFilter>
-      </th>
-      <th>
-        <p-columnFilter type="text" field="weather_state_name"></p-columnFilter>
-      </th>
-      <th>
-        <p-columnFilter type="number" field="min_temp"></p-columnFilter>
-      </th>
-      <th>
-        <p-columnFilter type="number" field="max_temp"></p-columnFilter>
-      </th>
-      <th>
-        <p-columnFilter type="text" field="wind_direction_compass"></p-columnFilter>
-      </th>
-      <th>
-        <p-columnFilter type="number" field="wind_speed"></p-columnFilter>
-      </th>
-      <th>
-        <p-columnFilter type="number" field="humidity"></p-columnFilter>
-      </th>
-      <th>
-        <p-columnFilter type="number" field="air_pressure"></p-columnFilter>
-      </th>
-      <th>
-        <p-columnFilter type="number" field="visibility"></p-columnFilter>
-      </th>
+      <tr>
+        <th>
+          <p-columnFilter type="text" field="id" matchMode="contains"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="date" field="created" display="menu" [showAddButton]="false"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="date" field="applicable_date" display="menu" [showAddButton]="false"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="weather_state_name" matchMode="in" [showMenu]="false">
+            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+              <p-multiSelect
+                appendTo="body"
+                [ngModel]="value"
+                [options]="weatherStates"
+                placeholder="{{ 'WEATHER_TABLE.ANY' | translate }}"
+                (onChange)="filter($event.value)">
+                <ng-template let-option pTemplate="item">
+                  <div class="p-multiselect-representative-option">
+                    <img
+                      [alt]="option.value"
+                      [src]="weatherStateIcon(option.value)"
+                      width="32"
+                      style="vertical-align: middle" />
+                    <span class="p-ml-1">{{ option.value }}</span>
+                  </div>
+                </ng-template>
+              </p-multiSelect>
+            </ng-template>
+          </p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter
+            field="min_temp"
+            matchMode="between"
+            display="menu"
+            [showMatchModes]="false"
+            [showOperator]="false"
+            [showAddButton]="false"
+            class="p-ml-auto">
+            <ng-template pTemplate="filter" let-filter="filterCallback">
+              <p-slider
+                [ngModel]="valuesRanges.minTempValuesRange"
+                [range]="true"
+                [min]="valuesRanges.minTempValuesRange[0]"
+                [max]="valuesRanges.minTempValuesRange[1]"
+                (onSlideEnd)="filter($event.values)"
+                styleClass="p-m-3">
+              </p-slider>
+              <div class="range-values">
+                <span>{{ valuesRanges.minTempValuesRange[0] }}</span>
+                <span>{{ valuesRanges.minTempValuesRange[1] }}</span>
+              </div>
+            </ng-template>
+          </p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter
+            field="max_temp"
+            matchMode="between"
+            display="menu"
+            [showMatchModes]="false"
+            [showOperator]="false"
+            [showAddButton]="false"
+            class="p-ml-auto">
+            <ng-template pTemplate="filter" let-filter="filterCallback">
+              <p-slider
+                [ngModel]="valuesRanges.maxTempValuesRange"
+                [range]="true"
+                [min]="valuesRanges.maxTempValuesRange[0]"
+                [max]="valuesRanges.maxTempValuesRange[1]"
+                (onSlideEnd)="filter($event.values)"
+                styleClass="p-m-3">
+              </p-slider>
+              <div class="range-values">
+                <span>{{ valuesRanges.maxTempValuesRange[0] }}</span>
+                <span>{{ valuesRanges.maxTempValuesRange[1] }}</span>
+              </div>
+            </ng-template>
+          </p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="wind_direction_compass" matchMode="contains"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter
+            field="wind_speed"
+            matchMode="between"
+            display="menu"
+            [showMatchModes]="false"
+            [showOperator]="false"
+            [showAddButton]="false"
+            class="p-ml-auto">
+            <ng-template pTemplate="filter" let-filter="filterCallback">
+              <p-slider
+                [ngModel]="valuesRanges.windSpeedValuesRange"
+                [range]="true"
+                [min]="valuesRanges.windSpeedValuesRange[0]"
+                [max]="valuesRanges.windSpeedValuesRange[1]"
+                (onSlideEnd)="filter($event.values)"
+                styleClass="p-m-3">
+              </p-slider>
+              <div class="range-values">
+                <span>{{ valuesRanges.windSpeedValuesRange[0] }}</span>
+                <span>{{ valuesRanges.windSpeedValuesRange[1] }}</span>
+              </div>
+            </ng-template>
+          </p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter
+            field="humidity"
+            matchMode="between"
+            display="menu"
+            [showMatchModes]="false"
+            [showOperator]="false"
+            [showAddButton]="false"
+            class="p-ml-auto">
+            <ng-template pTemplate="filter" let-filter="filterCallback">
+              <p-slider
+                [ngModel]="valuesRanges.humidityValuesRange"
+                [range]="true"
+                [min]="valuesRanges.humidityValuesRange[0]"
+                [max]="valuesRanges.humidityValuesRange[1]"
+                (onSlideEnd)="filter($event.values)"
+                styleClass="p-m-3">
+              </p-slider>
+              <div class="range-values">
+                <span>{{ valuesRanges.humidityValuesRange[0] }}</span>
+                <span>{{ valuesRanges.humidityValuesRange[1] }}</span>
+              </div>
+            </ng-template>
+          </p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter
+            field="air_pressure"
+            matchMode="between"
+            display="menu"
+            [showMatchModes]="false"
+            [showOperator]="false"
+            [showAddButton]="false"
+            class="p-ml-auto">
+            <ng-template pTemplate="filter" let-filter="filterCallback">
+              <p-slider
+                [ngModel]="valuesRanges.airPressureValuesRange"
+                [range]="true"
+                [min]="valuesRanges.airPressureValuesRange[0]"
+                [max]="valuesRanges.airPressureValuesRange[1]"
+                (onSlideEnd)="filter($event.values)"
+                styleClass="p-m-3">
+              </p-slider>
+              <div class="range-values">
+                <span>{{ valuesRanges.airPressureValuesRange[0] }}</span>
+                <span>{{ valuesRanges.airPressureValuesRange[1] }}</span>
+              </div>
+            </ng-template>
+          </p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter
+            field="visibility"
+            matchMode="between"
+            display="menu"
+            [showMatchModes]="false"
+            [showOperator]="false"
+            [showAddButton]="false"
+            class="p-ml-auto">
+            <ng-template pTemplate="filter" let-filter="filterCallback">
+              <p-slider
+                [ngModel]="valuesRanges.visibilityValuesRange"
+                [range]="true"
+                [min]="valuesRanges.visibilityValuesRange[0]"
+                [max]="valuesRanges.visibilityValuesRange[1]"
+                (onSlideEnd)="filter($event.values)"
+                styleClass="p-m-3">
+              </p-slider>
+              <div class="range-values">
+                <span>{{ valuesRanges.visibilityValuesRange[0] }}</span>
+                <span>{{ valuesRanges.visibilityValuesRange[1] }}</span>
+              </div>
+            </ng-template>
+          </p-columnFilter>
+        </th>
+      </tr>
     </ng-template>
     <ng-template pTemplate="body" let-data let-index="rowIndex">
       <tr>
         <td>{{ data.id }}</td>
-        <td>{{ data.created }}</td>
-        <td>{{ data.applicable_date }}</td>
-        <td>{{ data.weather_state_name }}</td>
-        <td>{{ data.max_temp }}</td>
-        <td>{{ data.min_temp }}</td>
+        <td>{{ data.created | date: 'dd/MM/yyyy, hh:mm aa' }}</td>
+        <td>{{ data.applicable_date | date: 'dd/MM/yyyy' }}</td>
+        <td>
+          <img
+            [alt]="data.weather_state_name"
+            [src]="weatherStateIcon(data.weather_state_name)"
+            width="32"
+            style="vertical-align: middle" />
+          {{ data.weather_state_name }}
+        </td>
+        <td>{{ data.max_temp | temperaturePipe: '°C' }}</td>
+        <td>{{ data.min_temp | temperaturePipe: '°C' }}</td>
         <td>
           {{ data.wind_direction_compass === 'False' ? '' : data.wind_direction_compass }}
         </td>
-        <td>{{ data.wind_speed }}</td>
-        <td>{{ data.humidity }}</td>
-        <td>{{ data.air_pressure }}</td>
-        <td>{{ data.visibility }}</td>
+        <td>{{ data.wind_speed | temperaturePipe: 'mph' }}</td>
+        <td>{{ data.humidity | temperaturePipe: '%' }}</td>
+        <td>{{ data.air_pressure | temperaturePipe: 'mbar' }}</td>
+        <td>{{ data.visibility | temperaturePipe: 'miles' }}</td>
       </tr>
     </ng-template>
   </p-table>
