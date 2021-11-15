@@ -1,5 +1,3 @@
-import { formatDate } from '@angular/common';
-
 export class WeatherTableItem {
   id: string;
   created: Date;

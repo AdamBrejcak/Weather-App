@@ -13,7 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
     NgApexchartsModule,
     WeatherApiInputsModule,
     LineChartRoutingModule,
-    TranslateModule
+    TranslateModule,
   ],
 })
 export class LineChartModule {}

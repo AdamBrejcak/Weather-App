@@ -5,18 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TabMenuModule } from 'primeng/tabmenu';
 import { ImageModule } from 'primeng/image';
+import { TabMenuModule } from 'primeng/tabmenu';
 import { MapModule } from './features/map/map.module';
+import { ContentWithMenuComponent } from './core/content-with-menu/content-with-menu.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 export function translationsLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/translations/', '.json');
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ContentWithMenuComponent],
   imports: [
     HttpClientModule,
     AppRoutingModule,
@@ -24,19 +25,18 @@ export function translationsLoaderFactory(http: HttpClient) {
     BrowserModule,
     ReactiveFormsModule,
     MapModule,
-    TabMenuModule,
     ImageModule,
+    TabMenuModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {
         provide: TranslateLoader,
         useFactory: translationsLoaderFactory,
-        deps: [HttpClient]
+        deps: [HttpClient],
       },
       isolate: true,
-    })
+    }),
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

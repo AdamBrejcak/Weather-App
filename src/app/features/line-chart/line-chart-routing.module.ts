@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { LineChartComponent } from './line-chart.component';
+import { ContentWithMenuComponent } from '../../core/content-with-menu/content-with-menu.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: LineChartComponent,
+    component: ContentWithMenuComponent,
+    children: [
+      {
+        path: '',
+        component: LineChartComponent,
+      },
+    ],
   },
 ];
 

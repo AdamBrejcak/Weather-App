@@ -34,7 +34,7 @@ export class OpenLayersMapService {
       const element: City = this.cities[index];
       const cityMarker = new Feature({
         geometry: new Point(olProj.fromLonLat([element.longitude, element.latitude])),
-        name: element.name,
+        code: element.code,
       });
       features.push(cityMarker);
     }
@@ -75,7 +75,7 @@ export class OpenLayersMapService {
     map.on('click', (evt: any) => {
       var pixel = evt.pixel;
       map.forEachFeatureAtPixel(pixel, (feature: any) => {
-        let clickedCity: any = this.cities.find((x) => x.name === feature.values_.name);
+        let clickedCity: any = this.cities.find((x) => x.code === feature.values_.code);
         return this.onMarkerClickSource.next(clickedCity), this.router.navigate(['weathertable']);
       });
     });

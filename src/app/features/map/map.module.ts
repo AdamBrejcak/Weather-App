@@ -9,7 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     CommonModule,
     MapRoutingModule,
-    TranslateModule
+    TranslateModule,
   ],
   exports: [MapComponent]
 })

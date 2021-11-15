@@ -1,19 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { WeatherTableComponent } from './weather-table.component';
 
-describe('WeatherTableComponent', () => {
-  let component: WeatherTableComponent;
-  let fixture: ComponentFixture<WeatherTableComponent>;
+import { ContentWithMenuComponent } from './content-with-menu.component';
+
+describe('ContentWmenuComponent', () => {
+  let component: ContentWithMenuComponent;
+  let fixture: ComponentFixture<ContentWithMenuComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WeatherTableComponent ]
+      declarations: [ ContentWithMenuComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WeatherTableComponent);
+    fixture = TestBed.createComponent(ContentWithMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

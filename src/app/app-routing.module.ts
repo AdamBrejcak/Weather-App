@@ -3,7 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { SelectedCityGuard } from './core/selected-city-guard/selectedCity.guard';
 
 const routes: Routes = [
-  { path: 'map', loadChildren: () => import('./features/map/map.module').then((m) => m.MapModule) },
+  {
+    path: 'map',
+    loadChildren: () => import('./features/map/map.module').then((m) => m.MapModule),
+  },
   {
     path: 'weathertable',
     canActivate: [SelectedCityGuard],
@@ -22,11 +25,8 @@ const routes: Routes = [
   { path: '**', redirectTo: 'map', pathMatch: 'full' },
 ];
 
-
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes),
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
