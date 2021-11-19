@@ -8,7 +8,13 @@
     }
   },
   "MAP": {
-    "HEADING": "Prosím zvoľte si mesto"
+    "HEADING": "Prosím zvoľte si mesto",
+    "MAP_VIEW": "Zobraziť mapu",
+    "GRID_VIEW": "Zobraziť tabuľku",
+    "CHOOSE": "Zvoliť",
+    "MAP_TABLE": {
+      "CITY": { "NAME": "Názov mesta", "CODE": "Kód", "LATITUDE": "Zemepisná šírka", "LONGITUDE": "Zemepisná dĺžka" }
+    }
   },
   "HEAT_INDEX": {
     "HEADING": "Výpočet pocitovej tepoty",

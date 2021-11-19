@@ -15,6 +15,8 @@ import Point from 'ol/geom/Point';
 import { Subject } from 'rxjs';
 import * as olProj from 'ol/proj';
 import * as data from '../../../shared/cities.json';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
@@ -24,9 +26,25 @@ export class OpenLayersMapService {
   public readonly markerClick = this.onMarkerClickSource.asObservable();
   cities: City[] = (data as any).default;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private ngxTranslateService: TranslateService
+  ) {}
 
-  initMap() {
+  createMapForm(): FormGroup {
+    return this.formBuilder.group({
+      toggleMapView: ['map'],
+    });
+  }
+
+  translateCitiesNames(cities: City[]) {
+    cities.forEach((city: City) => {
+      city.name = this.ngxTranslateService.instant('API_INPUTS.CITIES.' + city.translationName);
+    });
+  }
+
+  initMap(): Map {
     let features: Array<Feature<Point>> = [];
     let map: Map;
 

@@ -8,7 +8,13 @@
     }
   },
   "MAP": {
-    "HEADING": "Please choose city"
+    "HEADING": "Please choose city",
+    "MAP_VIEW": "Map view",
+    "GRID_VIEW": "Grid view",
+    "CHOOSE": "Choose",
+    "MAP_TABLE": {
+      "CITY": { "NAME": "City name", "CODE": "Code", "LATITUDE": "Latitude", "LONGITUDE": "Longitude" }
+    }
   },
   "HEAT_INDEX": {
     "HEADING": "Heat Index Calculator",

@@ -1,8 +1,23 @@
 .map {
-  height: calc(100vh - 90px);
+  height: calc(100vh - 110px);
 }
 
 .heading {
-  margin: 0 15px 15px 15px;
+  margin: 0 15px;
   font-weight: 500;
+}
+
+.toggle-view-buttons {
+  display: flex;
+  width: fit-content;
+  margin: 0 auto;
+  margin-right: 16px;
+  font-size: 12px;
+  span {
+    margin: 0 0 5px 10px;
+    label {
+      line-height: 20px;
+      margin-left: 3px;
+    }
+  }
 }
