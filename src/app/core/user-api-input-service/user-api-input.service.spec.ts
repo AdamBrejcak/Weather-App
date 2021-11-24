@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UserInputService } from './user-input.service';
+import { UserApiInputService } from './user-api-input.service';
 
 describe('EmitServiceService', () => {
-  let service: UserInputService;
+  let service: UserApiInputService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(UserInputService);
+    service = TestBed.inject(UserApiInputService);
   });
 
   it('should be created', () => {

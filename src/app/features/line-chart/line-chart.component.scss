@@ -16,24 +16,6 @@
   margin: 50px auto;
 }
 
-.error-message {
-  width: fit-content;
-  margin: 70px auto;
-
-  h2 {
-    width: fit-content;
-    margin: 0 auto;
-    font-size: 23px;
-  }
-
-  p {
-    width: fit-content;
-    margin: 0 auto;
-    font-size: 19px;
-    font-weight: 400;
-  }
-}
-
 @keyframes spin {
   0% {
     transform: rotate(0deg);

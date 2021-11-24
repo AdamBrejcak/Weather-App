@@ -4,6 +4,7 @@ export class City {
   code: number;
   latitude: number;
   longitude: number;
+  note: string;
 
   constructor(data: any) {
     this.name = data.name;
@@ -11,5 +12,6 @@ export class City {
     this.code = data.code;
     this.latitude = data.latitude;
     this.longitude = data.longitude;
+    this.note = data.note;
   }
 }

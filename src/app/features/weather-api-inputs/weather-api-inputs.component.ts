@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { City } from 'src/app/shared/city/city';
 import { Output, EventEmitter } from '@angular/core';
-import { UserInputService } from 'src/app/core/user-input-service/user-input.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { pairwise, startWith, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -9,6 +8,7 @@ import { UserInputs } from 'src/app/shared/user-inputs/user-inputs';
 import { DateOperationsService } from 'src/app/core/date-operations-service/date-operations.service';
 import { TranslateService } from '@ngx-translate/core';
 import * as citiesData from '../../shared/cities.json';
+import { UserApiInputService } from 'src/app/core/user-api-input-service/user-api-input.service';
 
 @Component({
   selector: 'app-weather-api-inputs',
@@ -28,10 +28,10 @@ export class WeatherApiInputsComponent implements OnInit, OnDestroy {
   private componentDestroyed: Subject<void> = new Subject<void>();
 
   constructor(
-    private userInputService: UserInputService,
     private formBuilder: FormBuilder,
     private dateOperationsService: DateOperationsService,
-    private ngxTranslateService: TranslateService
+    private ngxTranslateService: TranslateService,
+    private userApiInputService: UserApiInputService
   ) {}
 
   ngOnInit(): void {
@@ -42,17 +42,17 @@ export class WeatherApiInputsComponent implements OnInit, OnDestroy {
       this.changeCitiesNames();
     });
 
-    this.userInputService.currentCityValue
+    this.userApiInputService.currentCityValue
       .pipe(takeUntil(this.componentDestroyed))
       .subscribe((res: City | undefined) => {
         this.chosenCity = res;
       });
 
-    this.userInputService.currentDateFromValue.pipe(takeUntil(this.componentDestroyed)).subscribe((res: Date) => {
+    this.userApiInputService.currentDateFromValue.pipe(takeUntil(this.componentDestroyed)).subscribe((res: Date) => {
       this.chosenDateFrom = new Date(res);
     });
 
-    this.userInputService.currentDateToValue.pipe(takeUntil(this.componentDestroyed)).subscribe((res: Date) => {
+    this.userApiInputService.currentDateToValue.pipe(takeUntil(this.componentDestroyed)).subscribe((res: Date) => {
       this.chosenDateTo = new Date(res);
     });
 
@@ -135,7 +135,7 @@ export class WeatherApiInputsComponent implements OnInit, OnDestroy {
     this.weatherInputsForm.patchValue({
       dates: { dateFrom: newDateFrom, dateTo: newDateTo },
     }),
-      this.userInputService.changeCurrentInputsValues(this.weatherInputsForm.value);
+      this.userApiInputService.changeCurrentInputsValues(this.weatherInputsForm.value);
   }
 
   onInputChangeEmitAndSave() {
@@ -147,7 +147,7 @@ export class WeatherApiInputsComponent implements OnInit, OnDestroy {
           newFormValues.dates.dateTo &&
           JSON.stringify(newFormValues) !== JSON.stringify(oldFormValues)
         ) {
-          this.userInputService.changeCurrentInputsValues(newFormValues);
+          this.userApiInputService.changeCurrentInputsValues(newFormValues);
           this.change.emit(
             new UserInputs({
               city: newFormValues.city,

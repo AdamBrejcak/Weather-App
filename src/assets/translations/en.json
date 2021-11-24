@@ -12,8 +12,13 @@
     "MAP_VIEW": "Map view",
     "GRID_VIEW": "Grid view",
     "CHOOSE": "Choose",
+    "MAP_DIALOG":{
+      "HEADING":"Edit note for",
+      "CANCEL":"Cancel",
+      "SAVE":"Save"
+    },
     "MAP_TABLE": {
-      "CITY": { "NAME": "City name", "CODE": "Code", "LATITUDE": "Latitude", "LONGITUDE": "Longitude" }
+      "CITY": { "NAME": "City name", "CODE": "Code", "LATITUDE": "Latitude", "LONGITUDE": "Longitude", "NOTE": "Note" }
     }
   },
   "HEAT_INDEX": {

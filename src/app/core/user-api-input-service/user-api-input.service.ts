@@ -6,7 +6,7 @@ import { UserInputs } from 'src/app/shared/user-inputs/user-inputs';
 @Injectable({
   providedIn: 'root',
 })
-export class UserInputService {
+export class UserApiInputService {
   private citySource = new BehaviorSubject(this.initCityValue());
   private dateFromSource = new BehaviorSubject(this.initDateFromValue());
   private dateToSource = new BehaviorSubject(this.initDateToValue());

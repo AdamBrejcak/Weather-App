@@ -1,3 +1,6 @@
+@import './assets/styles/icons.scss';
+@import './assets/styles/dialog.scss';
+
 body {
   margin: 0 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
@@ -38,5 +41,23 @@ div .range-values {
     position: absolute;
     top: 25px;
     right: 7px;
+  }
+}
+
+.error-message {
+  width: fit-content;
+  margin: 70px auto;
+
+  h2 {
+    width: fit-content;
+    margin: 0 auto;
+    font-size: 23px;
+  }
+
+  p {
+    width: fit-content;
+    margin: 0 auto;
+    font-size: 19px;
+    font-weight: 400;
   }
 }

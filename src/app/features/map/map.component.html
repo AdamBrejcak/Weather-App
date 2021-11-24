@@ -23,6 +23,7 @@
         <th>{{ 'MAP.MAP_TABLE.CITY.CODE' | translate }}</th>
         <th>{{ 'MAP.MAP_TABLE.CITY.LATITUDE' | translate }}</th>
         <th>{{ 'MAP.MAP_TABLE.CITY.LONGITUDE' | translate }}</th>
+        <th>{{ 'MAP.MAP_TABLE.CITY.NOTE' | translate }}</th>
         <th></th>
       </tr>
     </ng-template>
@@ -32,14 +33,18 @@
         <td>{{ city.code }}</td>
         <td>{{ city.latitude }}</td>
         <td>{{ city.longitude }}</td>
-        <td>
+        <td class="city-note">
+          {{ city.note | textShorthand:12 }}
+          <i (click)="onEditNoteClick(city)" class="pi pi-pencil edit-icon"></i>
+        </td>
+        <td class="button-column">
           <button
             pButton
             pRipple
             type="button"
             label="{{ 'MAP.CHOOSE' | translate }}"
             class="p-button-outlined p-button-rounded"
-            (click)="onChooseCityBtnClick(city)"></button>
+            (click)="onChooseCityClick(city)"></button>
         </td>
       </tr>
     </ng-template>

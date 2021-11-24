@@ -2,6 +2,15 @@
   height: calc(100vh - 110px);
 }
 
+.city-note {
+  max-width: 80px !important;
+}
+
+.button-column {
+  text-align: center !important;
+  vertical-align: middle;
+}
+
 .heading {
   margin: 0 15px;
   font-weight: 500;

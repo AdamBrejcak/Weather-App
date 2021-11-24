@@ -12,8 +12,19 @@
     "MAP_VIEW": "Zobraziť mapu",
     "GRID_VIEW": "Zobraziť tabuľku",
     "CHOOSE": "Zvoliť",
+    "MAP_DIALOG":{
+      "HEADING":"Upraviť poznámku pre",
+      "CANCEL":"Zrušiť",
+      "SAVE":"Uložiť"
+    },
     "MAP_TABLE": {
-      "CITY": { "NAME": "Názov mesta", "CODE": "Kód", "LATITUDE": "Zemepisná šírka", "LONGITUDE": "Zemepisná dĺžka" }
+      "CITY": {
+        "NAME": "Názov mesta",
+        "CODE": "Kód",
+        "LATITUDE": "Zemepisná šírka",
+        "LONGITUDE": "Zemepisná dĺžka",
+        "NOTE": "Poznámka"
+      }
     }
   },
   "HEAT_INDEX": {
