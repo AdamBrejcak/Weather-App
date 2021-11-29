@@ -1,0 +1,46 @@
+::ng-deep {
+  .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link-active {
+    background: #ffffff;
+    border-color: #2196f3;
+    color: #2196f3;
+  }
+}
+
+.heading span:hover,
+.login .hover:hover {
+  cursor: pointer;
+  color: #6c757d;
+}
+
+.flags-login {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  display: flex;
+  flex-direction: row;
+}
+
+.login {
+  width: fit-content;
+  height: 24px;
+  font-size: 14px;
+  color: #0d89ec;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  span {
+    height: fit-content;
+    margin: auto 0 auto 10px;
+  }
+  i {
+    margin-right: 5px;
+    width: 14px;
+  }
+}
+
+.flags {
+  p-image {
+    margin: 0 5px 0 5px;
+    cursor: pointer;
+  }
+}

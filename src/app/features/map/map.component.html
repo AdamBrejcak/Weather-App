@@ -35,7 +35,7 @@
         <td>{{ city.longitude }}</td>
         <td class="city-note">
           {{ city.note | textShorthand:12 }}
-          <i (click)="onEditNoteClick(city)" class="pi pi-pencil edit-icon"></i>
+          <i (click)="onEditNoteClick(city)" *ngxPermissionsOnly="['ADMIN','canEditCityNote']" class="pi pi-pencil edit-icon"></i>
         </td>
         <td class="button-column">
           <button

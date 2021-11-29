@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MapNoteDialogComponent } from './map-note-dialog/map-note-dialog.component';
 import { TextShorthandPipe } from './text-shorthand-pipe/text-shorthand.pipe';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   declarations: [MapComponent, MapNoteDialogComponent, TextShorthandPipe],
@@ -27,6 +28,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     InputTextareaModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
+    NgxPermissionsModule.forChild()
   ],
   exports: [MapComponent],
   bootstrap: [],

@@ -1,8 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SelectedCityGuard } from './core/selected-city-guard/selectedCity.guard';
+import { UserLoggedGuard } from './core/user-logged-guard/user-logged.guard';
 
 const routes: Routes = [
+  {
+    path: 'login',
+    canActivate: [UserLoggedGuard],
+    loadChildren: () => import('./features/login/login.module').then((m) => m.LoginModule),
+  },
   {
     path: 'map',
     loadChildren: () => import('./features/map/map.module').then((m) => m.MapModule),

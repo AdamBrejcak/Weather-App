@@ -1,0 +1,33 @@
+<form [formGroup]="loginForm" #formDir="ngForm" class="login-form">
+  <h3 class="heading">
+    <span [routerLink]="['/map']" > <i class="pi pi-home"></i>{{ 'MAIN.HEADING' | translate }}</span>
+  </h3>
+
+  <span class="p-float-label">
+    <input id="input-username" type="text" pInputText required formControlName="name" />
+    <label for="float-input">{{ 'LOGIN.NAME' | translate }}</label>
+    <div class="validations" *ngIf="f.name.invalid && f.name.dirty">
+      <small *ngIf="f.name.errors?.required" class="p-error">{{ 'LOGIN.NAME_REQ' | translate }}</small>
+      <small *ngIf="f.name.errors?.minlength" class="p-error">{{ 'LOGIN.NAME_MIN' | translate }}</small>
+    </div>
+  </span>
+
+  <span class="p-float-label">
+    <input id="input-password" type="password" pInputText required formControlName="password" />
+    <label for="float-input">{{ 'LOGIN.PASSWORD' | translate }}</label>
+    <div class="validations" *ngIf="f.password.invalid && f.password.dirty">
+      <small *ngIf="f.password.errors?.required" class="p-error">{{ 'LOGIN.PASSWORD_REQ' | translate }}</small>
+      <small *ngIf="f.password.errors?.minlength" class="p-error">{{ 'LOGIN.PASSWORD_MIN' | translate }}</small>
+    </div>
+  </span>
+  <h4 class="error" *ngIf="error">{{'LOGIN.ERROR' | translate}}</h4>
+
+  <button
+    pButton
+    pRipple
+    type="button"
+    label="{{ 'LOGIN.LOGIN' | translate }}"
+    class="p-button-rounded"
+    [disabled]="!loginForm.valid"
+    (click)="onFormSubmit()"></button>
+</form>

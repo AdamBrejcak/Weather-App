@@ -26,6 +26,19 @@ body {
   max-width: 150px !important;
 }
 
+.heading {
+  margin: 0;
+  padding: 16px;
+  font-weight: 700;
+  color: #0d89ec;
+  span {
+    cursor: pointer;
+    i {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
 div .p-inputwrapper {
   min-width: fit-content !important;
 }

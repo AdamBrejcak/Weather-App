@@ -1,0 +1,30 @@
+.login-form {
+  width: 450px;
+  height: 550px;
+  margin: 50px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  border: 1px #a3a3a3 solid;
+  border-radius: 4px;
+  span {
+    margin: 0 auto;
+  }
+  button {
+    margin: 0px auto 20px auto;
+    max-width: 200px;
+  }
+}
+small.p-error.ng-star-inserted {
+  position: absolute;
+  width: 270px;
+}
+.heading {
+  margin: 0 auto;
+}
+
+.error {
+  margin: 0 auto;
+  color: #f44336;
+}

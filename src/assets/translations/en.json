@@ -7,15 +7,26 @@
       "HEAT_INDEX": "Heat Index Calculator"
     }
   },
+  "LOGIN": {
+    "NAME": "Username",
+    "PASSWORD": "Password",
+    "NAME_REQ": "Name is required",
+    "NAME_MIN": "Name must be at least 4 characters long",
+    "PASSWORD_REQ": "Password is required",
+    "PASSWORD_MIN": "Password must be at least 4 characters long",
+    "LOGIN": "Login",
+    "LOGOUT": "Logout",
+    "ERROR": "Invalid name or password"
+  },
   "MAP": {
     "HEADING": "Please choose city",
     "MAP_VIEW": "Map view",
     "GRID_VIEW": "Grid view",
     "CHOOSE": "Choose",
-    "MAP_DIALOG":{
-      "HEADING":"Edit note for",
-      "CANCEL":"Cancel",
-      "SAVE":"Save"
+    "MAP_DIALOG": {
+      "HEADING": "Edit note for",
+      "CANCEL": "Cancel",
+      "SAVE": "Save"
     },
     "MAP_TABLE": {
       "CITY": { "NAME": "City name", "CODE": "Code", "LATITUDE": "Latitude", "LONGITUDE": "Longitude", "NOTE": "Note" }

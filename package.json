@@ -25,6 +25,7 @@
     "apexcharts": "^3.27.3",
     "lodash": "^4.17.21",
     "ng-apexcharts": "^1.5.12",
+    "ngx-permissions": "^13.0.1",
     "ol": "^6.8.1",
     "primeicons": "^4.1.0",
     "primeng": "^12.2.2",
