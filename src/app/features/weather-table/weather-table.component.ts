@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
 import { merge, Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
@@ -12,7 +12,7 @@ import { SelectItem } from 'primeng/api';
   templateUrl: './weather-table.component.html',
   styleUrls: ['./weather-table.component.scss'],
 })
-export class WeatherTableComponent {
+export class WeatherTableComponent implements OnDestroy {
   @ViewChild('dt') dt: Table | undefined | any;
   weatherData: WeatherTableItem[] = [];
   error: any = null;

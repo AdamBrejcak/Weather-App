@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SelectedCityGuard } from './core/selected-city-guard/selectedCity.guard';
 import { UserLoggedGuard } from './core/user-logged-guard/user-logged.guard';
 
 const routes: Routes = [
@@ -14,18 +13,15 @@ const routes: Routes = [
     loadChildren: () => import('./features/map/map.module').then((m) => m.MapModule),
   },
   {
-    path: 'weathertable',
-    canActivate: [SelectedCityGuard],
+    path: 'weathertable/:cityCode/:dateFrom/:dateTo',
     loadChildren: () => import('./features/weather-table/weather-table.module').then((m) => m.WeatherTableModule),
   },
   {
-    path: 'linechart',
-    canActivate: [SelectedCityGuard],
+    path: 'linechart/:cityCode/:dateFrom/:dateTo',
     loadChildren: () => import('./features/line-chart/line-chart.module').then((m) => m.LineChartModule),
   },
   {
-    path: 'heatindex',
-    canActivate: [SelectedCityGuard],
+    path: 'heatindex/:cityCode/:dateFrom/:dateTo',
     loadChildren: () => import('./features/heat-index/heat-index.module').then((m) => m.HeatIndexModule),
   },
   { path: '**', redirectTo: 'map', pathMatch: 'full' },

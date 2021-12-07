@@ -10,7 +10,6 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MapNoteDialogComponent } from './map-note-dialog/map-note-dialog.component';
-import { UserApiInputService } from 'src/app/core/user-api-input-service/user-api-input.service';
 
 @Component({
   selector: 'app-map',
@@ -25,7 +24,6 @@ export class MapComponent implements OnInit {
 
   constructor(
     private citiesNotesService: CitiesNotesService,
-    private userApiInputService: UserApiInputService,
     private openLayersMapService: OpenLayersMapService,
     private ngxTranslateService: TranslateService,
     private router: Router,
@@ -37,16 +35,11 @@ export class MapComponent implements OnInit {
     this.map = this.openLayersMapService.initMap();
     this.cities = this.cities.map((cityData) => new City(cityData));
 
-    this.userApiInputService.changeCurrentCityValue(undefined);
     this.openLayersMapService.translateCitiesNames(this.cities);
 
     let citiesNotes = this.citiesNotesService.getCitiesNotes();
     this.cities.forEach((city: City) => {
       city.note = citiesNotes[city.code];
-    });
-
-    this.openLayersMapService.markerClick.pipe(takeUntil(this.componentDestroyed)).subscribe((city) => {
-      this.userApiInputService.changeCurrentCityValue(city);
     });
 
     this.ngxTranslateService.onLangChange.pipe(takeUntil(this.componentDestroyed)).subscribe(() => {
@@ -71,7 +64,7 @@ export class MapComponent implements OnInit {
   }
 
   onChooseCityClick(city: City) {
-    this.userApiInputService.changeCurrentCityValue(city);
-    this.router.navigate(['weathertable']);
+    let actualDateMidnight = new Date().setHours(0, 0, 0, 0);
+    this.router.navigate(['/weathertable', city.code, actualDateMidnight, actualDateMidnight]);
   }
 }

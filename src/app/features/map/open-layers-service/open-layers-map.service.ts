@@ -12,7 +12,6 @@ import Circle from 'ol/style/Circle';
 import Fill from 'ol/style/Fill';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
-import { Subject } from 'rxjs';
 import * as olProj from 'ol/proj';
 import * as data from '../../../shared/cities.json';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -22,8 +21,6 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: 'root',
 })
 export class OpenLayersMapService {
-  private onMarkerClickSource: Subject<City | undefined> = new Subject();
-  public readonly markerClick = this.onMarkerClickSource.asObservable();
   cities: City[] = (data as any).default;
 
   constructor(
@@ -94,7 +91,8 @@ export class OpenLayersMapService {
       var pixel = evt.pixel;
       map.forEachFeatureAtPixel(pixel, (feature: any) => {
         let clickedCity: any = this.cities.find((x) => x.code === feature.values_.code);
-        return this.onMarkerClickSource.next(clickedCity), this.router.navigate(['weathertable']);
+        let actualDateMidnight = new Date().setHours(0, 0, 0, 0);
+        return this.router.navigate(['/weathertable', clickedCity.code, actualDateMidnight, actualDateMidnight]);
       });
     });
   }

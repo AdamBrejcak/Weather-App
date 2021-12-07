@@ -8,7 +8,8 @@ import { UserInputs } from 'src/app/shared/user-inputs/user-inputs';
 import { DateOperationsService } from 'src/app/core/date-operations-service/date-operations.service';
 import { TranslateService } from '@ngx-translate/core';
 import * as citiesData from '../../shared/cities.json';
-import { UserApiInputService } from 'src/app/core/user-api-input-service/user-api-input.service';
+import { RouterParamsService } from 'src/app/core/router-params-service/router-params.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-weather-api-inputs',
@@ -31,7 +32,8 @@ export class WeatherApiInputsComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private dateOperationsService: DateOperationsService,
     private ngxTranslateService: TranslateService,
-    private userApiInputService: UserApiInputService
+    private routerParamsService: RouterParamsService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -42,23 +44,15 @@ export class WeatherApiInputsComponent implements OnInit, OnDestroy {
       this.changeCitiesNames();
     });
 
-    this.userApiInputService.currentCityValue
-      .pipe(takeUntil(this.componentDestroyed))
-      .subscribe((res: City | undefined) => {
-        this.chosenCity = res;
-      });
-
-    this.userApiInputService.currentDateFromValue.pipe(takeUntil(this.componentDestroyed)).subscribe((res: Date) => {
-      this.chosenDateFrom = new Date(res);
-    });
-
-    this.userApiInputService.currentDateToValue.pipe(takeUntil(this.componentDestroyed)).subscribe((res: Date) => {
-      this.chosenDateTo = new Date(res);
+    this.route.params.pipe(takeUntil(this.componentDestroyed)).subscribe((params) => {
+      this.chosenCity = this.cities.find((city) => city.code === Number(params.cityCode));
+      this.chosenDateFrom = new Date(Number(params.dateFrom));
+      this.chosenDateTo = new Date(Number(params.dateTo));
     });
 
     this.weatherInputsForm = this.createWeatherInputsForm();
 
-    this.weatherInputsForm.controls.city.patchValue(this.cities.find((x) => x.code === this.chosenCity?.code));
+    this.weatherInputsForm.controls.city.patchValue(this.cities.find((city) => city.code === this.chosenCity?.code));
 
     this.change.emit(
       new UserInputs({
@@ -135,7 +129,7 @@ export class WeatherApiInputsComponent implements OnInit, OnDestroy {
     this.weatherInputsForm.patchValue({
       dates: { dateFrom: newDateFrom, dateTo: newDateTo },
     }),
-      this.userApiInputService.changeCurrentInputsValues(this.weatherInputsForm.value);
+      this.routerParamsService.replaceRouteParams(this.weatherInputsForm.value);
   }
 
   onInputChangeEmitAndSave() {
@@ -147,7 +141,7 @@ export class WeatherApiInputsComponent implements OnInit, OnDestroy {
           newFormValues.dates.dateTo &&
           JSON.stringify(newFormValues) !== JSON.stringify(oldFormValues)
         ) {
-          this.userApiInputService.changeCurrentInputsValues(newFormValues);
+          this.routerParamsService.replaceRouteParams(newFormValues);
           this.change.emit(
             new UserInputs({
               city: newFormValues.city,
