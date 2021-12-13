@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ContentWithHeadingComponent } from 'src/app/core/content-with-heading/content-with-heading.component';
-import { MapComponent } from './map.component';
+import { SelectCityComponent } from './select-city.component';
 
 const routes: Routes = [
   {
@@ -10,7 +10,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: MapComponent,
+        component: SelectCityComponent,
       },
     ],
   },
@@ -20,4 +20,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MapRoutingModule {}
+export class SelectCityRoutingModule {}

@@ -23,6 +23,7 @@
     "MAP_VIEW": "Zobraziť mapu",
     "GRID_VIEW": "Zobraziť tabuľku",
     "CHOOSE": "Zvoliť",
+    "MISSING_NOTE": "Poznámka chýba.",
     "MAP_DIALOG": {
       "HEADING": "Upraviť poznámku pre",
       "CANCEL": "Zrušiť",
@@ -106,8 +107,16 @@
       "TORONTO": "Toronto",
       "LONDON": "Londýn",
       "PARIS": "Paríž",
+      "BUDAPEST": "Budapešť",
       "KYIV": "Kijev",
-      "MOSCOW": "Moskva"
+      "MINSK": "Minsk",
+      "MOSCOW": "Moskva",
+      "RIO_DE_JANEIRO": "Rio De Janeiro",
+      "BUENOS_AIRES": "Buenos Aires",
+      "LIMA": "Lima",
+      "ALEXANDRIA": "Alexandria",
+      "JOHANNESBURG": "Johannesburg",
+      "MELBOURNE": "Melbourne"
     }
   },
   "LINE_CHART": {

@@ -5,16 +5,16 @@ import { CitiesNotesService } from 'src/app/core/cities-notes-service/cities-not
 import { City } from 'src/app/shared/city/city';
 
 @Component({
-  selector: 'map-note-dialog',
-  templateUrl: 'map-note-dialog.component.html',
-  styleUrls: ['./map-note-dialog.component.scss'],
+  selector: 'city-note-dialog',
+  templateUrl: 'city-note-dialog.component.html',
+  styleUrls: ['./city-note-dialog.component.scss'],
 })
-export class MapNoteDialogComponent implements OnInit {
+export class CityNoteDialogComponent implements OnInit {
   cityNoteForm!: FormGroup;
   loading: boolean = false;
 
   constructor(
-    public dialogRef: MatDialogRef<MapNoteDialogComponent>,
+    public dialogRef: MatDialogRef<CityNoteDialogComponent>,
     private formBuilder: FormBuilder,
     private citiesNotesService: CitiesNotesService,
     @Inject(MAT_DIALOG_DATA) public city: City
@@ -27,7 +27,7 @@ export class MapNoteDialogComponent implements OnInit {
   }
 
   onCancelClick(): void {
-    this.dialogRef.close({ save: false, value: '' });
+    this.dialogRef.close({ save: false, newValue: '' });
   }
 
   onSaveClick(): void {

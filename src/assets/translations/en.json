@@ -23,6 +23,7 @@
     "MAP_VIEW": "Map view",
     "GRID_VIEW": "Grid view",
     "CHOOSE": "Choose",
+    "MISSING_NOTE":"There isn't note.",
     "MAP_DIALOG": {
       "HEADING": "Edit note for",
       "CANCEL": "Cancel",
@@ -60,8 +61,16 @@
       "TORONTO": "Toronto",
       "LONDON": "London",
       "PARIS": "Paris",
+      "BUDAPEST": "Budapest",
       "KYIV": "Kyiv",
-      "MOSCOW": "Moscow"
+      "MINSK": "Minsk",
+      "MOSCOW": "Moscow",
+      "RIO_DE_JANEIRO": "Rio De Janeiro",
+      "BUENOS_AIRES": "Buenos Aires",
+      "LIMA": "Lima",
+      "ALEXANDRIA": "Alexandria",
+      "JOHANNESBURG": "Johannesburg",
+      "MELBOURNE": "Melbourne"
     }
   },
   "LINE_CHART": {

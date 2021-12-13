@@ -5,6 +5,7 @@ export class City {
   latitude: number;
   longitude: number;
   note: string;
+  averageTemperature?:number;
 
   constructor(data: any) {
     this.name = data.name;
@@ -13,5 +14,6 @@ export class City {
     this.latitude = data.latitude;
     this.longitude = data.longitude;
     this.note = data.note;
+    this.averageTemperature = data.averageTemperature;
   }
 }

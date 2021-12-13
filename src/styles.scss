@@ -68,9 +68,19 @@ div .range-values {
   }
 
   p {
+    max-width: 350px;
     width: fit-content;
-    margin: 0 auto;
+    margin: 10px auto;
     font-size: 19px;
     font-weight: 400;
+  }
+}
+
+.ol-popup-submit a {
+  text-decoration: none;
+  color: #ffffff;
+  &:hover {
+    background: #0d89ec;
+    border-color: #0d89ec;
   }
 }

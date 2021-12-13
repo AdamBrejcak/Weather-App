@@ -106,7 +106,7 @@ export class LineChartComponent implements OnInit {
       )
       .subscribe(
         (res: LineChartItem[]) => {
-          let sortedResult = this.appUtilsService.sortData(res, 'applicableDate');
+          let sortedResult = this.appUtilsService.sortDataByValue(res, 'applicableDate');
           this.error = this.weatherDataService.checkDataLength(res);
           this.lineChartService.resetChartData(this.chartOptions);
           this.lineChartService.pushChartDataToChartOptions(sortedResult, this.chartOptions);

@@ -1,0 +1,38 @@
+<h5 [hidden]="error.value" class="heading">{{ 'MAP.HEADING' | translate }}</h5>
+
+<div [hidden]="!loading.value" class="loader"></div>
+
+<form [formGroup]="toggleViewForm">
+  <span class="toggle-view-buttons" [hidden]="error.value">
+    <span>
+      <p-radioButton value="map" formControlName="toggleMapView" inputId="mapView"></p-radioButton>
+      <label for="mapView">{{ 'MAP.MAP_VIEW' | translate }}</label>
+    </span>
+    <span>
+      <p-radioButton value="grid" formControlName="toggleMapView" inputId="gridView"></p-radioButton>
+      <label for="gridView">{{ 'MAP.GRID_VIEW' | translate }}</label>
+    </span>
+  </span>
+
+  <div *ngIf="error.value" class="error-message">
+    <h2>{{ 'WEATHER_TABLE.ERROR' | translate }}</h2>
+    <p>{{ error.value }}</p>
+  </div>
+
+  <app-map
+    [hidden]="toggleViewForm.controls.toggleMapView.value === 'grid'"
+    [cities]="cities"
+    [loading]="loading"
+    [error]="error"
+    [viewChanged]="viewChanged"
+    (cityChoosen)="onCityChoosen($event)"
+    #map>
+  </app-map>
+
+  <app-cities-grid
+    [hidden]="toggleViewForm.controls.toggleMapView.value === 'map'"
+    [cities]="cities"
+    (citiesChange)="onCitiesChange()"
+    (cityChoosen)="onCityChoosen($event)">
+  </app-cities-grid>
+</form>

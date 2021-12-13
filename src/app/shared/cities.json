@@ -5,6 +5,14 @@
   { "name": "", "translationName": "TORONTO", "code": 4118, "latitude": 43.75107, "longitude": -79.347015 },
   { "name": "", "translationName": "LONDON", "code": 44418, "latitude": 51.6074, "longitude": 0.0078 },
   { "name": "", "translationName": "PARIS", "code": 615702, "latitude": 48.9566, "longitude": 2.3522 },
+  { "name": "", "translationName": "BUDAPEST", "code": 804365, "latitude": 47.4979, "longitude": 19.0402 },
   { "name": "", "translationName": "KYIV", "code": 924938, "latitude": 50.4501, "longitude": 30.5234 },
-  { "name": "", "translationName": "MOSCOW", "code": 1105779, "latitude": 55.7558, "longitude": 37.6173 }
+  { "name": "", "translationName": "MINSK", "code": 834463, "latitude": 53.9006, "longitude": 27.5590 },
+  { "name": "", "translationName": "MOSCOW", "code": 2122265, "latitude": 55.7558, "longitude": 37.6173 },
+  { "name": "", "translationName": "RIO_DE_JANEIRO", "code": 455825, "latitude": -22.9068, "longitude": -43.1729 },
+  { "name": "", "translationName": "BUENOS_AIRES", "code": 468739, "latitude": -34.6037, "longitude": -58.3816 },
+  { "name": "", "translationName": "LIMA", "code": 418440, "latitude": -12.0464, "longitude": -77.0428 },
+  { "name": "", "translationName": "ALEXANDRIA", "code": 1522006, "latitude": 31.2001, "longitude": 29.9187 },
+  { "name": "", "translationName": "JOHANNESBURG", "code": 1582504, "latitude": -26.2041, "longitude": 28.0473 },
+  { "name": "", "translationName": "MELBOURNE", "code": 1103816, "latitude": -37.8136, "longitude": 144.9631 }
 ]

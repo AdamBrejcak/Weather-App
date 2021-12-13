@@ -17,8 +17,8 @@ export class WeatherTableItem {
     this.applicable_date = new Date(data.applicable_date);
     this.weather_state_name = data.weather_state_name;
     this.wind_direction_compass = data.wind_direction_compass;
-    this.max_temp = data.min_temp;
-    this.min_temp = data.max_temp;
+    this.max_temp = data.max_temp;
+    this.min_temp = data.min_temp;
     this.wind_speed = data.wind_speed;
     this.humidity = data.humidity;
     this.air_pressure = data.air_pressure;

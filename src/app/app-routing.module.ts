@@ -9,8 +9,8 @@ const routes: Routes = [
     loadChildren: () => import('./features/login/login.module').then((m) => m.LoginModule),
   },
   {
-    path: 'map',
-    loadChildren: () => import('./features/map/map.module').then((m) => m.MapModule),
+    path: 'selectcity',
+    loadChildren: () => import('./features/select-city/select-city.module').then((m) => m.SelectCityModule),
   },
   {
     path: 'weathertable/:cityCode/:dateFrom/:dateTo',
@@ -24,7 +24,7 @@ const routes: Routes = [
     path: 'heatindex/:cityCode/:dateFrom/:dateTo',
     loadChildren: () => import('./features/heat-index/heat-index.module').then((m) => m.HeatIndexModule),
   },
-  { path: '**', redirectTo: 'map', pathMatch: 'full' },
+  { path: '**', redirectTo: 'selectcity', pathMatch: 'full' },
 ];
 
 @NgModule({

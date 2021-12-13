@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MapNoteDialogComponent } from './map-note-dialog.component';
+import { SelectCityComponent } from './select-city.component';
 
-describe('WeatherTableComponent', () => {
-  let component: MapNoteDialogComponent;
-  let fixture: ComponentFixture<MapNoteDialogComponent>;
+describe('MapComponent', () => {
+  let component: SelectCityComponent;
+  let fixture: ComponentFixture<SelectCityComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MapNoteDialogComponent ]
+      declarations: [ SelectCityComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MapNoteDialogComponent);
+    fixture = TestBed.createComponent(SelectCityComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

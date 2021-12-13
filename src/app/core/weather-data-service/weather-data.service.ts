@@ -3,11 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { WeatherTableItem } from 'src/app/features/weather-table/weather-table-item/weather-table-item';
 import { DateOperationsService } from '../date-operations-service/date-operations.service';
 import { formatDate } from '@angular/common';
-import { forkJoin, Observable } from 'rxjs';
+import { forkJoin, Observable, zip } from 'rxjs';
 import { UserInputs } from 'src/app/shared/user-inputs/user-inputs';
 import { map } from 'rxjs/operators';
 import { LineChartItem } from 'src/app/features/line-chart/line-chart-item/line-chart-item';
 import { AppUtilsService } from '../app-utils-service/app-utils.service';
+import { City } from 'src/app/shared/city/city';
 
 @Injectable({
   providedIn: 'root',
@@ -40,6 +41,16 @@ export class WeatherDataService {
       );
     }
     return apiCalls;
+  }
+
+  calculateAverageTemperatureForDays(data: Object[]): number {
+    return Number(
+      (
+        (Number(data.reduce((a: any, b: any) => a + b.max_temp, 0) / data.length) +
+          Number(data.reduce((a: any, b: any) => a + b.min_temp, 0) / data.length)) /
+        2
+      ).toFixed(2)
+    );
   }
 
   checkDataLength(data: any): Object | null {
@@ -90,5 +101,16 @@ export class WeatherDataService {
         return results;
       })
     );
+  }
+
+  loadCitiesDataForMap(cities: City[]): Observable<Array<unknown>> {
+    let yesterday = new Date(new Date().setHours(0, 0, 0, 0) - 1);
+    let today = new Date(new Date().setHours(0, 0, 0, 0));
+
+    let apiCalls = cities.map((city) => {
+      return this.loadWeatherTableData({ city: city, dates: { dateFrom: yesterday, dateTo: today } });
+    });
+
+    return zip(...apiCalls);
   }
 }
