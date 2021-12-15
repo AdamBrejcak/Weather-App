@@ -2,8 +2,18 @@ h5 {
   width: fit-content;
 }
 
-textarea {
+.mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 350px;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 0;
   width: 100%;
+  input {
+    width: 100%;
+  }
 }
 
 .buttons {

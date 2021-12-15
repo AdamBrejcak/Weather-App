@@ -8,16 +8,26 @@ import { TableModule } from 'primeng/table';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { ButtonModule } from 'primeng/button';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CityNoteDialogComponent } from './city-note-dialog/city-note-dialog.component';
+import { EditCityDialogComponent } from './edit-city-dialog/edit-city-dialog.component';
 import { TextShorthandPipe } from './text-shorthand-pipe/text-shorthand.pipe';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { MapComponent } from './map-component/map.component';
 import { CitiesGridComponent } from './cities-grid-component/cities-grid.component';
+import { AddCityDialogComponent } from './add-city-dialog/add-city-dialog.component';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
-  declarations: [SelectCityComponent, CityNoteDialogComponent, TextShorthandPipe, MapComponent, CitiesGridComponent],
+  declarations: [
+    SelectCityComponent,
+    EditCityDialogComponent,
+    AddCityDialogComponent,
+    TextShorthandPipe,
+    MapComponent,
+    CitiesGridComponent,
+  ],
   entryComponents: [],
   imports: [
     SelectCityRoutingModule,
@@ -28,9 +38,11 @@ import { CitiesGridComponent } from './cities-grid-component/cities-grid.compone
     RadioButtonModule,
     ButtonModule,
     InputTextareaModule,
+    InputTextModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
-    NgxPermissionsModule.forChild()
+    TooltipModule,
+    NgxPermissionsModule.forChild(),
   ],
   exports: [SelectCityComponent],
   bootstrap: [],

@@ -1,8 +1,28 @@
-.city-note {
+.city-note,
+.city-delete {
   max-width: 80px !important;
 }
 
-.button-column {
+.city-delete {
+  text-align: center !important;
+}
+
+.note {
+  max-width: 70px;
+}
+
+.choose {
   text-align: center !important;
   vertical-align: middle;
+  max-width: 80px;
+}
+
+.city-edit i:hover {
+  cursor: pointer;
+  color: #0d89ec;
+}
+
+.city-delete i:hover {
+  cursor: pointer;
+  color: #ff0000;
 }

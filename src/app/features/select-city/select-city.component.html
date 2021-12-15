@@ -1,20 +1,25 @@
-<h5 [hidden]="error.value" class="heading">{{ 'MAP.HEADING' | translate }}</h5>
-
 <div [hidden]="!loading.value" class="loader"></div>
 
 <form [formGroup]="toggleViewForm">
-  <span class="toggle-view-buttons" [hidden]="error.value">
-    <span>
-      <p-radioButton value="map" formControlName="toggleMapView" inputId="mapView"></p-radioButton>
-      <label for="mapView">{{ 'MAP.MAP_VIEW' | translate }}</label>
-    </span>
-    <span>
-      <p-radioButton value="grid" formControlName="toggleMapView" inputId="gridView"></p-radioButton>
-      <label for="gridView">{{ 'MAP.GRID_VIEW' | translate }}</label>
-    </span>
+  <span class="add-toggle-buttons" [hidden]="error.value">
+    <div *ngxPermissionsOnly="['ADMIN', 'canAddCity']" [hidden]="loading.value || error.value" class="add-city">
+      <p-button (click)="onAddCityClick()" label="{{ 'MAP.CITY_DIALOG.ADD_CITY' | translate }}">
+        <i class="pi pi-plus plus-icon"></i>
+      </p-button>
+    </div>
+    <div class="toggle-map-view">
+      <span>
+        <p-radioButton value="map" formControlName="toggleMapView" inputId="mapView"></p-radioButton>
+        <label for="mapView">{{ 'MAP.MAP_VIEW' | translate }}</label>
+      </span>
+      <span>
+        <p-radioButton value="grid" formControlName="toggleMapView" inputId="gridView"></p-radioButton>
+        <label for="gridView">{{ 'MAP.GRID_VIEW' | translate }}</label>
+      </span>
+    </div>
   </span>
 
-  <div *ngIf="error.value" class="error-message">
+  <div *ngIf="error.value && toggleViewForm.controls.toggleMapView.value === 'map'" class="error-message">
     <h2>{{ 'WEATHER_TABLE.ERROR' | translate }}</h2>
     <p>{{ error.value }}</p>
   </div>
@@ -25,6 +30,7 @@
     [loading]="loading"
     [error]="error"
     [viewChanged]="viewChanged"
+    (citiesChange)="onCitiesChange()"
     (cityChoosen)="onCityChoosen($event)"
     #map>
   </app-map>

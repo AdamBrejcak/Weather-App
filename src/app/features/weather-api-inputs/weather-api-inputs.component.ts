@@ -6,10 +6,9 @@ import { pairwise, startWith, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { UserInputs } from 'src/app/shared/user-inputs/user-inputs';
 import { DateOperationsService } from 'src/app/core/date-operations-service/date-operations.service';
-import { TranslateService } from '@ngx-translate/core';
-import * as citiesData from '../../shared/cities.json';
 import { RouterParamsService } from 'src/app/core/router-params-service/router-params.service';
 import { ActivatedRoute } from '@angular/router';
+import { CitiesService } from 'src/app/core/cities-service/cities.service';
 
 @Component({
   selector: 'app-weather-api-inputs',
@@ -22,7 +21,7 @@ export class WeatherApiInputsComponent implements OnInit, OnDestroy {
   chosenDateTo!: Date;
   chosenCity!: City | undefined;
   maxDateValue: Date = new Date(new Date().setHours(0, 0, 0, 0));
-  citiesData: City[] = (citiesData as any).default;
+  citiesData!: City[];
   cities: City[] = [];
   weatherInputsForm!: FormGroup;
   @Output() change = new EventEmitter<UserInputs>();
@@ -31,17 +30,14 @@ export class WeatherApiInputsComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private dateOperationsService: DateOperationsService,
-    private ngxTranslateService: TranslateService,
     private routerParamsService: RouterParamsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private citiesService: CitiesService
   ) {}
 
   ngOnInit(): void {
-    this.cities = this.citiesData.map((cityData) => new City(cityData));
-    this.changeCitiesNames();
-
-    this.ngxTranslateService.onLangChange.pipe(takeUntil(this.componentDestroyed)).subscribe(() => {
-      this.changeCitiesNames();
+    this.citiesService.currentCities.pipe(takeUntil(this.componentDestroyed)).subscribe((res: City[]) => {
+      this.cities = res.map((cityData:City)=> new City(cityData));
     });
 
     this.route.params.pipe(takeUntil(this.componentDestroyed)).subscribe((params) => {
@@ -69,12 +65,6 @@ export class WeatherApiInputsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.componentDestroyed.next();
-  }
-
-  changeCitiesNames() {
-    this.cities.forEach(
-      (city) => city.name = this.ngxTranslateService.instant('API_INPUTS.CITIES.' + city.translationName)
-    );
   }
 
   createWeatherInputsForm(): FormGroup {

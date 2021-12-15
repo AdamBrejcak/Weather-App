@@ -19,15 +19,26 @@
     "ERROR": "Neplatné meno alebo heslo"
   },
   "MAP": {
-    "HEADING": "Prosím zvoľte si mesto",
     "MAP_VIEW": "Zobraziť mapu",
     "GRID_VIEW": "Zobraziť tabuľku",
     "CHOOSE": "Zvoliť",
+    "EDIT": "Upraviť",
     "MISSING_NOTE": "Poznámka chýba.",
-    "MAP_DIALOG": {
-      "HEADING": "Upraviť poznámku pre",
-      "CANCEL": "Zrušiť",
-      "SAVE": "Uložiť"
+    "CITY_DIALOG": {
+      "EDIT_CITY": "Upraviť mesto",
+      "ADD_CITY": "Pridať mesto",
+      "CLOSE": "Zrušiť",
+      "FORM": {
+        "NAME": "Názov",
+        "NAME_REQ": "Názov je povinný",
+        "CODE": "Kód",
+        "CODE_REQ": "Kód je povinný",
+        "LATITUDE": "Zemepisná šírka",
+        "LATITUDE_REQ": "Zemepisná šírka je povinná",
+        "LONGITUDE": "Zemepisná dĺžka",
+        "LONGITUDE_REQ": "Zemepisná dĺžka je povinná",
+        "NOTE": "Poznámka"
+      }
     },
     "MAP_TABLE": {
       "CITY": {
@@ -35,7 +46,8 @@
         "CODE": "Kód",
         "LATITUDE": "Zemepisná šírka",
         "LONGITUDE": "Zemepisná dĺžka",
-        "NOTE": "Poznámka"
+        "NOTE": "Poznámka",
+        "DELETE": "Zmazať mesto"
       }
     }
   },

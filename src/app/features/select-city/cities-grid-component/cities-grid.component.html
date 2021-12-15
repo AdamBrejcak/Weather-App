@@ -7,6 +7,8 @@
       <th>{{ 'MAP.MAP_TABLE.CITY.LONGITUDE' | translate }}</th>
       <th>{{ 'MAP.MAP_TABLE.CITY.NOTE' | translate }}</th>
       <th></th>
+      <th *ngxPermissionsOnly="['ADMIN', 'canEditCityNote']" class="city-delete"></th>
+      <th *ngxPermissionsOnly="['ADMIN', 'canEditCityNote']" class="city-delete"></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-city let-index="rowIndex">
@@ -15,14 +17,11 @@
       <td>{{ city.code }}</td>
       <td>{{ city.latitude }}</td>
       <td>{{ city.longitude }}</td>
-      <td class="city-note">
+      <td class="note">
         {{ city.note ? (city.note | textShorthand: 14) : '' }}
-        <i
-          (click)="onEditNoteClick(city)"
-          *ngxPermissionsOnly="['ADMIN', 'canEditCityNote']"
-          class="pi pi-pencil edit-icon"></i>
       </td>
-      <td class="button-column">
+
+      <td class="choose">
         <button
           pButton
           pRipple
@@ -30,6 +29,25 @@
           label="{{ 'MAP.CHOOSE' | translate }}"
           class="p-button-outlined p-button-rounded"
           (click)="onChooseCityClick(city.code)"></button>
+      </td>
+
+      <td *ngxPermissionsOnly="['ADMIN', 'canEditCityNote']" class="city-edit">
+        <i
+          (click)="onEditNoteClick(city)"
+          class="pi pi-pencil edit-icon"
+          pTooltip="{{ 'MAP.MAP_TABLE.EDIT' | translate }}"
+          tooltipPosition="top"
+          [showDelay]="100"
+          [hideDelay]="100"></i>
+      </td>
+      <td *ngxPermissionsOnly="['ADMIN', 'canEditCityNote']" class="city-delete">
+        <i
+          (click)="onDeleteCityClick(city.code)"
+          class="pi pi-trash trash-icon delete"
+          pTooltip="{{ 'MAP.MAP_TABLE.DELETE' | translate }}"
+          tooltipPosition="left"
+          [showDelay]="100"
+          [hideDelay]="100"></i>
       </td>
     </tr>
   </ng-template>

@@ -19,18 +19,37 @@
     "ERROR": "Invalid name or password"
   },
   "MAP": {
-    "HEADING": "Please choose city",
     "MAP_VIEW": "Map view",
     "GRID_VIEW": "Grid view",
     "CHOOSE": "Choose",
-    "MISSING_NOTE":"There isn't note.",
-    "MAP_DIALOG": {
-      "HEADING": "Edit note for",
+    "EDIT": "Edit",
+    "MISSING_NOTE": "There isn't note.",
+    "CITY_DIALOG": {
+      "EDIT_CITY": "Edit city",
+      "ADD_CITY": "Add city",
       "CANCEL": "Cancel",
-      "SAVE": "Save"
+      "FORM": {
+        "NAME": "Name",
+        "NAME_REQ": "Name is required",
+        "CODE": "Code",
+        "CODE_REQ": "Code is required",
+        "LATITUDE": "Latitude",
+        "LATITUDE_REQ": "Latitude is required",
+        "LONGITUDE": "Longitude",
+        "LONGITUDE_REQ": "Longitude is required",
+        "NOTE": "Note"
+      }
     },
     "MAP_TABLE": {
-      "CITY": { "NAME": "City name", "CODE": "Code", "LATITUDE": "Latitude", "LONGITUDE": "Longitude", "NOTE": "Note" }
+      "CITY": {
+        "NAME": "City name",
+        "CODE": "Code",
+        "LATITUDE": "Latitude",
+        "LONGITUDE": "Longitude",
+        "NOTE": "Note"
+      },
+      "DELETE": "Delete city",
+      "EDIT": "Edit city"
     }
   },
   "HEAT_INDEX": {

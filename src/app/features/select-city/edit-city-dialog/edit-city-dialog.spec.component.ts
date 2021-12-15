@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CityNoteDialogComponent } from './city-note-dialog.component';
+import { EditCityDialogComponent } from './edit-city-dialog.component';
 
 describe('WeatherTableComponent', () => {
-  let component: CityNoteDialogComponent;
-  let fixture: ComponentFixture<CityNoteDialogComponent>;
+  let component: EditCityDialogComponent;
+  let fixture: ComponentFixture<EditCityDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CityNoteDialogComponent],
+      declarations: [EditCityDialogComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CityNoteDialogComponent);
+    fixture = TestBed.createComponent(EditCityDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

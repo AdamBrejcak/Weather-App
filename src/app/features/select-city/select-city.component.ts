@@ -1,13 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CitiesNotesService } from 'src/app/core/cities-notes-service/cities-notes.service';
 import { City } from 'src/app/shared/city/city';
-import * as citiesData from '../../shared/cities.json';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MapComponent } from './map-component/map.component';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CitiesService } from 'src/app/core/cities-service/cities.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddCityDialogComponent } from './add-city-dialog/add-city-dialog.component';
+import { AppUtilsService } from 'src/app/core/app-utils-service/app-utils.service';
 
 @Component({
   selector: 'app-select-city',
@@ -15,7 +17,7 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./select-city.component.scss'],
 })
 export class SelectCityComponent implements OnInit {
-  cities: City[] = (citiesData as any).default;
+  cities!: City[];
   toggleViewForm!: FormGroup;
   loading: any = { value: false };
   error: any = { value: undefined };
@@ -24,10 +26,12 @@ export class SelectCityComponent implements OnInit {
   private componentDestroyed: Subject<void> = new Subject<void>();
 
   constructor(
-    private citiesNotesService: CitiesNotesService,
+    private citiesService: CitiesService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private ngxTranslateService: TranslateService
+    private ngxTranslateService: TranslateService,
+    private matDialog: MatDialog,
+    private appUtilsService: AppUtilsService
   ) {}
 
   ngOnInit(): void {
@@ -35,17 +39,19 @@ export class SelectCityComponent implements OnInit {
       toggleMapView: ['map'],
     });
 
-    this.cities = this.cities.map((cityData) => new City(cityData));
+    this.citiesService.currentCities.pipe(takeUntil(this.componentDestroyed)).subscribe((res) => {
+      this.cities = res;
+      this.cities = this.appUtilsService.sortDataByValue(this.cities, 'averageTemperature');
 
-    let citiesNotes = this.citiesNotesService.getCitiesNotes();
-    this.cities.forEach((city: City) => {
-      city.note = citiesNotes[city.code];
+      this.cities = this.cities.map((cityData) => new City(cityData));
+      this.citiesService.currentNotes.pipe(takeUntil(this.componentDestroyed)).subscribe((res) => {
+        this.cities.forEach((city: City) => {
+          city.note = res[city.code];
+        });
+      });
     });
 
-    this.translateCitiesNames();
-
     this.ngxTranslateService.onLangChange.pipe(takeUntil(this.componentDestroyed)).subscribe(() => {
-      this.translateCitiesNames();
       this.map.redrawVectorLayer();
     });
 
@@ -63,9 +69,21 @@ export class SelectCityComponent implements OnInit {
     this.router.navigate(['/weathertable', code, actualDateMidnight, actualDateMidnight]);
   }
 
-  translateCitiesNames() {
-    this.cities.forEach((city: City) => {
-      city.name = this.ngxTranslateService.instant('API_INPUTS.CITIES.' + city.translationName);
+  onAddCityClick() {
+    const dialogRef = this.matDialog.open(AddCityDialogComponent, {
+      width: '380px',
+      minHeight: 'calc(500px)',
+      height: 'auto',
+      data: this.cities,
     });
+
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntil(this.componentDestroyed))
+      .subscribe((res: boolean) => {
+        if (res) {
+          this.map.redrawVectorLayer();
+        }
+      });
   }
 }

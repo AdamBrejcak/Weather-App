@@ -6,11 +6,11 @@
   position: absolute;
   background-color: white;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  padding: 15px;
+  padding: 12px;
   border-radius: 10px;
   border: 1px solid #cccccc;
-  bottom: 12px;
-  left: -50px;
+  bottom: 15px;
+  left: -55px;
   min-width: 280px;
 }
 
@@ -42,16 +42,20 @@
 .ol-popup-closer {
   text-decoration: none;
   position: absolute;
-  top: 2px;
-  right: 8px;
+  top: 12px;
+  right: 12px;
   cursor: pointer;
   &:hover {
-    color: #0d89ec;
+    color: #ff0000;
   }
 }
 
 .ol-popup-submit {
   width: fit-content;
-  margin: 0 auto;
+  float: right;
   cursor: pointer;
+}
+
+.ol-popup-edit {
+  margin-left: 95px;
 }

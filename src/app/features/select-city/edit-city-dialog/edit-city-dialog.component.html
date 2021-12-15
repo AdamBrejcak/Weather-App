@@ -1,0 +1,63 @@
+<h5 mat-dialog-title>{{ 'MAP.CITY_DIALOG.EDIT_CITY' | translate }}</h5>
+<form [formGroup]="editCityForm" (submit)="onFormSubmit()">
+  <div mat-dialog-content>
+    <span class="p-float-label">
+      <input id="input-name" type="text" pInputText required formControlName="name" />
+      <label for="float-input">{{ 'MAP.CITY_DIALOG.FORM.NAME' | translate }}</label>
+      <div class="validations" *ngIf="f.name.invalid && f.name.dirty">
+        <small *ngIf="f.name.errors?.required" class="p-error">{{ 'MAP.CITY_DIALOG.FORM.NAME_REQ' | translate }}</small>
+      </div>
+    </span>
+
+    <span class="p-float-label">
+      <input id="input-code" type="number" pInputText required formControlName="code" />
+      <label for="float-input">{{ 'MAP.CITY_DIALOG.FORM.CODE' | translate }}</label>
+      <div class="validations" *ngIf="f.code.invalid && f.code.dirty">
+        <small *ngIf="f.code.errors?.required" class="p-error">{{ 'MAP.CITY_DIALOG.FORM.CODE_REQ' | translate }}</small>
+      </div>
+    </span>
+
+    <span class="p-float-label">
+      <input id="input-latitude" type="number" pInputText required formControlName="latitude" />
+      <label for="float-input">{{ 'MAP.CITY_DIALOG.FORM.LATITUDE' | translate }}</label>
+      <div class="validations" *ngIf="f.latitude.invalid && f.latitude.dirty">
+        <small *ngIf="f.latitude.errors?.required" class="p-error">{{
+          'MAP.CITY_DIALOG.FORM.LATITUDE_REQ' | translate
+        }}</small>
+      </div>
+    </span>
+
+    <span class="p-float-label">
+      <input id="input-longitude" type="number" pInputText required formControlName="longitude" />
+      <label for="float-input">{{ 'MAP.CITY_DIALOG.FORM.LONGITUDE' | translate }}</label>
+      <div class="validations" *ngIf="f.longitude.invalid && f.longitude.dirty">
+        <small *ngIf="f.longitude.errors?.required" class="p-error">{{
+          'MAP.CITY_DIALOG.FORM.LONGITUDE_REQ' | translate
+        }}</small>
+      </div>
+    </span>
+
+    <span class="p-float-label">
+      <input id="input-longitude" type="text" pInputText required formControlName="note" />
+      <label for="float-input">{{ 'MAP.CITY_DIALOG.FORM.NOTE' | translate }}</label>
+    </span>
+  </div>
+  <div mat-dialog-actions class="buttons">
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="{{ 'MAP.CITY_DIALOG.CANCEL' | translate }}"
+      class="p-button-rounded"
+      (click)="onCancelClick()"></button>
+    <button
+      pButton
+      pRipple
+      type="submit"
+      label="{{ 'MAP.CITY_DIALOG.EDIT_CITY' | translate }}"
+      class="p-button-rounded"
+      [disabled]="!editCityForm.valid">
+      <mat-spinner *ngIf="loading.value" strokeWidth="1.5" [diameter]="15" class="spinner"></mat-spinner>
+    </button>
+  </div>
+</form>
