@@ -39,8 +39,8 @@ export class MapComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.authenticationService.userLogged
       .pipe(takeUntil(merge(this.componentDestroyed, this.viewChanged)))
-      .subscribe((res) => {
-        this.userLogged = res;
+      .subscribe((res:any) => {
+        this.userLogged = res.loggedIn;
       });
 
     this.fullLoadMap();

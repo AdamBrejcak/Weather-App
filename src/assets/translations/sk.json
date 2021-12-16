@@ -15,19 +15,26 @@
     "PASSWORD_REQ": "Heslo je povinné",
     "PASSWORD_MIN": "Heslo musí mať aspoň 4 znaky",
     "LOGIN": "Prihlásiť sa",
+    "EDIT": "Upraviť",
     "LOGOUT": "Odhlásiť sa",
-    "ERROR": "Neplatné meno alebo heslo"
+    "ERROR": "Neplatné meno alebo heslo",
+    "USER_EDIT": {
+      "HEADING": "Upraviť použivateľa",
+      "USERNAME": "Použivateľské meno",
+      "CANCEL": "Zrušiť",
+      "SAVE": "Uložiť"
+    }
   },
   "MAP": {
     "MAP_VIEW": "Zobraziť mapu",
     "GRID_VIEW": "Zobraziť tabuľku",
     "CHOOSE": "Zvoliť",
     "EDIT": "Upraviť",
-    "MISSING_NOTE": "Poznámka chýba.",
+    "MISSING_NOTE": "Poznámka neexistuje.",
     "CITY_DIALOG": {
       "EDIT_CITY": "Upraviť mesto",
       "ADD_CITY": "Pridať mesto",
-      "CLOSE": "Zrušiť",
+      "CANCEL": "Zrušiť",
       "FORM": {
         "NAME": "Názov",
         "NAME_REQ": "Názov je povinný",
@@ -46,9 +53,10 @@
         "CODE": "Kód",
         "LATITUDE": "Zemepisná šírka",
         "LONGITUDE": "Zemepisná dĺžka",
-        "NOTE": "Poznámka",
-        "DELETE": "Zmazať mesto"
-      }
+        "NOTE": "Poznámka"
+      },
+      "DELETE": "Zmazať mesto",
+      "EDIT":"Upraviť mesto"
     }
   },
   "HEAT_INDEX": {

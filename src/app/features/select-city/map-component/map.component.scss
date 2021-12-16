@@ -50,12 +50,17 @@
   }
 }
 
-.ol-popup-submit {
-  width: fit-content;
-  float: right;
-  cursor: pointer;
-}
+.buttons{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 
-.ol-popup-edit {
-  margin-left: 95px;
+  .ol-popup-submit{
+    cursor: pointer;
+    margin-left: 7px;
+  }
+  .ol-popup-edit  {
+    cursor: pointer;
+  }
 }

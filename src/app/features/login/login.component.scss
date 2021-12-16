@@ -8,6 +8,13 @@
   padding: 20px;
   border: 1px #a3a3a3 solid;
   border-radius: 4px;
+  .heading {
+    margin: 0 auto;
+    color: #0d89ec;
+    i{
+      margin-right: 7px;
+    }
+  }
   span {
     margin: 0 auto;
   }
@@ -16,15 +23,8 @@
     max-width: 200px;
   }
 }
+
 small.p-error.ng-star-inserted {
   position: absolute;
   width: 270px;
-}
-.heading {
-  margin: 0 auto;
-}
-
-.error {
-  margin: 0 auto;
-  color: #f44336;
 }

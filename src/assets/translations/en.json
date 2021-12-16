@@ -15,15 +15,22 @@
     "PASSWORD_REQ": "Password is required",
     "PASSWORD_MIN": "Password must be at least 4 characters long",
     "LOGIN": "Login",
+    "EDIT": "Edit",
     "LOGOUT": "Logout",
-    "ERROR": "Invalid name or password"
+    "ERROR": "Invalid name or password",
+    "USER_EDIT":{
+      "HEADING":"Edit user",
+      "USERNAME": "User name",
+      "CANCEL": "Cancel",
+      "SAVE": "Save"
+    }
   },
   "MAP": {
     "MAP_VIEW": "Map view",
     "GRID_VIEW": "Grid view",
     "CHOOSE": "Choose",
     "EDIT": "Edit",
-    "MISSING_NOTE": "There isn't note.",
+    "MISSING_NOTE": "Note does not exist.",
     "CITY_DIALOG": {
       "EDIT_CITY": "Edit city",
       "ADD_CITY": "Add city",

@@ -10,8 +10,8 @@ export class UserLoggedGuard implements CanActivate {
 
   canActivate(): Promise<boolean | UrlTree> {
     return new Promise((resolve) => {
-      this.authenticationService.userLogged.subscribe((res) => {
-        if (res) {
+      this.authenticationService.userLogged.subscribe((res: any) => {
+        if (res.loggedIn) {
           resolve(this.router.parseUrl('map'));
         }
         resolve(true);

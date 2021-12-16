@@ -1,27 +1,18 @@
-<h3  class="heading">
-    <span [routerLink]="['/map']"> <i class="pi pi-home"></i>{{ 'MAIN.HEADING' | translate }}</span>
-  </h3>
+<h3 [routerLink]="['/map']" class="heading"><i class="pi pi-home"></i>{{ 'MAIN.HEADING' | translate }}</h3>
 
-  <div class="flags-login">
-    <div class="flags">
-      <p-image src="assets/flags/us.png" alt="USA flag" width="30" height="20" (click)="translateEN()"></p-image>
-      <p-image src="assets/flags/sk.png" alt="SK flag" width="30" height="20" (click)="translateSK()"></p-image>
-    </div>
-
-    <div class="login">
-      <span *ngIf="!loggedIn " [routerLink]="['/login']" class="hover">
-        <i class="pi pi-user"></i>{{ 'LOGIN.LOGIN' | translate }}
-      </span>
-      <ng-container *ngIf="loggedIn">
-        <span>
-          <i class="pi pi-user"></i>
-          Admin
-        </span>
-        <span (click)="logOut()" class="hover">
-          <i class="pi pi-sign-out"></i>
-          {{ 'LOGIN.LOGOUT' | translate }}
-        </span>
-      </ng-container>
-    </div>
+<div class="flags-login">
+  <div class="flags">
+    <p-image src="assets/flags/us.png" alt="USA flag" width="36" height="24" (click)="translateEN()"></p-image>
+    <p-image src="assets/flags/sk.png" alt="SK flag" width="36" height="24" (click)="translateSK()"></p-image>
   </div>
-  <router-outlet></router-outlet>
+
+  <div *ngIf="user.loggedIn" class="login">
+    <a (click)="menu.toggle($event)"> <i class="pi pi-user"></i>{{ user.name }} </a>
+    <p-menu class="user-items" appendTo="body" #menu [popup]="true" [model]="userItems"></p-menu>
+  </div>
+
+  <div *ngIf="!user.loggedIn" class="login">
+    <a [routerLink]="['/login']"> <i class="pi pi-sign-in"></i>{{ 'LOGIN.LOGIN' | translate }} </a>
+  </div>
+</div>
+<router-outlet></router-outlet>

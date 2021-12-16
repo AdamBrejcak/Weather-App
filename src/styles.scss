@@ -26,19 +26,6 @@ body {
   max-width: 150px !important;
 }
 
-.heading {
-  margin: 0;
-  padding: 16px 10px;
-  font-weight: 700;
-  color: #0d89ec;
-  span {
-    cursor: pointer;
-    i {
-      margin-right: 0.5rem;
-    }
-  }
-}
-
 div .p-inputwrapper {
   min-width: fit-content !important;
 }
@@ -83,4 +70,12 @@ div .range-values {
     background: #0d89ec;
     border-color: #0d89ec;
   }
+}
+
+.ol-popup-content p {
+  margin: 1.33em 0;
+}
+
+.p-megamenu .p-megamenu-root-list > .p-menuitem > .p-menuitem-link:not(.p-disabled):hover {
+  color: #0d89ec;
 }

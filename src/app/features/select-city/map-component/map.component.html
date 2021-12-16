@@ -3,7 +3,9 @@
   <div [hidden]="loading.value" id="popup" class="ol-popup">
     <a id="popupCloser" class="ol-popup-closer"><i class="pi pi-times"></i></a>
     <div id="popupContent" class="ol-popup-content"></div>
-    <span [hidden]="!userLogged" id="popupEdit" class="ol-popup-edit"></span>
-    <span id="popupSubmit" class="ol-popup-submit"></span>
+    <div class="buttons">
+      <span [hidden]="!userLogged" id="popupEdit" class="ol-popup-edit"></span>
+      <span id="popupSubmit" class="ol-popup-submit"></span>
+    </div>
   </div>
 </div>

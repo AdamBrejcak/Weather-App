@@ -1,6 +1,6 @@
 <h5 mat-dialog-title>{{ 'MAP.CITY_DIALOG.EDIT_CITY' | translate }}</h5>
 <form [formGroup]="editCityForm" (submit)="onFormSubmit()">
-  <div mat-dialog-content>
+  <div mat-dialog-content class="content">
     <span class="p-float-label">
       <input id="input-name" type="text" pInputText required formControlName="name" />
       <label for="float-input">{{ 'MAP.CITY_DIALOG.FORM.NAME' | translate }}</label>

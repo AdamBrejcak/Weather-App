@@ -1,8 +1,12 @@
-::ng-deep {
-  .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link-active {
-    background: #ffffff;
-    border-color: #2196f3;
-    color: #2196f3;
+.heading {
+  margin: 10px;
+  height: 24px;
+  width: fit-content;
+  font-weight: 700;
+  color: #0d89ec;
+  cursor: pointer;
+  i {
+    margin-right: 7px;
   }
 }
 
@@ -14,31 +18,34 @@
 
 .flags-login {
   position: absolute;
-  right: 16px;
-  top: 16px;
+  right: 10px;
+  top: 10px;
   display: flex;
   flex-direction: row;
 }
 
 .login {
   width: fit-content;
-  height: 24px;
   font-size: 14px;
-  color: #0d89ec;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  span {
+  margin-left: 7px;
+  a {
     height: fit-content;
-    margin: auto 0 auto 10px;
-  }
-  i {
-    margin-right: 5px;
-    width: 14px;
+    cursor: pointer;
+    margin: auto 0;
+    text-decoration: none;
+    color: #0d89ec;
+    i {
+      margin-right: 7px;
+      width: 14px;
+    }
   }
 }
 
 .flags {
+  height: 24px;
   p-image {
     margin: 0 5px 0 5px;
     cursor: pointer;

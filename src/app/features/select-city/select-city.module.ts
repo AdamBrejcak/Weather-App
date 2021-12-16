@@ -2,7 +2,6 @@ import { SelectCityComponent } from './select-city.component';
 import { SelectCityRoutingModule } from './select-city-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 import { TableModule } from 'primeng/table';
 import { RadioButtonModule } from 'primeng/radiobutton';
@@ -32,7 +31,6 @@ import { TooltipModule } from 'primeng/tooltip';
   imports: [
     SelectCityRoutingModule,
     CommonModule,
-    MatDialogModule,
     TranslateModule,
     TableModule,
     RadioButtonModule,

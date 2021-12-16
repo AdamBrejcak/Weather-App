@@ -11,6 +11,13 @@ import { ContentWithMenuComponent } from './core/content-with-menu/content-with-
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { UserEditDialogComponent } from './core/user-edit-dialog-component/user-edit-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { MenuModule } from 'primeng/menu';
+import { RippleModule } from 'primeng/ripple';
 import { ContentWithHeadingComponent } from './core/content-with-heading/content-with-heading.component';
 
 export function translationsLoaderFactory(http: HttpClient) {
@@ -18,15 +25,21 @@ export function translationsLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, ContentWithMenuComponent, ContentWithHeadingComponent],
+  declarations: [AppComponent, ContentWithMenuComponent, ContentWithHeadingComponent, UserEditDialogComponent],
   imports: [
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatDialogModule,
     BrowserModule,
     ReactiveFormsModule,
     ImageModule,
     TabMenuModule,
+    MatProgressSpinnerModule,
+    ButtonModule,
+    InputTextModule,
+    MenuModule,
+    RippleModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {
@@ -36,7 +49,7 @@ export function translationsLoaderFactory(http: HttpClient) {
       },
       isolate: true,
     }),
-    NgxPermissionsModule.forRoot()
+    NgxPermissionsModule.forRoot(),
   ],
   bootstrap: [AppComponent],
 })

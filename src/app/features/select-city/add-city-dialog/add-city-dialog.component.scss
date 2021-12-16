@@ -1,15 +1,13 @@
 h5 {
   font-size: 15px;
+  margin-top: 0;
 }
 
-.mat-dialog-content {
+.content {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 350px;
-  width: fit-content;
-  margin: 0 auto;
-  padding: 0;
+  height: 367px;
   width: 100%;
   input {
     width: 100%;
@@ -34,4 +32,9 @@ h5 {
 .spinner {
   stroke: white;
   margin: 0 5px 0 0;
+}
+
+small.p-error.ng-star-inserted {
+  position: absolute;
+  width: 100%;
 }

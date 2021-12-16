@@ -1,0 +1,36 @@
+<h5 mat-dialog-title>{{ 'LOGIN.USER_EDIT.HEADING' | translate }}</h5>
+<div mat-dialog-content>
+  <form [formGroup]="userNameForm">
+    <span class="p-float-label">
+      <input id="float-input" type="text" pInputText formControlName="name" />
+      <label for="float-input">{{ 'LOGIN.USER_EDIT.USERNAME' | translate }}</label>
+      <div class="validations" *ngIf="f.name.invalid && f.name.dirty">
+        <small *ngIf="f.name.errors?.required" class="p-error">{{ 'LOGIN.NAME_REQ' | translate }}</small>
+        <small *ngIf="f.name.errors?.minlength" class="p-error">{{ 'LOGIN.NAME_MIN' | translate }}</small>
+      </div>
+    </span>
+  </form>
+</div>
+<div mat-dialog-actions class="buttons">
+  <button
+    pButton
+    pRipple
+    type="button"
+    label="{{ 'LOGIN.USER_EDIT.CANCEL' | translate }}"
+    class="p-button-rounded"
+    (click)="onCancelClick()"></button>
+  <button
+    pButton
+    pRipple
+    type="button"
+    label="{{ 'LOGIN.USER_EDIT.SAVE' | translate }}"
+    class="p-button-rounded"
+    (click)="onSaveClick()"
+    [disabled]="!userNameForm.valid">
+    <mat-spinner *ngIf="loading" strokeWidth="1.5" [diameter]="15" class="spinner"></mat-spinner>
+  </button>
+</div>
+<div *ngIf="error" class="error-message">
+  <h2>{{ 'WEATHER_TABLE.ERROR' | translate }}</h2>
+  <p>{{ error }}</p>
+</div>
